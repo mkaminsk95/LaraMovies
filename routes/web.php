@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/list-movies', function () {
+    $apiKey = Config::get('services.themoviedb.api_key');
+
+    $response = Http::get('https://api.themoviedb.org/3/movie/top_rated', [
+        'api_key' => $apiKey,
+        'page' => 1,
+    ]);
+
+    return view('list-movies', ['movies' => $response->json()['results']]);
 });
