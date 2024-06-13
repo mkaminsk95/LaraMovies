@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
+use App\Services\TMDBService;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +21,7 @@ Route::get('/', function () {
 });
 
 Route::get('/list-movies', function () {
-    $apiKey = Config::get('services.themoviedb.api_key');
+    $TMDBService = new TMDBService();
 
-    $response = Http::get('https://api.themoviedb.org/3/movie/top_rated', [
-        'api_key' => $apiKey,
-        'page' => 1,
-    ]);
-
-    return view('list-movies', ['movies' => $response->json()['results']]);
+    return view('list-movies', $TMDBService->getTopRatedMovies());
 });
