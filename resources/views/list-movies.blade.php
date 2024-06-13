@@ -9,10 +9,10 @@
                              alt="">
                     </div>
                     <div class="flex flex-row flex-1 justify-between shrink-0 mt-3 rounded">
-                        <span class="min-w-0">
-                            <p class="text-sm font-semibold leading-6 text-gray-900">{{ $movie['title'] }}</p>
-                            <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $movie['release_date']}}</p>
-                        </span>
+                        <div class="min-w-0">
+                            <span class="text-sm font-semibold leading-6 text-gray-900">{{ $movie['title'] }}</span>
+                            <span class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $movie['release_date']}}</span>
+                        </div>
                         <span class="text-sm leading-6 text-gray-900 pr-5">Drama</span>
                     </div>
                 </li>
