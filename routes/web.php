@@ -21,8 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/list-movies', function () {
-    $movies = Movie::orderBy('vote_average', 'desc')->take(20)->get();
+Route::get('/list-movies/', function () {
+    $paginatedMovies = Movie::orderBy('vote_average', 'desc')->paginate(20);
 
-    return view('list-movies', ['movies' => $movies]);
+    return view('list-movies', ['paginatedMovies' => $paginatedMovies]);
 });

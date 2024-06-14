@@ -1,7 +1,7 @@
 <x-layout>
-    <div class="mt-12 mx-12 flex justify-center">
+    <div class="mt-12 mx-auto max-w-lg flex justify-center flex-col">
         <ul role="list" class="divide-y-4 divide-gray-100 bg-white rounded">
-            @foreach($movies as $movie)
+            @foreach($paginatedMovies as $movie)
                 <li class="flex gap-x-6">
                     <div class="flex min-w-0 gap-x-4">
                         <img class="h-30 w-20 flex-none rounded bg-gray-50"
@@ -18,5 +18,8 @@
                 </li>
             @endforeach
         </ul>
+        <div class="mt-4 mb-20 flex justify-center">
+            {{ $paginatedMovies->onEachSide(1)->links() }}
+        </div>
     </div>
 </x-layout>
