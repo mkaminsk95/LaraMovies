@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
+use App\Models\Movie;
 use App\Services\TMDBService;
 
 /*
@@ -21,7 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/list-movies', function () {
-    $TMDBService = new TMDBService();
+    $movies = Movie::orderBy('vote_average', 'desc')->take(20)->get();
 
-    return view('list-movies', $TMDBService->getTopRatedMovies());
+    return view('list-movies', ['movies' => $movies]);
 });
