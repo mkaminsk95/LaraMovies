@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="h-full bg-gray-100">
+<html lang="en" class="bg-gray-100 dark:bg-gray-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,8 +8,8 @@
     <title>About page</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="h-full">
-<header class="bg-white">
+<body>
+<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600">
     <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
@@ -28,12 +28,12 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Movies</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">About</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">News</a>
+            <a href="#" class="text-sm font-semibold leading-6">Movies</a>
+            <a href="#" class="text-sm font-semibold leading-6">About</a>
+            <a href="#" class="text-sm font-semibold leading-6">News</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+            <a href="#" class="text-sm font-semibold leading-6">Log in <span
                     aria-hidden="true">&rarr;</span></a>
         </div>
     </nav>
