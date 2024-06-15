@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600">
+<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 border border-gray-300 dark:border-gray-700 ">
     <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
@@ -28,12 +28,12 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-            <a href="#" class="text-sm font-semibold leading-6">Movies</a>
-            <a href="#" class="text-sm font-semibold leading-6">About</a>
-            <a href="#" class="text-sm font-semibold leading-6">News</a>
+            <a href="{{ route('list-movies') }}" class="text-sm hover:text-gray-500 font-semibold leading-6">Movies</a>
+            <a href="#" class="text-sm hover:text-gray-500 font-semibold leading-6">About</a>
+            <a href="#" class="text-sm hover:text-gray-500 font-semibold leading-6">News</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="text-sm font-semibold leading-6">Log in <span
+            <a href="#" class="text-sm hover:text-gray-500 font-semibold leading-6">Log in <span
                     aria-hidden="true">&rarr;</span></a>
         </div>
     </nav>
