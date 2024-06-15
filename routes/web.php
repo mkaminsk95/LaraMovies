@@ -25,4 +25,10 @@ Route::get('/list-movies/', function () {
     $paginatedMovies = Movie::orderBy('vote_average', 'desc')->paginate(20);
 
     return view('list-movies', ['paginatedMovies' => $paginatedMovies]);
-});
+})->name('list-movies');
+
+Route::get('/movie/{id}', function ($id) {
+    $movie = Movie::find($id);
+
+    return view('movie', ['movie' => $movie]);
+})->name('movie');
