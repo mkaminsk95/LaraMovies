@@ -13,6 +13,7 @@ class Movie extends Model
         'original_title',
         'release_date',
         'poster_path',
+        'backdrop_path',
         'vote_average',
         'vote_count',
         'overview',

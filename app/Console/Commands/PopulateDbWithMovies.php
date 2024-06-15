@@ -54,6 +54,7 @@ class PopulateDbWithMovies extends Command
                     'original_title' => $movie['original_title'],
                     'release_date' => $movie['release_date'],
                     'poster_path' => $movie['poster_path'],
+                    'backdrop_path' => $movie['backdrop_path'],
                     'vote_average' => $movie['vote_average'],
                     'vote_count' => $movie['vote_count'],
                     'overview' => $movie['overview'],
