@@ -1,8 +1,8 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
@@ -20,5 +20,8 @@ class Movie extends Model
         'original_language'
     ];
 
-    use HasFactory;
+    public function genres(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Genre::class, 'movie_genre');
+    }
 }
