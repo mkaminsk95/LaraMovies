@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class TMDBService implements MovieServiceInterface
 {
-    const API_URL = 'https://api.themoviedb.org/3/movie/top_rated';
+    const API_MOVIES_URL = 'https://api.themoviedb.org/3/movie/top_rated';
+    const API_GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
     private string $apiKey;
 
     public function __construct()
@@ -31,6 +32,11 @@ class TMDBService implements MovieServiceInterface
         return $movies;
     }
 
+    public function getGenres(): array
+    {
+        return $this->fetchGenres();
+    }
+
     private function mergeMovies(array $movies, array $result, int &$n): array
     {
         $count = count($result);
@@ -47,11 +53,20 @@ class TMDBService implements MovieServiceInterface
 
     private function fetchMovies(int $page): array
     {
-        $response = Http::get(self::API_URL, [
+        $response = Http::get(self::API_MOVIES_URL, [
             'api_key' => $this->apiKey,
             'page' => $page,
         ]);
 
         return $response->json()['results'] ?? [];
+    }
+
+    private function fetchGenres(): array
+    {
+        $response = Http::get(self::API_GENRES_URL, [
+            'api_key' => $this->apiKey
+        ]);
+
+        return $response->json()['genres'] ?? [];
     }
 }
