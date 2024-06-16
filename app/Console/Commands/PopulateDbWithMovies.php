@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\Genre;
 use App\Services\MovieServiceInterface;
 use Illuminate\Console\Command;
 use App\Models\Movie;
-use App\Services\TMDBService;
 
 class PopulateDbWithMovies extends Command
 {
@@ -31,10 +31,6 @@ class PopulateDbWithMovies extends Command
         parent::__construct();
     }
 
-
-    /**
-     * Execute the console command.
-     */
     public function handle(): void
     {
         $number = $this->argument('number');
@@ -44,6 +40,28 @@ class PopulateDbWithMovies extends Command
             return;
         }
 
+        $this->populateGenres();
+        $this->populateMovies((int)$number);
+    }
+
+    public function populateGenres(): void
+    {
+        $genres = $this->movieService->getGenres();
+
+        foreach ($genres as $genre) {
+            try {
+                Genre::create([
+                    'id' => $genre['id'],
+                    'name' => $genre['name'],
+                ]);
+            } catch (\Illuminate\Database\QueryException $e) {
+                continue;
+            }
+        }
+    }
+
+    public function populateMovies(int $number): void
+    {
         $movies = $this->movieService->getMovies((int)$number);
 
         foreach ($movies as $movie) {
@@ -59,7 +77,9 @@ class PopulateDbWithMovies extends Command
                     'vote_count' => $movie['vote_count'],
                     'overview' => $movie['overview'],
                     'original_language' => $movie['original_language'],
-                ]);
+                ])
+                    ->genres()
+                    ->attach($movie['genre_ids']);
             } catch (\Illuminate\Database\QueryException $e) {
                 continue;
             }
