@@ -4,9 +4,14 @@
             @foreach($paginatedMovies as $movie)
                 <li class="flex mt-1 gap-x-6 bg-white dark:bg-gray-800 border border-1 border-gray-300 dark:border-gray-700 rounded">
                     <div class="flex min-w-0 gap-x-4">
-                        <img class="h-30 w-20 flex-none rounded bg-gray-50"
-                             src="https://image.tmdb.org/t/p/w1280/{{ $movie['poster_path'] }}"
-                             alt="">
+                        @if($movie['poster_path'] !== null)
+                            <img class="h-30 w-20 flex-none rounded bg-gray-50"
+                                 src="https://image.tmdb.org/t/p/w185{{ $movie['poster_path'] }}"
+                                 alt="">
+                        @else
+                            <img class="h-30 w-20 flex-none rounded bg-gray-50"
+                                src="https://dummyimage.com/185x278/d2d5db/fff&text=+" alt="poster">
+                        @endif
                     </div>
                     <div class="flex flex-row flex-1 justify-between shrink-0 mt-3 rounded">
                         <div class="min-w-0">
