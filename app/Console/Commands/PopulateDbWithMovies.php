@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Models\Genre;
-use App\Services\MovieServiceInterface;
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Services\MovieServiceInterface;
+use App\Models\Genre;
 use App\Models\Movie;
+use App\Services\DateFormatDeterminer;
+
 
 class PopulateDbWithMovies extends Command
 {
@@ -40,8 +44,10 @@ class PopulateDbWithMovies extends Command
             return;
         }
 
+        DB::beginTransaction();
         $this->populateGenres();
         $this->populateMovies((int)$number);
+        DB::commit();
     }
 
     public function populateGenres(): void
@@ -62,7 +68,14 @@ class PopulateDbWithMovies extends Command
 
     public function populateMovies(int $number): void
     {
-        $movies = $this->movieService->getMovies((int)$number);
+        $movies = $this->movieService->getMovies($number);
+        $format = DateFormatDeterminer::determine($movies[0]['release_date']);
+
+        if ($format === false) {
+            $this->error('The date format is not supported.');
+            DB::rollback();
+            return;
+        }
 
         foreach ($movies as $movie) {
             try {
@@ -70,7 +83,7 @@ class PopulateDbWithMovies extends Command
                     'tmdb_id' => $movie['id'],
                     'title' => $movie['title'],
                     'original_title' => $movie['original_title'],
-                    'release_date' => $movie['release_date'],
+                    'release_date' => Carbon::createFromFormat($format, $movie['release_date']),
                     'poster_path' => $movie['poster_path'],
                     'backdrop_path' => $movie['backdrop_path'],
                     'vote_average' => $movie['vote_average'],
