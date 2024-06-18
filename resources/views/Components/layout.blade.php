@@ -28,9 +28,9 @@
             </button>
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
-            <a href="{{ route('list-movies') }}" class="text-sm hover:text-gray-500 font-semibold leading-6">Movies</a>
-            <a href="#" class="text-sm hover:text-gray-500 font-semibold leading-6">About</a>
-            <a href="#" class="text-sm hover:text-gray-500 font-semibold leading-6">News</a>
+            <a href="{{ route('movies.index') }}" class="text-m hover:text-gray-500 font-semibold leading-6">Movies</a>
+            <a href="#" class="text-m hover:text-gray-500 font-semibold leading-6">About</a>
+            <a href="#" class="text-m hover:text-gray-500 font-semibold leading-6">News</a>
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
             <a href="#" class="text-sm hover:text-gray-500 font-semibold leading-6">Log in <span

@@ -16,7 +16,7 @@
                     <div class="flex flex-row flex-1 justify-between shrink-0 mt-3 rounded">
                         <div class="min-w-0">
                             <span class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-600">
-                                <a class="hover:text-gray-500" href="{{ route('movie', $movie['id']) }}">
+                                <a class="hover:text-gray-500" href="{{ route('movies.show', $movie['id']) }}">
                                     {{ $movie['title'] }}
                                 </a>
                             </span>
