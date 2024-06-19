@@ -30,11 +30,23 @@ Route::get('/movies/create', function () {
     return view('movies.create');
 })->name('movies.create');
 
+Route::get('/movies/{id}/edit', function ($id) {
+    $movie = Movie::find($id);
+
+    return view('movies.edit', ['movie' => $movie]);
+})->name('movies.edit');
+
 Route::get('/movies/{id}', function ($id) {
     $movie = Movie::find($id);
 
     return view('movies.show', ['movie' => $movie]);
 })->name('movies.show');
+
+Route::delete('/movies/{id}', function ($id) {
+    Movie::find($id)->delete();
+
+    return redirect()->route('movies.index');
+})->name('movies.destroy');
 
 Route::post('/movies', function () {
     request()->validate([
