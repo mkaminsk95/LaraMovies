@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Movie;
-use App\Enums\CountryCodes;
 use Illuminate\Validation\Rule;
 
 /*
@@ -43,10 +42,33 @@ Route::get('/movies/{id}', function ($id) {
 })->name('movies.show');
 
 Route::delete('/movies/{id}', function ($id) {
-    Movie::find($id)->delete();
+    Movie::findOrFail($id)->delete();
 
-    return redirect()->route('movies.index');
+    return redirect()->route('movies.index')->with('success', 'Movie successfully deleted!');
 })->name('movies.destroy');
+
+Route::patch('/movies/{id}', function ($id) {
+    request()->validate([
+        'title' => 'required',
+        'original-title' => 'required',
+        'overview' => 'required',
+        'release-date' => ['required', 'date'],
+        'original-language' => ['required', Rule::in(array_values(config('movie_languages')))],
+    ]);
+
+    $movie = Movie::findOrFail($id);
+    $movie->update([
+        'title' => request('title'),
+        'original_title' => request('original-title'),
+        'overview' => request('overview'),
+        'release_date' => request('release-date'),
+        'poster_path' => request('poster-path'),
+        'backdrop_path' => request('backdrop-path'),
+        'original_language' => request('original-language'),
+    ]);
+
+    return redirect()->route('movies.edit', ['id' => $movie->id])->with('success', 'Movie successfully updated!');
+})->name('movies.update');
 
 Route::post('/movies', function () {
     request()->validate([
@@ -54,7 +76,7 @@ Route::post('/movies', function () {
         'original-title' => 'required',
         'overview' => 'required',
         'release-date' => ['required', 'date'],
-        'original-language' => ['required', Rule::enum(CountryCodes::class)],
+        'original-language' => ['required', Rule::in(array_values(config('movie_languages')))],
     ]);
 
     $movie = Movie::create([
