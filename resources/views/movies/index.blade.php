@@ -13,16 +13,26 @@
                                 src="https://dummyimage.com/185x278/d2d5db/fff&text=+" alt="poster">
                         @endif
                     </div>
-                    <div class="flex flex-row flex-1 justify-between shrink-0 mt-3 rounded">
-                        <div class="min-w-0">
-                            <span class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-600">
+                    <div class="flex flex-row flex-1 justify-between shrink-0 my-3 rounded">
+                        <div class="flex flex-col justify-between min-w-0">
+                            <div>
+                                <p class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-600">
                                 <a class="hover:text-gray-500" href="{{ route('movies.show', $movie['id']) }}">
                                     {{ $movie['title'] }}
                                 </a>
-                            </span>
-                            <span class="mt-1 truncate text-xs leading-5 text-gray-500 dark:text-gray-700">{{ $movie['release_date']}}</span>
+                            </p>
+                                <p class="truncate text-xs leading-5 text-gray-500 dark:text-gray-700">{{ (new DateTime($movie['release_date']))->format('Y') }}</p>
+                            </div>
+                            <div>
+                                @foreach($movie->genres as $genre)
+                                    <span class="text-xs text-gray-500 p-1 mr-1 bg-gray-700 ">{{ $genre['name'] }}</span>
+                                @endforeach
+                            </div>
                         </div>
-                        <span class="text-sm leading-6 text-gray-900 dark:text-gray-600 pr-5">Drama</span>
+                        <div class="mr-5 mt-2">
+                            <svg class="inline align-top leading-none text-yellow-700" width="20px" height="20px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" x="0" y="0" rx="30" fill="transparent" stroke="transparent" stroke-width="0" stroke-opacity="100%" paint-order="stroke"></rect><svg width="100" height="100" viewBox="0 0 1024 1024" fill="currentColor" x="0" y="0" role="img" style="display:inline-block;vertical-align:middle" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path fill="currentColor" d="m908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5c-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3a32.05 32.05 0 0 0 .6 45.3l183.7 179.1l-43.4 252.9a31.95 31.95 0 0 0 46.4 33.7L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2c17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9l183.7-179.1c5-4.9 8.3-11.3 9.3-18.3c2.7-17.5-9.5-33.7-27-36.3z"/></g></svg></svg>
+                            <span class="inline-block align-top leading-5 text-sm text-gray-900 dark:text-gray-400">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
+                        </div>
                     </div>
                     <div class="absolute -right-10 top-3">
                         <button form="delete-form-{{ $movie->id }}">
