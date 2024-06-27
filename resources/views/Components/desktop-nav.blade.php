@@ -22,7 +22,7 @@
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         @auth
-            <a href="{{route('profile.edit')}}" class="mr-6 text-base hover:text-gray-500 font-semibold leading-6">Edit</a>
+            <a href="{{route('profile.edit')}}" class="mr-6 text-base hover:text-gray-500 font-semibold leading-6">Profile</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a href="{{ route('logout') }}"
