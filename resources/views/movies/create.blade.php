@@ -5,6 +5,7 @@
 @endphp
 
 <x-content>
+    <x-action-status-message/>
     <div class="mx-20 mt-12 my-6 text-gray-500 sm:text-xl">
         <h1 class="text-center text-2xl">New movie</h1>
         <div class="text-base text-gray-400 pt-10">Fill in the form below to create a new movie</div>
@@ -12,48 +13,18 @@
             @csrf
 
             <div class="border-b dark:border-white/10 pb-12">
-                @if($errors->any())
-                    <div class="row-start-1 col-span-full">
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                            <strong class="font-bold">Validation error</strong>
-                            <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif
                 <div class="mt-10 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-6">
 
                     <div class="row-start-1 sm:col-span-full">
-                        <label for="title" class="{{ $labelStyling }}">
-                            Title
-                        </label>
-                        <div class="mt-2">
-                            <input type="text" name="title" id="title"
-                                   class="{{ $inputStyling }}" required>
-                        </div>
+                        <x-input label="Title" id="title" name="title" required/>
                     </div>
 
                     <div class="row-start-2 col-span-full">
-                        <label for="original-title" class="{{ $labelStyling }}">
-                            Original title
-                        </label>
-                        <div class="mt-2">
-                            <input type="text" name="original-title" id="original-title"
-                                   class="{{ $inputStyling }}" required>
-                        </div>
+                        <x-input label="Original title" id="original-title" required/>
                     </div>
 
                     <div class="row-start-3 col-span-3">
-                        <label for="release-date" class="{{ $labelStyling }}">
-                            Release date
-                        </label>
-                        <div class="mt-2">
-                            <input id="release-date" name="release-date" type="date"
-                                   class="{{ $inputStyling }}" required>
-                        </div>
+                        <x-input label="Release date" id="release-date" type="date" required/>
                     </div>
 
                     <div class="row-start-3 col-span-3">
@@ -62,23 +33,11 @@
                     </div>
 
                     <div class="row-start-4 col-span-full">
-                        <label for="poster-path" class="{{ $labelStyling }}">
-                            Poster path
-                        </label>
-                        <div class="mt-2">
-                            <input type="text" name="poster-path" id="poster-path"
-                                   class="{{ $inputStyling }}">
-                        </div>
+                        <x-input label="Poster path" id="poster-path"/>
                     </div>
 
                     <div class="row-start-5 col-span-full">
-                        <label for="backdrop-path" class="{{ $labelStyling }}">
-                            Backdrop path
-                        </label>
-                        <div class="mt-2">
-                            <input type="text" name="backdrop-path" id="backdrop-path"
-                                   class="{{ $inputStyling }}">
-                        </div>
+                        <x-input label="Backdrop path" id="backdrop-path"/>
                     </div>
 
                     <div class="row-start-6 col-span-full">

@@ -5,16 +5,7 @@
 @endphp
 
 <x-layout>
-    @if($errors->any())
-        <div class="pb-5">
-            <x-message type="error" :messages="$errors->all()"></x-message>
-        </div>
-    @endif
-    @if (session('success'))
-        <div class="pb-5">
-            <x-message type="success" :messages="session('success')"></x-message>
-        </div>
-    @endif
+    <x-action-status-message/>
     <div class="flex flex-col w-5/12 mx-auto mt-10 mb-20 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400">
         <div class="mx-20 mt-12 my-6 text-gray-500 sm:text-xl">
             <h1 class="text-center text-2xl">Edit movie</h1>
@@ -26,35 +17,15 @@
                     <div class="mt-10 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-6">
 
                         <div class="row-start-1 sm:col-span-full">
-                            <label for="title" class="{{ $labelStyling }}">
-                                Title
-                            </label>
-                            <div class="mt-2">
-                                <input type="text" name="title" id="title" value="{{$movie->title}}"
-                                       class="{{ $inputStyling }}">
-                            </div>
+                            <x-input label="Title" id="title" name="title" value="{{$movie->title}}" required/>
                         </div>
 
                         <div class="row-start-2 col-span-full">
-                            <label for="original-title" class="{{ $labelStyling }}">
-                                Original title
-                            </label>
-                            <div class="mt-2">
-                                <input type="text" name="original-title" id="original-title"
-                                       value="{{$movie->original_title}}"
-                                       class="{{ $inputStyling }}" required>
-                            </div>
+                            <x-input label="Original title" id="original-title" name="original-title" value="{{$movie->original_title}}" required/>
                         </div>
 
                         <div class="row-start-3 col-span-3">
-                            <label for="release-date" class="{{ $labelStyling }}">
-                                Release date
-                            </label>
-                            <div class="mt-2">
-                                <input id="release-date" name="release-date" type="date"
-                                       value="{{$movie->release_date}}"
-                                       class="{{ $inputStyling }}" required>
-                            </div>
+                            <x-input label="Release date" id="release-date" value="{{$movie->release_date}}" type="date" required/>
                         </div>
 
                         <div class="row-start-3 col-span-3">
@@ -64,24 +35,11 @@
                         </div>
 
                         <div class="row-start-4 col-span-full">
-                            <label for="poster-path" class="{{ $labelStyling }}">
-                                Poster path
-                            </label>
-                            <div class="mt-2">
-                                <input type="text" name="poster-path" id="poster-path" value="{{$movie->poster_path}}"
-                                       class="{{ $inputStyling }}">
-                            </div>
+                            <x-input label="Poster path" id="poster-path" value="{{$movie->poster_path}}"/>
                         </div>
 
                         <div class="row-start-5 col-span-full">
-                            <label for="backdrop-path" class="{{ $labelStyling }}">
-                                Backdrop path
-                            </label>
-                            <div class="mt-2">
-                                <input type="text" name="backdrop-path" id="backdrop-path"
-                                       value="{{$movie->backdrop_path}}"
-                                       class="{{ $inputStyling }}">
-                            </div>
+                            <x-input label="Backdrop path" id="backdrop-path" value="{{$movie->backdrop_path}}"/>
                         </div>
 
                         <div class="row-start-6 col-span-full">

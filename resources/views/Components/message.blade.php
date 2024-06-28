@@ -1,4 +1,4 @@
-@props(['type' => 'info', 'messages'])
+in@props(['type' => 'info', 'messages'])
 @php
     $colors = match ($type) {
         'success' => ['background' => 'bg-green-100', 'border' => 'border-green-400', 'text' => 'text-green-700'],

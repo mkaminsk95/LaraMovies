@@ -1,9 +1,6 @@
 <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
     <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5 hover:animate-spin">
-            <span class="sr-only">Your Company</span>
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="">
-        </a>
+        <x-application-logo class="h-10 w-auto"/>
     </div>
     <div class="flex lg:hidden">
         <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
@@ -16,9 +13,9 @@
         </button>
     </div>
     <div class="hidden lg:flex lg:gap-x-12">
-        <a href="{{ route('movies.index') }}" class="text-m hover:text-gray-500 font-semibold leading-6">Movies</a>
-        <a href="#" class="text-m hover:text-gray-500 font-semibold leading-6">About</a>
-        <a href="#" class="text-m hover:text-gray-500 font-semibold leading-6">News</a>
+        <x-nav-link active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-nav-link>
+        <x-nav-link active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-nav-link>
+        <x-nav-link active="{{ request()->routeIs('contact') ? true : '' }}" href="{{ route('contact') }}">Contact</x-nav-link>
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         @auth
@@ -31,8 +28,8 @@
             </form>
         @endauth
         @guest
-            <a href="{{route('login')}}" class="mr-6 text-base hover:text-gray-500 font-semibold leading-6">Log in</a>
-            <a href="{{route('register')}}" class="text-base hover:text-gray-500 font-semibold leading-6">Register</a>
+                <x-nav-link class="mr-4" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-nav-link>
+                <x-nav-link active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-nav-link>
         @endguest
     </div>
 </nav>
