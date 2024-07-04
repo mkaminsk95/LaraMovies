@@ -16,3 +16,5 @@ Route::get('/movies/{id}/edit', [MovieController::class, 'edit'])->name('movies.
 Route::patch('/movies/{id}', [MovieController::class, 'update'])->name('movies.update');
 
 Route::delete('/movies/{id}', [MovieController::class, 'destroy'])->name('movies.destroy');
+
+Route::post('/movies/{id}/rate', [MovieController::class, 'rate'])->name('movies.rate');

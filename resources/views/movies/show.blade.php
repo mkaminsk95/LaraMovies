@@ -22,17 +22,7 @@
                 </div>
 
             </div>
-            <div class="absolute -bottom-4 right-9 h-32 pt-4 px-4 bg-gray-300 rounded">
-                <div class="flex flex-row items-center gap-3">
-                    <span class="flex ml-1 items-center justify-center w-10 h-10 bg-black text-white text-base rounded-full">8</span>
-                    <span class="text-base tracking-wider">Awesome!</span>
-                </div>
-                <div class="pt-3">
-                    @for($i = 0; $i < 10; $i++)
-                        <x-star width="26px" height="26px" :filled="true"/>
-                    @endfor
-                </div>
-            </div>
+            <x-star-rating-panel movieId="{{ $movie->id }}" userRating="{{ $rating }}"/>
         </div>
         <div class="flex flex-row px-8 py-8 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400">
             <div class="basis-1/4">

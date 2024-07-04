@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import mkcert from'vite-plugin-mkcert';
+import mkcert from 'vite-plugin-mkcert';
 
 export default defineConfig({
     plugins: [
@@ -8,10 +8,13 @@ export default defineConfig({
             'resources/css/app.css',
             'resources/js/app.js',
         ]),
-        mkcert()
+        mkcert({
+            savePath: './certs'
+        })
     ],
     server: {
         host: true,
-        https: true
+        https: true,
+        port: 5173,
     },
 });
