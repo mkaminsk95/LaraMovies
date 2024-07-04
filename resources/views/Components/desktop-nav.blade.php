@@ -19,12 +19,12 @@
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         @auth
-            <a href="{{route('profile.edit')}}" class="mr-6 text-base hover:text-gray-500 font-semibold leading-6">Profile</a>
+            <x-nav-link class="mr-4" active="{{ request()->routeIs('profile.edit') ? true : '' }}" href="{{ route('profile.edit') }}">Profile</x-nav-link>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); this.closest('form').submit();"
-                   class="text-base hover:text-gray-500 font-semibold leading-6">Log out</a>
+                   class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">Log out</a>
             </form>
         @endauth
         @guest
