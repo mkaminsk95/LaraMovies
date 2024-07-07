@@ -29,4 +29,29 @@ class Movie extends Model
     {
         return $this->hasMany(Rating::class);
     }
+
+    public function scopeWithGenre($query, $genres)
+    {
+        foreach ($genres as $genre) {
+            $query->whereHas('genres', function ($q) use ($genre) {
+                $q->where('name', $genre);
+            });
+        }
+        return $query;
+    }
+
+    public function scopeWithTitle($query, $title)
+    {
+        return $query->where('title', 'like', "%$title%");
+    }
+
+    public function scopeWithYear($query, $year)
+    {
+        return $query->whereYear('release_date', $year);
+    }
+
+    public function scopeWithVoteAverage($query, $voteAverage)
+    {
+        return $query->where('vote_average', '>=', $voteAverage);
+    }
 }

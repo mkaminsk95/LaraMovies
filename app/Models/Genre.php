@@ -13,4 +13,9 @@ class Genre extends Model
     {
         return $this->belongsToMany(Movie::class, 'movie_genre');
     }
+
+    public static function getAllGenresArray(): array
+    {
+        return self::all()->pluck('name')->toArray();
+    }
 }
