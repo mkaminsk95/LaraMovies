@@ -1,4 +1,4 @@
-@props(['movieId', 'userRating' => null])
+@props(['movieId', 'userRating' => null, 'isFavourite' => false, 'isWatchlistItem' => false])
 @php
     $rated = (bool)$userRating;
     $beforeRatingColor = 'bg-black';
@@ -7,12 +7,18 @@
 
 <div x-data="initializePanel()" x-on:mouseleave="clearRating()"
      class="absolute -bottom-4 right-9 h-32 pt-4 px-4 bg-gray-300 rounded">
-    <div class="flex flex-row items-center gap-3">
-        <span id="rating" class="flex ml-1 items-center justify-center w-10 h-10 {{ $rated ? $afterRatingColor : $beforeRatingColor }} text-white text-base rounded-full">
-            <span x-text="ratingNum"></span>
-            <x-spinner width="20" height="20"/>
-        </span>
-        <span x-text="ratingText" class="text-base tracking-wider"></span>
+    <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-row items-center gap-3">
+            <span id="rating" class="flex ml-1 items-center justify-center w-10 h-10 {{ $rated ? $afterRatingColor : $beforeRatingColor }} text-white text-base rounded-full">
+                <span x-text="ratingNum"></span>
+                <x-spinner width="20" height="20"/>
+            </span>
+            <span x-text="ratingText" class="text-base tracking-wider"></span>
+        </div>
+        <div class="flex flex-row items-center gap-1 mt-1 mr-[1px]">
+            <x-add-to-watchlist  width="26px" height="26px"  movieId="{{ $movieId }}" :added="$isWatchlistItem"/>
+            <x-add-to-favourites width="26px" height="26px"  movieId="{{ $movieId }}" :added="$isFavourite"/>
+        </div>
     </div>
     <div class="pt-3">
         @for($i = 0; $i < 10; $i++)

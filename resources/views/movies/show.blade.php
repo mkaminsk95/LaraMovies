@@ -22,7 +22,12 @@
                 </div>
 
             </div>
-            <x-star-rating-panel movieId="{{ $movie->id }}" userRating="{{ $rating }}"/>
+            <x-star-rating-panel
+                movieId="{{ $movie->id }}"
+                userRating="{{ $rating }}"
+                :isFavourite="$isFavourite"
+                :isWatchlistItem="$isWatchlistItem"
+            />
         </div>
         <div class="flex flex-row px-8 py-8 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400">
             <div class="basis-1/4">

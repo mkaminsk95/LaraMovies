@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\WatchlistItemController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
@@ -18,3 +20,11 @@ Route::patch('/movies/{id}', [MovieController::class, 'update'])->name('movies.u
 Route::delete('/movies/{id}', [MovieController::class, 'destroy'])->name('movies.destroy');
 
 Route::post('/movies/{id}/rate', [MovieController::class, 'rate'])->name('movies.rate');
+
+Route::post('/movies/{id}/favourites', [FavouriteController::class, 'store'])->name('favourites.store');
+
+Route::delete('/movies/{id}/favourites', [FavouriteController::class, 'destroy'])->name('favourites.destroy');
+
+Route::post('/movies/{id}/watchlist-items', [WatchlistItemController::class, 'store'])->name('watchlistItems.store');
+
+Route::delete('/movies/{id}/watchlist-items', [WatchlistItemController::class, 'destroy'])->name('watchlistItems.destroy');
