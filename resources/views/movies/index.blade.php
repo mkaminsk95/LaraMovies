@@ -83,31 +83,33 @@
                                     class="inline-block align-top leading-5 text-sm text-gray-900 dark:text-gray-400">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
                             </div>
                         </div>
-                        <div class="absolute -right-10 top-3">
-                            <button form="delete-form-{{ $movie->id }}">
-                                <svg class="w-6 h-6 text-gray-400 dark:text-gray-400" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                     viewBox="0 0 24 24">
-                                    <path fill-rule="evenodd"
-                                          d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
-                                          clip-rule="evenodd"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="absolute -right-10 top-10">
-                            <a href={{ route('movies.edit', $movie->id) }}>
-                                <svg class="w-6 h-6 text-gray-400 dark:text-gray-400"
-                                     viewBox="0 0 1024 1024"
-                                     x="128" y="128" role="img" xmlns="http://www.w3.org/2000/svg">
-                                    <g fill="currentColor">
-                                        <path fill="currentColor"
-                                              d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z"/>
-                                        <path
-                                            d="m469.952 554.24l52.8-7.552L847.104 222.4a32 32 0 1 0-45.248-45.248L477.44 501.44l-7.552 52.8zm422.4-422.4a96 96 0 0 1 0 135.808l-331.84 331.84a32 32 0 0 1-18.112 9.088L436.8 623.68a32 32 0 0 1-36.224-36.224l15.104-105.6a32 32 0 0 1 9.024-18.112l331.904-331.84a96 96 0 0 1 135.744 0z"/>
-                                    </g>
-                                </svg>
-                            </a>
-                        </div>
+                        @if(auth()->user() && auth()->user()->is_admin)
+                            <div class="absolute -right-10 top-3">
+                                <button form="delete-form-{{ $movie->id }}">
+                                    <svg class="w-6 h-6 text-gray-400 dark:text-gray-400" aria-hidden="true"
+                                         xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                         viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd"
+                                              d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z"
+                                              clip-rule="evenodd"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="absolute -right-10 top-10">
+                                <a href={{ route('movies.edit', $movie->id) }}>
+                                    <svg class="w-6 h-6 text-gray-400 dark:text-gray-400"
+                                         viewBox="0 0 1024 1024"
+                                         x="128" y="128" role="img" xmlns="http://www.w3.org/2000/svg">
+                                        <g fill="currentColor">
+                                            <path fill="currentColor"
+                                                  d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z"/>
+                                            <path
+                                                d="m469.952 554.24l52.8-7.552L847.104 222.4a32 32 0 1 0-45.248-45.248L477.44 501.44l-7.552 52.8zm422.4-422.4a96 96 0 0 1 0 135.808l-331.84 331.84a32 32 0 0 1-18.112 9.088L436.8 623.68a32 32 0 0 1-36.224-36.224l15.104-105.6a32 32 0 0 1 9.024-18.112l331.904-331.84a96 96 0 0 1 135.744 0z"/>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        @endif
                     </li>
                     <form id="delete-form-{{ $movie->id }}" method="POST" action="/movies/{{ $movie->id }}">
                         @csrf
