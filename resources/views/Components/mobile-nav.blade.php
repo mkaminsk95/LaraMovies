@@ -1,16 +1,11 @@
 <!-- Mobile menu, show/hide based on menu open state. -->
-<div class="lg:hidden" role="dialog" aria-modal="true">
+<div class="lg:hidden" role="dialog" aria-modal="true" x-show="opened">
     <!-- Background backdrop, show/hide based on slide-over state. -->
     <div class="fixed inset-0 z-10"></div>
     <div
-        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-        <div class="flex items-center justify-between">
-            <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
-                <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                     alt="">
-            </a>
-            <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 px-6 py-6 sm:max-w-sm border border-gray-300 dark:border-gray-700">
+        <div class="text-right">
+            <button @click="opened = false" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
                 <span class="sr-only">Close menu</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                      aria-hidden="true">
@@ -18,20 +13,27 @@
                 </svg>
             </button>
         </div>
-        <div class="mt-6 flow-root">
+        <div class="mt-6">
             <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
-                    <a href="#"
-                       class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Movies</a>
-                    <a href="#"
-                       class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">About</a>
-                    <a href="#"
-                       class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">News</a>
+                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-nav-link>
+                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-nav-link>
+                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('contact') ? true : '' }}" href="{{ route('contact') }}">Contact</x-nav-link>
                 </div>
-                <div class="py-6">
-                    <a href="#"
-                       class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log
-                        in</a>
+                <div class="space-y-2 py-6">
+                    @auth
+                        <x-nav-link class="block mr-4 py-2" active="{{ request()->routeIs('profile.edit') ? true : '' }}" href="{{ route('profile.edit') }}">Profile</x-nav-link>
+                        <form class="block" method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); this.closest('form').submit();"
+                               class="block items-center py-2 px-1 pt-1 border-b-2 border-transparent text-base font-medium leading-7 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">Log out</a>
+                        </form>
+                    @endauth
+                    @guest
+                        <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-nav-link>
+                        <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-nav-link>
+                    @endguest
                 </div>
             </div>
         </div>

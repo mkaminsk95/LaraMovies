@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex flex-col mx-auto mt-10 w-[1000px]">
+    <div class="flex flex-col mx-auto pb-12 md:mt-12 lg:mt-10 w-full md:w-[725px] lg:w-[1000px] bg-white dark:bg-gray-800">
         <div class="relative">
             @if($movie['backdrop_path'] !== null)
                 <img src="https://image.tmdb.org/t/p/w1280/{{ $movie['backdrop_path'] }}" alt="poster">
@@ -11,18 +11,19 @@
             <div class="absolute bottom-10 left-8 max-w-[600px] text-white">
                 <div class="mt-2 mb-2">
                     <x-star class="inline mr-1 align-top leading-none text-yellow-600" width="30px" height="30px" :filled="true"/>
-                    <span class="inline-block align-top leading-7 text-2xl text-white dark:text-white">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
+                    <span class="inline-block align-top leading-7 text-lg lg:text-2xl text-white dark:text-white">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
                 </div>
-                <span class="text-4xl">{{ $movie['title'] }}</span>
-                <span class="text-2xl">({{ (new DateTime($movie['release_date']))->format('Y') }})</span>
+                <span class="text-3xl lg:text-4xl">{{ $movie['title'] }}</span>
+                <span class="text-lg lg:text-2xl">({{ (new DateTime($movie['release_date']))->format('Y') }})</span>
                 <div class="mt-3">
                     @foreach($movie['genres'] as $genre)
-                        <x-genre-block class='text-l p-1 mr-3 bg-gray-800'>{{ $genre['name'] }}</x-genre-block>
+                        <x-genre-block class='text-sm lg:text-md p-1 mr-3 bg-gray-800'>{{ $genre['name'] }}</x-genre-block>
                     @endforeach
                 </div>
 
             </div>
             <x-star-rating-panel
+                class="hidden md:block absolute -bottom-4 right-9 h-32 pt-4 px-4"
                 movieId="{{ $movie->id }}"
                 userRating="{{ $rating }}"
                 :isFavourite="$isFavourite"
@@ -40,8 +41,15 @@
                 @endif
             </div>
             <div class="basis-1/2 ml-12">
-                <p class="text-l mt-4">{{ $movie['overview'] }}</p>
+                <p class="text-sm lg:text-base mt-4">{{ $movie['overview'] }}</p>
             </div>
         </div>
+        <x-star-rating-panel
+            class="md:hidden h-32 w-[350px] mx-auto mt-8 pt-6 px-4 bg-gray-300 rounded"
+            movieId="{{ $movie->id }}"
+            userRating="{{ $rating }}"
+            :isFavourite="$isFavourite"
+            :isWatchlistItem="$isWatchlistItem"
+        />
     </div>
 </x-layout>

@@ -6,7 +6,7 @@
 @endphp
 
 <div x-data="initializePanel()" x-on:mouseleave="clearRating()"
-     class="absolute -bottom-4 right-9 h-32 pt-4 px-4 bg-gray-300 rounded">
+     {{ $attributes->merge(['class' => 'bg-gray-300 rounded']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating" class="flex ml-1 items-center justify-center w-10 h-10 {{ $rated ? $afterRatingColor : $beforeRatingColor }} text-white text-base rounded-full">
@@ -20,7 +20,7 @@
             <x-add-to-favourites width="26px" height="26px"  movieId="{{ $movieId }}" :added="$isFavourite"/>
         </div>
     </div>
-    <div class="pt-3">
+    <div class="pt-4 md:pt-3">
         @for($i = 0; $i < 10; $i++)
             <div class="inline-block" x-data="{starId: '{{$i+1}}', filled: 'nonzero'}"
                  x-on:mouseover="
@@ -30,7 +30,7 @@
                         ratingText = ratingNames[rating-1];
                  }"
                  x-on:click="submitData()">
-                <x-star class="h-[26px] w-[26px]" filled="starId - 1 < rating ? 'nonzero' : 'evenodd'"></x-star>
+                <x-star class="h-[28px] w-[28px] md:h-[26px] md:w-[26px]" filled="starId - 1 < rating ? 'nonzero' : 'evenodd'"></x-star>
             </div>
         @endfor
     </div>

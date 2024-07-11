@@ -10,9 +10,11 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 border border-gray-300 dark:border-gray-700 ">
-    <x-desktop-nav/>
-    <x-mobile-nav/>
+<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 border border-gray-300 dark:border-gray-700">
+    <div x-data="{ opened: false }">
+        <x-desktop-nav/>
+        <x-mobile-nav/>
+    </div>
 </header>
 
     {{ $slot }}
