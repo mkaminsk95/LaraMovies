@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
         startAt: 0,
         perView: 6.4,
         bound: true,
-        gap: 30
+        gap: 30,
+        breakpoints: {
+            768: {
+                perView: 4.7
+            },
+            1024: {
+                perView: 5.6
+            }
+        }
     }).mount();
 });
