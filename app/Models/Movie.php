@@ -30,6 +30,11 @@ class Movie extends Model
         return $this->hasMany(Rating::class);
     }
 
+    public function credits(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Credit::class);
+    }
+
     public function scopeWithGenre($query, $genres)
     {
         foreach ($genres as $genre) {
