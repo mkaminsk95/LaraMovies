@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Services\MovieServiceInterface;
-use App\Services\TMDBService;
+use App\Services\ActorsPopulatorInterface;
+use App\Services\MoviesPopulatorInterface;
+use App\Services\TMDB\TMDBActorsPopulator;
+use App\Services\TMDB\TMDBMoviesPopulator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(MovieServiceInterface::class, TMDBService::class);
+        $this->app->bind(MoviesPopulatorInterface::class, TMDBMoviesPopulator::class);
+        $this->app->bind(ActorsPopulatorInterface::class, TMDBActorsPopulator::class);
     }
 
     /**
