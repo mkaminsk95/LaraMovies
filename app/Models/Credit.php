@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Credit extends Model
 {
+    const DEPARTMENT_ACTING = 'Acting';
+    const DEPARTMENT_DIRECTING = 'Directing';
+    const DEPARTMENT_WRITING = 'Writing';
+    const DEPARTMENT_PRODUCTION = 'Production';
+    const DEPARTMENT_SOUND = 'Sound';
+    const DEPARTMENT_CAMERA = 'Camera';
+
     public $timestamps = false;
 
     protected $fillable = [
