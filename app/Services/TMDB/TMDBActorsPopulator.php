@@ -75,8 +75,7 @@ class TMDBActorsPopulator implements ActorsPopulatorInterface
 
     private function ifActorAlreadyExists(int $personId): bool
     {
-
-        return Person::where('tmdb_id', $personId)->exist();
+        return Person::where('tmdb_id', $personId)->exists();
     }
 
     private function addNewActor(array $personData): Person
