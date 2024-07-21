@@ -65,9 +65,9 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
                 break;
             }
 
-            $movies = $this->mergeMovies($movies, $result, $n);
+            $movies = $this->mergeMovies($movies, $result, $number);
 
-            echo "Fetched page $page - $n movies left\n";
+            echo "Fetched page $page - $number movies left\n";
             $page++;
         }
 
