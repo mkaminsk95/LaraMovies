@@ -20,7 +20,7 @@
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         @auth
-            <x-nav-link class="mr-4 text-sm" active="{{ request()->routeIs('profile.edit') ? true : '' }}" href="{{ route('profile.edit') }}">Profile</x-nav-link>
+            <x-nav-link class="mr-10 text-sm" active="{{ request()->routeIs('profile.show') ? true : '' }}" href="{{ route('profile.show') }}">Profile</x-nav-link>
             <form class="flex items-center" method="POST" action="{{ route('logout') }}">
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); this.closest('form').submit();"
