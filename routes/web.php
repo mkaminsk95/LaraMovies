@@ -1,5 +1,6 @@
 <?php
 
+// TODO: clean up
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,13 @@ Route::get('/contact', function () {
 require __DIR__.'/movies.php';
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])
+    Route::get('/profile', [ProfileController::class, 'show'])
+        ->name('profile.show');
+
+    Route::patch('/profile/update-avatar', [ProfileController::class, 'updateAvatar'])
+        ->name('profile.update-avatar');
+
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])
         ->name('profile.edit');
 
     Route::patch('/profile', [ProfileController::class, 'update'])

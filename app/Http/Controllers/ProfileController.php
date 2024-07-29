@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Avatar;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,9 +13,44 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+
+    public function show(Request $request): View
+    {
+        $favourites = $request->user()->favourites()->get();
+        $watchlist = $request->user()->watchlistItems()->get();
+        $recentRatings = $request->user()->ratings()->orderByDesc('created_at')->get();
+        $topRatings = $request->user()->ratings()->orderByDesc('rating')->get();
+        $topRated = $request->user()->ratings()->orderByDesc('rating')->first()?->movie;
+        $avatars = Avatar::all();
+
+        return view('profile.show', [
+            'user' => $request->user(),
+            'favourites' => $favourites,
+            'watchlist' => $watchlist,
+            'recentRatings' => $recentRatings,
+            'topRatings' => $topRatings,
+            'topRated' => $topRated,
+            'avatars' => $avatars,
+        ]);
+    }
+
+    public function updateAvatar(Request $request): JsonResponse
+    {
+        $avatarId = $request->input('avatarId');
+
+        $request->validate([
+            'avatarId' => ['required', 'exists:avatars,id'],
+        ]);
+
+        $user = $request->user();
+        $user->avatar_id = $avatarId;
+        $request->user()->save();
+
+        return response()->json([
+            'status' => 'avatar-updated',
+        ]);
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -21,9 +58,6 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -37,9 +71,6 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         $request->validateWithBag('userDeletion', [
