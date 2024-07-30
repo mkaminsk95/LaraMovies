@@ -58,7 +58,7 @@
                 @foreach($movie->credits as $credit)
                     @if($credit->person['profile_path'] !== null)
                         <li class="glide__slide">
-                            <img class="border dark:border-gray-700" src="https://image.tmdb.org/t/p/w185{{ $credit->person['profile_path'] }}" alt="">
+                            <img class="carousel-image border dark:border-gray-700" src="https://image.tmdb.org/t/p/w185{{ $credit->person['profile_path'] }}" alt="">
                             <p class="pt-5 text-center text-sm lg:text-base dark:text-gray-400">{{ $credit['character'] }}</p>
                             <p class="pt-2 text-center text-xs lg:text-sm text-gray-600">{{ $credit->person['name'] }}</p>
                         </li>

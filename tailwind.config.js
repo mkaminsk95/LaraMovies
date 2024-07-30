@@ -22,6 +22,9 @@ export default {
                 'primary':'rgb(79 70 229)',
                 'primary-hovered':'rgb(99 102 241)',
             },
+            lineHeight: {
+                '0': '0',
+            },
         },
     },
 
