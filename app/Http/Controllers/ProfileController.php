@@ -23,6 +23,11 @@ class ProfileController extends Controller
         $topRated = $request->user()->ratings()->orderByDesc('rating')->first()?->movie;
         $avatars = Avatar::all();
 
+        if ($request->headers->get('referer')) {
+            $request->session()->reflash();
+            $request->session()->forget('status');
+        }
+
         return view('profile.show', [
             'user' => $request->user(),
             'favourites' => $favourites,
@@ -36,19 +41,26 @@ class ProfileController extends Controller
 
     public function updateAvatar(Request $request): JsonResponse
     {
-        $avatarId = $request->input('avatarId');
+        try {
+            $avatarId = $request->input('avatarId');
 
-        $request->validate([
-            'avatarId' => ['required', 'exists:avatars,id'],
-        ]);
+            $request->validate([
+                'avatarId' => ['required', 'exists:avatars,id'],
+            ]);
 
-        $user = $request->user();
-        $user->avatar_id = $avatarId;
-        $request->user()->save();
+            $user = $request->user();
+            $user->avatar_id = $avatarId;
+            $request->user()->save();
 
-        return response()->json([
-            'status' => 'avatar-updated',
-        ]);
+            return response()->json([
+                'status' => 'success'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Failed to update avatar. Please try again.'
+            ]);
+        }
     }
 
     public function edit(Request $request): View
