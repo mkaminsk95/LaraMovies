@@ -8,7 +8,7 @@
     };
 @endphp
 
-<div class="{{ implode(' ', $colors) }} border px-4 py-3 rounded relative"
+<div {{ $attributes->merge(['class' => implode(' ', $colors).' border px-4 py-3 rounded relative']) }}"
      role="alert">
     @if(is_array($messages) && count($messages) > 1)
         <ul class="list-disc list-inside text-sm {{ $colors['text'] }}">
