@@ -8,6 +8,7 @@ export default defineConfig({
             'resources/css/app.css',
             'resources/js/app.js',
             'resources/js/carousel.js',
+            'resources/js/message.js'
         ]),
         mkcert({
             savePath: './certs'
