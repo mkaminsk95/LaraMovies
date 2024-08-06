@@ -31,6 +31,7 @@ Route::get('/contact', function () {
 
 require __DIR__.'/movies.php';
 
+// TODO: move to separate file
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])
         ->name('profile.show');

@@ -166,12 +166,24 @@ class MovieController extends Controller
             $rating = request()->query('rating');
             $user = auth()->user();
 
-            Rating::create(['rating' => $rating, 'user_id' => $user->id, 'movie_id' => $movieId]);
+            Rating::updateOrCreate(['user_id' => $user->id, 'movie_id' => $movieId], ['rating' => $rating]);
 
             return response()->json(['success' => true]);
         } else {
             return redirect(route('login'));
         }
+    }
+
+    public function deleteRating(int $movieId)
+    {
+        $user = auth()->user();
+
+        Rating::where([
+            ['user_id', $user->id],
+            ['movie_id', $movieId]
+        ])->firstOrFail()->delete();
+
+        return response()->json(['success' => true]);
     }
 
     public function addToFavourites(int $movieId): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse

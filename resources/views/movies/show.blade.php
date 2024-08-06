@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex flex-col mx-auto pb-12 md:mt-12 lg:mt-10 w-full md:w-[725px] lg:w-[1000px] bg-white dark:bg-gray-800">
+    <div x-data="initializePanel()"  class="flex flex-col mx-auto pb-12 md:mt-12 lg:mt-10 w-full md:w-[725px] lg:w-[1000px] bg-white dark:bg-gray-800">
         <div class="relative">
             @if($movie['backdrop_path'] !== null)
                 <img src="https://image.tmdb.org/t/p/w1280/{{ $movie['backdrop_path'] }}" alt="poster">
@@ -23,7 +23,7 @@
 
             </div>
             <x-star-rating-panel
-                class="hidden md:block absolute -bottom-4 right-9 h-32 pt-4 px-4"
+                class="hidden md:block absolute -bottom-4 right-9 h-32 pt-4 px-4 bg-gray-300 rounded"
                 movieId="{{ $movie->id }}"
                 userRating="{{ $rating }}"
                 :isFavourite="$isFavourite"
