@@ -8,7 +8,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-
 class CreateAdminUser extends Command
 {
     protected $signature = 'app:admin:create-user';

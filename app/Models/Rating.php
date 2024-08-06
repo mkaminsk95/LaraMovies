@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Rating extends Model
 {
@@ -13,12 +14,12 @@ class Rating extends Model
         'movie_id'
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function movie(): BelongsTo
     {
         return $this->belongsTo(Movie::class);
     }

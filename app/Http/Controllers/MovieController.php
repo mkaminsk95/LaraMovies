@@ -162,16 +162,12 @@ class MovieController extends Controller
 
     public function rate(int $movieId)
     {
-        if (Auth::check()) {
-            $rating = request()->query('rating');
-            $user = auth()->user();
+        $rating = request()->query('rating');
+        $user = auth()->user();
 
-            Rating::updateOrCreate(['user_id' => $user->id, 'movie_id' => $movieId], ['rating' => $rating]);
+        Rating::updateOrCreate(['user_id' => $user->id, 'movie_id' => $movieId], ['rating' => $rating]);
 
-            return response()->json(['success' => true]);
-        } else {
-            return redirect(route('login'));
-        }
+        return response()->json(['success' => true]);
     }
 
     public function deleteRating(int $movieId)
@@ -188,27 +184,19 @@ class MovieController extends Controller
 
     public function addToFavourites(int $movieId): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
-        if (Auth::check()) {
-            $user = auth()->user();
+        $user = auth()->user();
 
-            Favourite::create(['user_id' => $user->id, 'movie_id' => $movieId]);
+        Favourite::create(['user_id' => $user->id, 'movie_id' => $movieId]);
 
-            return response()->json(['success' => true]);
-        } else {
-            return redirect(route('login'));
-        }
+        return response()->json(['success' => true]);
     }
 
     public function addToWatchlist(int $movieId): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
     {
-        if (Auth::check()) {
-            $user = auth()->user();
+        $user = auth()->user();
 
-            WatchlistItem::create(['user_id' => $user->id, 'movie_id' => $movieId]);
+        WatchlistItem::create(['user_id' => $user->id, 'movie_id' => $movieId]);
 
-            return response()->json(['success' => true]);
-        } else {
-            return redirect(route('login'));
-        }
+        return response()->json(['success' => true]);
     }
 }

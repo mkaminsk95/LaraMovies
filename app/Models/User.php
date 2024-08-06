@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -45,22 +47,22 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
-    public function ratings(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
     }
 
-    public function favourites(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function favourites(): HasMany
     {
         return $this->hasMany(Favourite::class);
     }
 
-    public function watchlistItems(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function watchlistItems(): HasMany
     {
         return $this->hasMany(WatchlistItem::class);
     }
 
-    public function avatar(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function avatar(): BelongsTo
     {
         return $this->belongsTo(Avatar::class);
     }

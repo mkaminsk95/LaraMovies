@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Movie extends Model
 {
@@ -20,17 +22,17 @@ class Movie extends Model
         'original_language'
     ];
 
-    public function genres(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class, 'movie_genre');
     }
 
-    public function ratings(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
     }
 
-    public function credits(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function credits(): HasMany
     {
         return $this->hasMany(Credit::class);
     }
