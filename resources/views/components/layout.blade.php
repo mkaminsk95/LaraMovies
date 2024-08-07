@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>About page</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="icon" href="{{ asset('logos/favicon.png') }}" type="image/png">
 </head>
 <body>
 <header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 border border-gray-300 dark:border-gray-700">

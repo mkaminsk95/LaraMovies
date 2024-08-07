@@ -1,6 +1,6 @@
 <nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
     <div class="flex lg:flex-1">
-        <x-application-logo class="h-10 w-auto"/>
+        <x-application-logo class="h-12 w-auto"/>
     </div>
     <div class="flex lg:hidden">
         <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:text-gray-500"
