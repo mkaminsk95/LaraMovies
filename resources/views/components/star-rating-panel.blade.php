@@ -5,8 +5,8 @@
     $afterRatingColor = 'bg-yellow-600';
 @endphp
 
-<div x-on:mouseleave="clearRating()"
-    {{ $attributes->merge(['class' => 'bg-gray-300 rounded']) }}>
+<div x-on:mouseleave="clearRating()" @resize.window="starSize = getStarSize()"
+    {{ $attributes->merge(['class' => 'rating-panel pt-5 px-4 bg-gray-300 rounded']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating"
@@ -21,12 +21,12 @@
             <x-add-to-favourites width="26px" height="26px" movieId="{{ $movieId }}" :added="$isFavourite"/>
         </div>
     </div>
-    <div class="pt-4 md:pt-3" x-on:mouseleave="bringBackRating()">
+    <div class="flex flex-row md:pt-3 pt-4" x-on:mouseleave="bringBackRating()">
         @for($i = 0; $i < 10; $i++)
-            <div class="inline-block" x-data="{starId: '{{$i+1}}', filled: 'nonzero'}"
+            <div x-data="{starId: '{{$i+1}}', filled: 'nonzero'}"
                  x-on:mouseover="displayRatingProposition()"
                  x-on:click="submitData()">
-                <x-star class="h-[28px] w-[28px] md:h-[26px] md:w-[26px]"
+                <x-star x-bind:height="starSize" x-bind:width="starSize"
                         filled="starId - 1 < ratingNum ? 'nonzero' : 'evenodd'"></x-star>
             </div>
         @endfor
@@ -34,6 +34,20 @@
 </div>
 <script>
     function initializePanel() {
+        const getStarSize = function () {
+            let element = document.getElementsByClassName('rating-panel')[0];
+            if (element.clientWidth === 0) {
+                element = document.getElementsByClassName('rating-panel')[1];
+            }
+            let widthWithPaddings = element.clientWidth;
+            const elementComputedStyle = window.getComputedStyle(element, null);
+            return (
+                widthWithPaddings -
+                parseFloat(elementComputedStyle.paddingLeft) -
+                parseFloat(elementComputedStyle.paddingRight)
+            )/10;
+        }
+
         const ratingNames = [
             'Abysmal',
             'Terrible',
@@ -46,10 +60,13 @@
             'Excellent!',
             'Perfect!'
         ];
+
         const rated = {{ $rated ? 'true' : 'false' }};
         const rating = '{{ $rated ?  $userRating : '' }}';
         const ratingNum = rating;
         const ratingText = ratingNames[rating - 1] ?? 'Your rating:';
+
+        const starSize = getStarSize();
 
         return {
             message: '',
@@ -61,6 +78,7 @@
             showSpinner: false,
             rated: rated,
             token: document.querySelector('meta[name="csrf-token"]').content,
+            starSize: starSize,
 
             submitData() {
                 this.showSpinner = true;
@@ -156,6 +174,8 @@
                     this.ratingText = this.ratingNames[this.rating - 1];
                 }
             },
+
+            getStarSize: getStarSize,
         }
     }
 </script>
