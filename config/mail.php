@@ -112,6 +112,16 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'from_support_address' => [
+        'address' => env('MAIL_FROM_SUPPORT_ADDRESS', 'support@example.com'),
+        'name' => env('MAIL_FROM_SUPPORT_NAME', 'support@example.com'),
+    ],
+
+    'from_contact_address' => [
+        'address' => env('MAIL_FROM_CONTACT_ADDRESS', 'contact@example.com'),
+        'name' => env('MAIL_FROM_CONTACT_NAME', 'Contact'),
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
