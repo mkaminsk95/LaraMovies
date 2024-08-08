@@ -1,5 +1,5 @@
 <x-layout>
-    <div x-data="initializePanel()"  class="flex flex-col mx-auto md:mt-16 md:mb-20 lg:mt-20 w-full sm:max-md:max-w-[800px] lg:w-[1000px] bg-white dark:bg-gray-800">
+    <div x-data="initializePanel()"  class="flex flex-col mx-auto md:mt-16 md:mb-20 lg:mt-20 w-full max-lg:max-w-[800px] lg:w-[1000px] bg-white dark:bg-gray-800">
 
         @include('movies.partials.movie-header')
 
