@@ -18,7 +18,7 @@
                 <div class="space-y-2 py-6">
                     <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-nav-link>
                     <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-nav-link>
-                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('contact') ? true : '' }}" href="{{ route('contact') }}">Contact</x-nav-link>
+                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">Contact</x-nav-link>
                 </div>
                 <div class="space-y-2 py-6">
                     @auth
