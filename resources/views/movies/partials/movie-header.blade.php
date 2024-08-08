@@ -6,7 +6,7 @@
     @endif
     <div class="h-full w-full absolute -translate-y-full text-white bg-gradient-to-t from-gray-900 to-transparent ">
     </div>
-    <div class="absolute bottom-10 left-8 max-w-[600px] text-white">
+    <div class="absolute bottom-10 left-8 max-w-[400px] lg:max-w-[600px] text-white">
         <div class="mt-2 mb-2">
             <x-star class="inline mr-1 align-top leading-none text-yellow-600" width="30px" height="30px" :filled="true"/>
             <span class="inline-block align-top leading-7 text-lg lg:text-2xl text-white dark:text-white">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
