@@ -16,7 +16,7 @@
     <div class="hidden lg:flex lg:gap-x-12">
         <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-nav-link>
         <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-nav-link>
-        <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('contact') ? true : '' }}" href="{{ route('contact') }}">Contact</x-nav-link>
+        <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">Contact</x-nav-link>
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         @auth
