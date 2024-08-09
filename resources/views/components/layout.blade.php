@@ -11,7 +11,7 @@
     <link rel="icon" href="{{ asset('logos/favicon.png') }}" type="image/png">
 </head>
 <body>
-<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 border border-gray-300 dark:border-gray-700">
+<header class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 shadow-md dark:shadow-shadow-color border border-gray-300 dark:border-gray-700">
     <div x-data="{ opened: false }">
         <x-desktop-nav/>
         <x-mobile-nav/>

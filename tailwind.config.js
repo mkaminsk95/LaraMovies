@@ -21,6 +21,7 @@ export default {
             colors: {
                 'primary':'rgb(79 70 229)',
                 'primary-hovered':'rgb(99 102 241)',
+                'shadow-color':'rgba(96,103,115,0.2)',
             },
             lineHeight: {
                 '0': '0',
