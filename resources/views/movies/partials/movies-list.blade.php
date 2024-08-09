@@ -11,7 +11,7 @@
         </li>
     @endif
     @foreach($paginatedMovies as $movie)
-        <li class="flex relative mt-1 gap-x-6 bg-white dark:bg-gray-800 border border-1 border-gray-300 dark:border-gray-700 rounded">
+        <li class="flex relative mt-1.5 gap-x-6 bg-white dark:bg-gray-800 shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 rounded">
             <div class="flex min-w-0 gap-x-4">
                 @if($movie['poster_path'] !== null)
                     <img class="h-30 w-20 flex-none rounded bg-gray-50"

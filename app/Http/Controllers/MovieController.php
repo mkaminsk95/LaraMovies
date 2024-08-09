@@ -8,6 +8,7 @@ use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\Rating;
 use App\Models\WatchlistItem;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
@@ -17,12 +18,14 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $query = request()->query();
-        $moviesQuery = $this->applyFilters(Movie::query(), $query);
+        $moviesQuery = Movie::query();
+        $moviesQuery = $this->applyFilters($moviesQuery, $query);
+        $moviesQuery = $this->applySorting($moviesQuery, $query['sorting'] ?? 'vote_average.asc');
 
-        $movies = $moviesQuery->orderBy('vote_average', 'desc')->paginate(20);
+        $movies = $moviesQuery->paginate(20);
         $genresList = Genre::getAllGenresArray();
 
         return view('movies.index', [
@@ -39,6 +42,13 @@ class MovieController extends Controller
                 $this->$method($query, $value);
             }
         }
+        return $query;
+    }
+
+    private function applySorting($query, $sorting)
+    {
+        list($attribute, $order) = explode('.', $sorting);
+        $query->orderBy($attribute, $order);
         return $query;
     }
 
