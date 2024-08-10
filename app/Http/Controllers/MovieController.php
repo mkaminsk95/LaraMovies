@@ -23,7 +23,7 @@ class MovieController extends Controller
         $query = request()->query();
         $moviesQuery = Movie::query();
         $moviesQuery = $this->applyFilters($moviesQuery, $query);
-        $moviesQuery = $this->applySorting($moviesQuery, $query['sorting'] ?? 'vote_average.asc');
+        $moviesQuery = $this->applySorting($moviesQuery, $query['sorting'] ?? 'vote_average.desc');
 
         $movies = $moviesQuery->paginate(20);
         $genresList = Genre::getAllGenresArray();
