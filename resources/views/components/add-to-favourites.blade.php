@@ -1,6 +1,6 @@
 @props(['movieId', 'added' => false])
 
-<span x-data="initializeAddToFavouritesButton"
+<span x-data="initializeAddToFavouritesButton"  title="Add to favourites"
       @click="runAnimation();addOrDeleteFromFavourites()">
     <svg :width="animate ? '{{(int)$attributes['width']+4}}px' : '{{$attributes['width']}}'"
          :height="animate ? '{{(int)$attributes['width']+4}}px' : '{{$attributes['width']}}'"

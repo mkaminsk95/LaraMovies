@@ -1,6 +1,6 @@
 @props(['movieId', 'added' => false])
 
-<span x-data="initializeAddToWatchlistButton"
+<span x-data="initializeAddToWatchlistButton" title="Add to watchlist"
       @click="runAnimation();addOrDeleteFromWatchlist()">
     <svg :width="animate ? '{{(int)$attributes['width']+4}}px' : '{{$attributes['width']}}'"
          :height="animate ? '{{(int)$attributes['width']+4}}px' : '{{$attributes['width']}}'"
