@@ -9,15 +9,14 @@ use App\Models\Movie;
 use App\Models\Rating;
 use App\Models\WatchlistItem;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class MovieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         $query = request()->query();
@@ -72,17 +71,11 @@ class MovieController extends Controller
         return $query->withVoteAverage($voteAverage);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('movies.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreMovieRequest $request)
     {
         $movie = Movie::create([
@@ -98,9 +91,6 @@ class MovieController extends Controller
         return redirect()->route('movies.show', ['id' => $movie->id]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id)
     {
         $movie = Movie::findOrFail($id);
@@ -110,6 +100,7 @@ class MovieController extends Controller
             $isFavourite = $user->favourites()->where('movie_id', $movie->id)->exists();
             $isWatchlistItem = $user->watchlistItems()->where('movie_id', $movie->id)->exists();
             $rating = $movie->ratings()->where('user_id', $user->id)->first()?->rating;
+            $review = $movie->reviews()->where('user_id', $user->id)->first();
         }
 
         return view(
@@ -117,15 +108,13 @@ class MovieController extends Controller
             [
                 'movie' => $movie,
                 'rating' => $rating ?? null,
+                'review' => $review ?? null,
                 'isFavourite' => $isFavourite ?? false,
                 'isWatchlistItem' => $isWatchlistItem ?? false
             ]
         );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(int $id)
     {
         $movie = Movie::find($id);
@@ -133,9 +122,6 @@ class MovieController extends Controller
         return view('movies.edit', ['movie' => $movie]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(StoreMovieRequest $request, int $id)
     {
         $request->validate([
@@ -160,9 +146,6 @@ class MovieController extends Controller
         return redirect()->route('movies.edit', ['id' => $movie->id])->with('success', 'Movie successfully updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         Movie::findOrFail($id)->delete();
@@ -170,7 +153,7 @@ class MovieController extends Controller
         return redirect()->route('movies.index')->with('success', 'Movie successfully deleted!');
     }
 
-    public function rate(int $movieId)
+    public function rate(int $movieId): JsonResponse
     {
         $rating = request()->query('rating');
         $user = auth()->user();
@@ -180,7 +163,7 @@ class MovieController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function deleteRating(int $movieId)
+    public function deleteRating(int $movieId): JsonResponse
     {
         $user = auth()->user();
 
@@ -192,7 +175,7 @@ class MovieController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function addToFavourites(int $movieId): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function addToFavourites(int $movieId): JsonResponse
     {
         $user = auth()->user();
 
@@ -201,12 +184,36 @@ class MovieController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function addToWatchlist(int $movieId): \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+    public function addToWatchlist(int $movieId): JsonResponse
     {
         $user = auth()->user();
 
         WatchlistItem::create(['user_id' => $user->id, 'movie_id' => $movieId]);
 
         return response()->json(['success' => true]);
+    }
+
+    public function review(int $movieId): RedirectResponse
+    {
+        // validate if the name and description are not empty and if description is not too long (max 255 characters)
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required|max:255',
+        ]);
+
+        $movie = Movie::findOrFail($movieId);
+        $user = auth()->user();
+        $name = request('name');
+        $description = request('description');
+
+        // Check if the user has already reviewed the movie and if not create a new review
+        $review = $movie->reviews()->where('user_id', $user->id)->first();
+        if ($review) {
+            $review->update(['name' => $name, 'description' => $description]);
+        } else {
+            $movie->reviews()->create(['user_id' => $user->id, 'name' => $name, 'description' => $description]);
+        }
+
+        return redirect()->route('movies.show', ['id' => $movie->id]);
     }
 }
