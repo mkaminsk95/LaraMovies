@@ -20,6 +20,9 @@ export default {
             },
             colors: {
                 'primary':'rgb(79 70 229)',
+                'secondary':'rgb(51,51,51)',
+                'star-gold':'rgb(202 138 4)',
+                'star-gold-light':'rgb(234 179 8)',
                 'primary-hovered':'rgb(99 102 241)',
                 'shadow-color':'rgba(96,103,115,0.2)',
             },
