@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('description');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('movie_id')->constrained()->onDelete('cascade');
-            $table->foreignId('rating_id')->constrained();
+            $table->foreignId('rating_id')->nullable()->constrained()->nullOnDelete();
         });
     }
 
