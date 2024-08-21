@@ -11,7 +11,7 @@
         </li>
     @endif
     @foreach($paginatedMovies as $movie)
-        <li class="flex relative mt-1.5 gap-x-6 bg-white dark:bg-gray-800 shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 rounded">
+        <li class="flex relative mt-1.5 gap-x-6 bg-white dark:bg-gray-800 shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 ">
             <div class="flex min-w-0 gap-x-4">
                 @if($movie['poster_path'] !== null)
                     <img class="h-30 w-20 flex-none rounded bg-gray-50"
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="mr-5 mt-2">
-                    <x-star class="inline align-top leading-none text-yellow-600" width="20px" height="20px"
+                    <x-star class="inline align-top leading-none text-star-gold" width="20px" height="20px"
                             :filled="true"/>
                     <span
                         class="inline-block align-top leading-5 text-sm text-gray-900 dark:text-gray-400">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
