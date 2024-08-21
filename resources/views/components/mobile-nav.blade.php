@@ -22,7 +22,7 @@
                 </div>
                 <div class="space-y-2 py-6">
                     @auth
-                        <x-nav-link class="block mr-4 py-2" active="{{ request()->routeIs('profile.show') ? true : '' }}" href="{{ route('profile.show') }}">Profile</x-nav-link>
+                        <x-nav-link class="block mr-4 py-2" active="{{ request()->routeIs('profile.show.me') ? true : '' }}" href="{{ route('profile.show.me') }}">Profile</x-nav-link>
                         <form class="block" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a href="{{ route('logout') }}"
