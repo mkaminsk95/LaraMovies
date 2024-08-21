@@ -8,7 +8,7 @@
     </div>
     <div class="absolute bottom-10 left-8 max-w-[400px] lg:max-w-[600px] text-white">
         <div class="mt-2 mb-2">
-            <x-star class="inline mr-1 align-top leading-none text-yellow-600" width="30px" height="30px" :filled="true"/>
+            <x-star class="inline mr-1 align-top leading-none text-star-gold" width="30px" height="30px" :filled="true"/>
             <span class="inline-block align-top leading-7 text-lg lg:text-2xl text-white dark:text-white">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
         </div>
         <span class="text-2xl md:text-3xl lg:text-4xl">{{ $movie['title'] }}</span>
@@ -21,10 +21,11 @@
 
     </div>
     <x-star-rating-panel
-        class="hidden md:block absolute -bottom-4 right-9 h-32 md:w-[300px] lg:w-[330px] pt-4 px-4 bg-gray-300 rounded"
+        class="hidden md:block absolute top-[302px] lg:top-[412px] right-9 md:w-[300px] lg:w-[330px] pt-4 px-4 bg-gray-300 rounded"
         movieId="{{ $movie->id }}"
         userRating="{{ $rating }}"
         :isFavourite="$isFavourite"
         :isWatchlistItem="$isWatchlistItem"
+        :review="$review"
     />
 </div>

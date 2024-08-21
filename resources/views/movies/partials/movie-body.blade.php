@@ -12,25 +12,16 @@
         <p class="text-xs sm:text-sm lg:text-base">{{ $movie['overview'] }}</p>
     </div>
 </div>
+
 <x-star-rating-panel
-    class="md:hidden h-32 w-3/4 max-w-[350px] sm:w-[350px] mx-auto mt-8 sm:mt-12"
+    class="md:hidden w-3/4 max-w-[350px] sm:w-[350px] mx-auto mt-8 sm:mt-12 pt-4 px-4 bg-gray-300 rounded"
     movieId="{{ $movie->id }}"
     userRating="{{ $rating }}"
     :isFavourite="$isFavourite"
     :isWatchlistItem="$isWatchlistItem"
+    :review="$review"
 />
 
-@if($movie->credits->count())
-    <h2 class="md:pl-[80px] max-md:text-center pt-8 sm:pt-12 md:pt-10 dark:text-gray-300 text-2xl font-medium tracking-wider">Top Billed Cast</h2>
-    <x-carousel class="w-full mx-auto pb-8">
-        @foreach($movie->credits as $credit)
-            @if($credit->person['profile_path'] !== null)
-                <li class="glide__slide">
-                    <img class="carousel-image border dark:border-gray-700" src="https://image.tmdb.org/t/p/w185{{ $credit->person['profile_path'] }}" alt="">
-                    <p class="pt-5 text-center text-sm lg:text-base dark:text-gray-400">{{ $credit['character'] }}</p>
-                    <p class="pt-2 text-center text-xs lg:text-sm text-gray-600">{{ $credit->person['name'] }}</p>
-                </li>
-            @endif
-        @endforeach
-    </x-carousel>
-@endif
+@include('movies.partials.actors-carousel')
+
+@include('movies.partials.review-carousel')

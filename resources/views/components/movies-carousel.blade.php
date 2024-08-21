@@ -9,11 +9,11 @@
 @endphp
 
 <section {{ $attributes }}>
-    <h2 class="sm:pl-14 dark:text-gray-300 text-center sm:text-left text-xl font-normal tracking-wide uppercase">{{ $title }}</h2>
+    <h2 class="pb-8 sm:pl-14 dark:text-gray-300 text-center sm:text-left text-2xl font-normal tracking-wide uppercase">{{ $title }}</h2>
     @if($movies->isEmpty())
         <p class="text-center text-gray-500 dark:text-gray-300">{{ $emptyMessage }}</p>
     @else
-        <x-carousel class="mx-auto px-6 sm:px-14  sm:pb-8" perViewExtraSmall="3" perViewSmall="4.4" perViewMedium="5.4"
+        <x-carousel class="mx-auto px-6 sm:px-14 sm:pb-8" perViewExtraSmall="3" perViewSmall="4.4" perViewMedium="5.4"
                     perViewLarge="7.4">
             @foreach($movies as $movie)
                 <li class="glide__slide">
