@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Avatar;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
 
-    public function show(Request $request): View
+    public function showMe(Request $request): View
     {
         $favourites = $request->user()->favourites()->get();
         $watchlist = $request->user()->watchlistItems()->get();
@@ -36,6 +37,29 @@ class ProfileController extends Controller
             'topRatings' => $topRatings,
             'topRated' => $topRated,
             'avatars' => $avatars,
+            'isMe' => true,
+        ]);
+    }
+
+    public function show(Request $request, int $id): View
+    {
+        $user = User::findOrFail($id);
+        $favourites = $user->favourites()->get();
+        $watchlist = $user->watchlistItems()->get();
+        $recentRatings = $user->ratings()->orderByDesc('created_at')->get();
+        $topRatings = $user->ratings()->orderByDesc('rating')->get();
+        $topRated = $user->ratings()->orderByDesc('rating')->first()?->movie;
+        $avatars = Avatar::all();
+
+        return view('profile.show', [
+            'user' => $user,
+            'favourites' => $favourites,
+            'watchlist' => $watchlist,
+            'recentRatings' => $recentRatings,
+            'topRatings' => $topRatings,
+            'topRated' => $topRated,
+            'avatars' => $avatars,
+            'isMe' => $request->user()?->id === $id,
         ]);
     }
 

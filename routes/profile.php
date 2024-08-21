@@ -4,8 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'show'])
-        ->name('profile.show');
+    Route::get('/profile', [ProfileController::class, 'showMe'])
+        ->name('profile.show.me');
 
     Route::patch('/profile/update-avatar', [ProfileController::class, 'updateAvatar'])
         ->name('profile.update-avatar');
@@ -19,3 +19,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
+
+Route::get('/profile/{id}', [ProfileController::class, 'show'])
+    ->name('profile.show');

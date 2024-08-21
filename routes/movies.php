@@ -20,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::delete('/movies/{id}', [MovieController::class, 'destroy'])->name('movies.destroy');
 
+    Route::post('/movies/{id}/review', [MovieController::class, 'review'])->name('review.create');
+
     Route::post('/movies/{id}/rate', [MovieController::class, 'rate'])->name('rate.create');
 
     Route::delete('/movies/{id}/rate', [MovieController::class, 'deleteRating'])->name('rate.destroy');
