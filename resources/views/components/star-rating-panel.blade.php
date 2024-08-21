@@ -1,12 +1,12 @@
-@props(['movieId', 'userRating' => null, 'isFavourite' => false, 'isWatchlistItem' => false])
+@props(['movieId', 'userRating' => null, 'isFavourite' => false, 'isWatchlistItem' => false, 'review' => null])
 @php
     $rated = (bool)$userRating;
     $beforeRatingColor = 'bg-black';
-    $afterRatingColor = 'bg-yellow-600';
+    $afterRatingColor = 'bg-star-gold';
 @endphp
 
 <div x-on:mouseleave="clearRating()" @resize.window="starSize = getStarSize()"
-    {{ $attributes->merge(['class' => 'rating-panel pt-5 px-4 bg-gray-300 rounded']) }}>
+    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-gray-300 rounded']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating"
@@ -25,11 +25,29 @@
         @for($i = 0; $i < 10; $i++)
             <div x-data="{starId: '{{$i+1}}', filled: 'nonzero'}"
                  x-on:mouseover="displayRatingProposition()"
-                 x-on:click="submitData()">
+                 x-on:click="submitData()" class="cursor-pointer">
                 <x-star x-bind:height="starSize" x-bind:width="starSize"
                         filled="starId - 1 < ratingNum ? 'nonzero' : 'evenodd'"></x-star>
             </div>
         @endfor
+    </div>
+    <div x-data="{showReviewForm: false}">
+        <div class="flex pt-5">
+            <x-secondary-button x-on:click="showReviewForm = !showReviewForm" x-show="!showReviewForm">{{ $review ? 'Edit review' : 'Review' }}</x-secondary-button>
+        </div>
+        <form x-show="showReviewForm" action="{{ route('review.create', $movieId) }}" method="post">
+            @csrf
+            <div class="float-right pb-2 pr-1 cursor-pointer hover:text-primary">
+                <svg @click="showReviewForm = false" height="24" width="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+            </div>
+            <x-text-input name="name" placeholder="Title" value="{{ $review?->name }}" required/>
+            <x-textarea-input name="description" class="resize-none mt-3" placeholder="Write a review..." rows="3" maxlength="200" required>
+                {{ $review?->description }}
+            </x-textarea-input>
+            <div class="flex">
+                <x-primary-button class="mt-3">Submit</x-primary-button>
+            </div>
+        </form>
     </div>
 </div>
 <script>
