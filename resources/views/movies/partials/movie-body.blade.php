@@ -14,7 +14,7 @@
 </div>
 
 <x-star-rating-panel
-    class="md:hidden w-3/4 max-w-[350px] sm:w-[350px] mx-auto mt-8 sm:mt-12 pt-4 px-4 bg-gray-300 rounded"
+    class="md:hidden w-full max-w-[400px] sm:w-[350px] mx-auto mt-16 pt-4 px-4 bg-gray-300 rounded"
     movieId="{{ $movie->id }}"
     userRating="{{ $rating }}"
     :isFavourite="$isFavourite"
