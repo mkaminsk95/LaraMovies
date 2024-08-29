@@ -1,13 +1,13 @@
 <div x-data="{ chosenAvatarId: '', avatarHovered: false }">
     <x-modal maxWidth="xl" name="test" focusable>
 
-        <div class="p-10 text-gray-300">
+        <div class="p-10 bg-light-element-secondary dark:bg-dark-element-secondary">
             <span class="pt-5 pl-5 text-lg uppercase">Choose picture</span>
             <div class="pt-8 grid grid-cols-3 sm:grid-cols-6 gap-2">
                 @foreach($avatars as $avatar)
                     <div>
                         <img x-avatar-id="{{ $avatar->id }}" @click="chosenAvatarId = $el.getAttribute('x-avatar-id')"
-                             :class="chosenAvatarId == $el.getAttribute('x-avatar-id') ? 'outline outline-4 outline-primary/50' : ''"
+                             :class="chosenAvatarId == $el.getAttribute('x-avatar-id') ? 'outline outline-4 outline-accent-primary/50' : ''"
                              class="h-[80px] w-[80px]"
                              src="{{ Vite::asset('resources/assets/avatars/'.$avatar->path) }}"
                              alt="Avatar">

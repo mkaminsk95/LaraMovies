@@ -1,15 +1,15 @@
 @php
-    $inputStyling = "block p-4 px-6 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6";
+    $inputStyling = "block p-4 px-6 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-input-placeholder font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6";
     $labelStyling = "block text-sm font-semibold leading-6";
     $textareaStyling = "block h-40 p-4 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-m sm:leading-6";
 @endphp
 
 <x-layout>
     <x-action-status-message/>
-    <div class="flex flex-col w-5/12 mx-auto mt-10 mb-20 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400">
-        <div class="mx-20 mt-12 my-6 text-gray-500 sm:text-xl">
-            <h1 class="text-center text-black dark:text-gray-300 text-2xl">Edit movie</h1>
-            <div class="text-base text-black dark:text-gray-300 pt-10">Fill in the form below to edit a new movie</div>
+    <div class="flex flex-col w-5/12 mx-auto mt-10 mb-20 bg-white dark:bg-dark-element text-light-text-secondary dark:text-dark-text-secondary">
+        <div class="mx-20 mt-12 my-6 sm:text-xl">
+            <h1 class="text-center text-2xl">Edit movie</h1>
+            <div class="text-base text-light-text-secondary dark:text-dark-text-secondary pt-10">Fill in the form below to edit a new movie</div>
             <form method="POST" action="{{ route('movies.update', $movie->id) }}">
                 @csrf
                 @method('PATCH')

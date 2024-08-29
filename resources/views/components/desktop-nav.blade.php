@@ -3,7 +3,7 @@
         <x-application-logo class="h-12 w-auto"/>
     </div>
     <div class="flex lg:hidden">
-        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:text-gray-500"
+        <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 hover:text-light-text-hover dark:hover:text-dark-text-hover"
                 @click="opened = true">
             <span class="sr-only">Open main menu</span>
             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -24,7 +24,7 @@
             <form class="flex items-center" method="POST" action="{{ route('logout') }}">
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); this.closest('form').submit();"
-                   class="px-1 border-b-2 border-transparent text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">Log out</a>
+                   class="px-1 border-b-2 border-transparent text-sm font-medium hover:text-light-text-hover dark:hover:text-dark-text-hover hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">Log out</a>
                 @csrf
             </form>
         @endauth

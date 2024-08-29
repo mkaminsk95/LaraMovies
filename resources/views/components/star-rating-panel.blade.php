@@ -6,7 +6,7 @@
 @endphp
 
 <div x-on:mouseleave="clearRating()" @resize.window="starSize = getStarSize()"
-    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-gray-300 rounded']) }}>
+    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-additional-element rounded dark:text-black shadow-lg']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating"
@@ -37,7 +37,7 @@
         </div>
         <form x-show="showReviewForm" action="{{ route('review.create', $movieId) }}" method="post">
             @csrf
-            <div class="float-right pb-2 pr-1 cursor-pointer hover:text-primary">
+            <div class="float-right pb-2 pr-1 cursor-pointer">
                 <svg @click="showReviewForm = false" height="24" width="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
             </div>
             <x-text-input name="name" placeholder="Title" value="{{ $review?->name }}" required/>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="bg-gray-100 dark:bg-gray-900">
+<html lang="en" class="bg-light-background dark:bg-dark-background text-light-text-primary dark:text-dark-text-primary">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,7 +9,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-<div class="w-full sm:max-w-md mx-auto mt-20 sm:mt-72 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+<div class="w-full sm:max-w-md mx-auto mt-20 sm:mt-72 px-6 py-4 bg-white dark:bg-dark-element shadow-md overflow-hidden sm:rounded-lg">
     {{ $slot }}
 </div>
 </body>

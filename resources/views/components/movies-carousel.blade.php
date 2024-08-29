@@ -9,9 +9,9 @@
 @endphp
 
 <section {{ $attributes }}>
-    <h2 class="pb-8 sm:pl-14 dark:text-gray-300 text-center sm:text-left text-2xl font-normal tracking-wide uppercase">{{ $title }}</h2>
+    <h2 class="pb-8 sm:pl-14 text-center sm:text-left text-2xl font-normal tracking-wide uppercase">{{ $title }}</h2>
     @if($movies->isEmpty())
-        <p class="text-center text-gray-500 dark:text-gray-300">{{ $emptyMessage }}</p>
+        <p class="text-center">{{ $emptyMessage }}</p>
     @else
         <x-carousel class="mx-auto px-6 sm:px-14 sm:pb-8" perViewExtraSmall="3" perViewSmall="4.4" perViewMedium="5.4"
                     perViewLarge="7.4">
@@ -21,7 +21,7 @@
                         <img class="carousel-image shadow-lg rounded-lg"
                              src="https://image.tmdb.org/t/p/w154{{ $movie->poster_path }}"
                              alt="poster">
-                        <p class="pt-5 text-center text-sm lg:text-sm dark:text-gray-500 hover:text-gray-300">{{ $movie->title }}</p>
+                        <p class="pt-5 text-center text-sm lg:text-sm hover:text-dark-text-hover">{{ $movie->title }}</p>
                     </a>
                 </li>
             @endforeach

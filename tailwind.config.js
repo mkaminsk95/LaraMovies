@@ -19,7 +19,27 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
             colors: {
-                'primary':'rgb(79 70 229)',
+                'light-background': '#d8dae1',
+                'light-element': '#f4f4f4',
+                'light-element-secondary': '#c1c1c1',
+
+                'dark-background': '#111827',
+                'dark-element': '#1f2937',
+                'dark-element-secondary': '#334155',
+
+                'additional-element': '#eaeaea',
+
+                'light-text-primary': '#000000',
+                'light-text-hover': '#8f8f8f',
+                'light-text-secondary': '#5a5a5a',
+
+                'dark-text-primary': '#d3d3d3',
+                'dark-text-hover': '#ffffff',
+                'dark-text-secondary': '#8e8e8e',
+
+                'input-placeholder': '#8e8e8e',
+
+                'accent-primary':'rgb(79 70 229)',
                 'secondary':'rgb(51,51,51)',
                 'star-gold':'rgb(202 138 4)',
                 'star-gold-light':'rgb(234 179 8)',

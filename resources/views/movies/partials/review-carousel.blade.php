@@ -7,13 +7,14 @@
             $movie->reviews->prepend($userReview);
         }
     @endphp
-    <h2 class="max-md:text-center pt-8 sm:pt-12 md:pt-12 dark:text-gray-300 text-2xl font-medium tracking-wider uppercase">
-        Reviews</h2>
+    <h2 class="max-md:text-center pt-8 sm:pt-12 md:pt-12 text-2xl font-medium tracking-wider uppercase">
+        Reviews
+    </h2>
     <x-carousel class="w-full mx-auto pt-8 pb-8" perViewExtraSmall='1' perViewSmall='1.6' perViewMedium='2'
                 perViewLarge='2.5' arrowsPosition="top-[40%]">
         @foreach($movie->reviews as $review)
             <li class="glide__slide">
-                <div class="p-4 overflow-y-scroll h-[250px] relative bg-gray-300 rounded">
+                <div class="ml-2 mb-10 p-4 overflow-y-scroll h-[250px] relative bg-additional-element dark:text-black rounded shadow-lg shadow">
                     <div class="flex flex-row pt-2 items-center">
                         @if ($review->user['avatar_id'])
                             <img
@@ -26,7 +27,7 @@
                                  alt="profile">
                         @endif
                         <a class="pl-4" href="{{ route('profile.show', $review->user->id) }}">
-                            <span class="text-lg hover:text-primary transition duration-200 ease-in-out">{{ $review->user['name'] }}</span>
+                            <span class="text-lg hover:text-accent-primary transition duration-200 ease-in-out">{{ $review->user['name'] }}</span>
                         </a>
                     </div>
 

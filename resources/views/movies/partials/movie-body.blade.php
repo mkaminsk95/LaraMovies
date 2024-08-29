@@ -1,4 +1,4 @@
-<div class="flex flex-row bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-400">
+<div class="flex flex-row">
     <div class="sm:basis-1/4 lg:basis-1/4 min-w-[80px] max-w-[120px] sm:max-w-[200px] md:max-w-full">
         @if($movie['poster_path'] !== null)
             <img class="flex-none bg-gray-50"
@@ -14,7 +14,7 @@
 </div>
 
 <x-star-rating-panel
-    class="md:hidden w-full max-w-[400px] sm:w-[350px] mx-auto mt-16 pt-4 px-4 bg-gray-300 rounded"
+    class="md:hidden w-full max-w-[400px] sm:w-[350px] mx-auto mt-16 pt-4 px-4 rounded"
     movieId="{{ $movie->id }}"
     userRating="{{ $rating }}"
     :isFavourite="$isFavourite"

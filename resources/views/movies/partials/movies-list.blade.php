@@ -1,9 +1,9 @@
 <ul role="list" class="rounded">
     @if($paginatedMovies->isEmpty())
-        <li class="flex relative mt-1 pl-7 p-4 gap-x-6 bg-white dark:bg-gray-800 border border-1 border-gray-300 dark:border-gray-700 rounded">
+        <li class="flex relative mt-1 pl-7 p-4 gap-x-6 bg-light-element dark:bg-dark-element border border-1 border-gray-300 dark:border-gray-700 rounded">
             <div class="flex flex-col justify-between min-w-0">
                 <div >
-                    <p class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-600">
+                    <p class="text-sm font-semibold leading-6">
                         No movies found
                     </p>
                 </div>
@@ -11,7 +11,7 @@
         </li>
     @endif
     @foreach($paginatedMovies as $movie)
-        <li class="flex relative mt-1.5 gap-x-6 bg-white dark:bg-gray-800 shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 ">
+        <li class="flex lg:w-[500px] relative mt-1.5 gap-x-6 bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 ">
             <div class="flex min-w-0 gap-x-4">
                 @if($movie['poster_path'] !== null)
                     <img class="h-30 w-20 flex-none rounded bg-gray-50"
@@ -25,17 +25,16 @@
             <div class="flex flex-row flex-1 justify-between shrink-0 my-3 rounded">
                 <div class="flex flex-col justify-between min-w-0">
                     <div>
-                        <p class="text-xs sm:text-sm font-semibold leading-6 text-gray-900 dark:text-gray-600">
-                            <a class="hover:text-gray-500" href="{{ route('movies.show', $movie['id']) }}">
+                        <p class="text-xs sm:text-sm font-semibold leading-6 hover:text-light-text-hover dark:hover:text-dark-text-hover">
+                            <a href="{{ route('movies.show', $movie['id']) }}">
                                 {{ $movie['title'] }}
                             </a>
                         </p>
-                        <p class="truncate text-xs leading-5 text-gray-500 dark:text-gray-700">{{ (new DateTime($movie['release_date']))->format('Y') }}</p>
+                        <p class="truncate text-xs leading-5 text-light-text-secondary dark:text-dark-text-secondary">{{ (new DateTime($movie['release_date']))->format('Y') }}</p>
                     </div>
                     <div>
                         @foreach($movie->genres as $genre)
-                            <x-genre-block
-                                class="text-xs text-gray-500 p-1 mr-1 bg-gray-700">{{ $genre['name'] }}</x-genre-block>
+                            <x-genre-block class="text-xs p-1 mr-1">{{ $genre['name'] }}</x-genre-block>
                         @endforeach
                     </div>
                 </div>
@@ -43,13 +42,13 @@
                     <x-star class="inline align-top leading-none text-star-gold" width="20px" height="20px"
                             :filled="true"/>
                     <span
-                        class="inline-block align-top leading-5 text-sm text-gray-900 dark:text-gray-400">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
+                        class="inline-block align-top leading-5 text-sm">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
                 </div>
             </div>
             @if(auth()->user() && auth()->user()->is_admin)
                 <div class="absolute -right-10 top-3">
                     <button form="delete-form-{{ $movie->id }}">
-                        <svg class="w-6 h-6 text-gray-400 dark:text-gray-400" aria-hidden="true"
+                        <svg class="w-6 h-6 text-light-text-secondary dark:text-dark-text-secondary" aria-hidden="true"
                              xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                              viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -60,7 +59,7 @@
                 </div>
                 <div class="absolute -right-10 top-10">
                     <a href={{ route('movies.edit', $movie->id) }}>
-                        <svg class="w-6 h-6 text-gray-400 dark:text-gray-400"
+                        <svg class="w-6 h-6 text-light-text-secondary dark:text-dark-text-secondary"
                              viewBox="0 0 1024 1024"
                              x="128" y="128" role="img" xmlns="http://www.w3.org/2000/svg">
                             <g fill="currentColor">

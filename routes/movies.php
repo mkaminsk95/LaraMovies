@@ -5,10 +5,6 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\WatchlistItemController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
-
-Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
 
@@ -34,3 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::delete('/movies/{id}/watchlist-items', [WatchlistItemController::class, 'destroy'])->name('watchlistItems.destroy');
 });
+
+Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
+
+Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');

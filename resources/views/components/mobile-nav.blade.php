@@ -3,9 +3,9 @@
     <!-- Background backdrop, show/hide based on slide-over state. -->
     <div class="fixed inset-0 z-10"></div>
     <div
-        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-600 px-6 py-6 sm:max-w-sm border border-gray-300 dark:border-gray-700">
+        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-dark-element px-6 py-6 sm:max-w-sm border border-gray-300 dark:border-gray-700">
         <div class="text-right">
-            <button @click="opened = false" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+            <button @click="opened = false" type="button" class="-m-2.5 rounded-md p-2.5">
                 <span class="sr-only">Close menu</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                      aria-hidden="true">
@@ -27,7 +27,7 @@
                             @csrf
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault(); this.closest('form').submit();"
-                               class="block items-center py-2 px-1 pt-1 border-b-2 border-transparent text-base font-medium leading-7 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">Log out</a>
+                               class="block items-center py-2 px-1 pt-1 border-b-2 border-transparent text-base font-medium leading-7 hover:text-light-text-hover dark:hover:text-dark-text-hover hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700 transition duration-150 ease-in-out">Log out</a>
                         </form>
                     @endauth
                     @guest
