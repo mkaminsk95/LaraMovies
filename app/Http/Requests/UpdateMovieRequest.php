@@ -27,7 +27,7 @@ class UpdateMovieRequest extends FormRequest
             'original-title' => 'required',
             'overview' => 'required',
             'release-date' => ['required', 'date'],
-            'original-language' => ['required', Rule::in(array_values(config('movie_languages')))],
+            'original-language' => ['required', Rule::in(array_keys(config('movie_languages')))],
         ];
     }
 }

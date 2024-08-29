@@ -2,7 +2,7 @@
     <div class="isolate px-6 py-24 sm:py-32 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Contact us</h2>
-            <p class="mt-2 text-lg leading-8 text-light-text-secondary dark:text-dark-text-secondary">Tell us about your ideas, concerns, or anything else you'd like to share.<br/>We're here to listen and help!</p>
+            <p class="mt-2 text-md leading-8 text-light-text-secondary dark:text-dark-text-secondary">Tell us about your ideas, concerns, or anything else you'd like to share.<br/>We're here to listen and help!</p>
         </div>
         <form action="/contact" method="POST" class="mx-auto mt-16 max-w-xl sm:mt-20">
             <x-action-status-message/>

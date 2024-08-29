@@ -1,22 +1,18 @@
-@php
-    $inputStyling = "block p-4 px-6 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-input-placeholder font-medium focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-6";
-    $labelStyling = "block text-sm font-semibold leading-6";
-    $textareaStyling = "block h-40 p-4 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-m sm:leading-6";
-@endphp
-
 <x-layout>
     <x-action-status-message/>
-    <div class="flex flex-col w-5/12 mx-auto mt-10 mb-20 bg-white dark:bg-dark-element text-light-text-secondary dark:text-dark-text-secondary">
-        <div class="mx-20 mt-12 my-6 sm:text-xl">
-            <h1 class="text-center text-2xl">Edit movie</h1>
-            <div class="text-base text-light-text-secondary dark:text-dark-text-secondary pt-10">Fill in the form below to edit a new movie</div>
+    <div class="flex flex-col mx-auto max-w-3xl my-14 bg-light-element dark:bg-dark-element text-light-text-primary dark:text-dark-text-primary shadow-lg rounded">
+        <div class="mx-20 my-16 sm:text-xl">
+            <div class="mx-auto max-w-2xl text-center">
+                <h2 class="text-xl font-bold tracking-tight sm:text-2xl">Edit movie</h2>
+                <p class="mt-2 text-base leading-8 text-light-text-secondary dark:text-dark-text-secondary">Fill in the form below to edit a new movie.</p>
+            </div>
             <form method="POST" action="{{ route('movies.update', $movie->id) }}">
                 @csrf
                 @method('PATCH')
-                <div class="border-b dark:border-white/10 pb-12">
-                    <div class="mt-10 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-6">
+                <div class="pb-12">
+                    <div class="mt-10 grid grid-cols-2 gap-x-12 gap-y-8">
 
-                        <div class="row-start-1 sm:col-span-full">
+                        <div class="row-start-1 col-span-full">
                             <x-input-label for="title">Title</x-input-label>
                             <x-text-input id="title" name="title" value="{{$movie->title}}" required/>
                         </div>
@@ -26,15 +22,16 @@
                             <x-text-input id="original-title" name="original-title" value="{{$movie->original_title}}" required/>
                         </div>
 
-                        <div class="row-start-3 col-span-3">
+                        <div class="row-start-3 col-span-1">
                             <x-input-label for="release-date">Release date</x-input-label>
                             <x-text-input id="release-date" name="release-date" value="{{$movie->release_date}}" type="date" required/>
                         </div>
 
-                        <div class="row-start-3 col-span-3">
+                        <div class="row-start-3 col-span-1">
+                            <x-input-label for="original-language">Original language</x-input-label>
                             <x-country-select label="Original language" name="original-language"
                                               :selected="$movie->original_language"
-                                              id="original-language" required></x-country-select>
+                                              id="original-language" required/>
                         </div>
 
                         <div class="row-start-4 col-span-full">
@@ -53,12 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="submit"
-                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Save
-                    </button>
-                </div>
+                <x-primary-button class="box-content w-full py-2">Save</x-primary-button>
             </form>
         </div>
     </div>

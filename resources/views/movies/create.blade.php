@@ -1,64 +1,55 @@
-@php
-    $labelStyling = "block text-sm font-semibold leading-6";
-    $textareaStyling = "block h-40 p-4 w-full rounded-md border-0 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-m sm:leading-6";
-@endphp
 <x-layout>
-    <div
-        class="flex flex-col w-5/12 mx-auto mt-10 mb-20 bg-white dark:bg-dark-element">
-        <x-action-status-message/>
-        <div class="mx-20 mt-12 my-6 sm:text-xl">
-            <h1 class="text-center text-2xl">New movie</h1>
-            <div class="text-base text-light-text-secondary dark:text-dark-text-secondary pt-10">Fill in the form below
-                to create a new movie
+    <x-action-status-message/>
+    <div class="flex flex-col mx-auto max-w-3xl my-14 bg-light-element dark:bg-dark-element text-light-text-primary dark:text-dark-text-primary shadow-lg rounded">
+        <div class="mx-20 my-16 sm:text-xl">
+            <div class="mx-auto max-w-2xl text-center">
+                <h2 class="text-xl font-bold tracking-tight sm:text-2xl">Create movie</h2>
+                <p class="mt-2 text-base leading-8 text-light-text-secondary dark:text-dark-text-secondary">Fill in the form below to save a new movie.</p>
             </div>
-            <form method="POST" action="/movies">
+            <form method="POST" action="{{ route('movies.store') }}">
                 @csrf
+                @method('PATCH')
+                <div class="pb-12">
+                    <div class="mt-10 grid grid-cols-2 gap-x-12 gap-y-8">
 
-                <div class="border-b dark:border-white/10 pb-12">
-                    <div class="mt-10 grid grid-cols-1 gap-x-12 gap-y-8 sm:grid-cols-6">
-
-                        <div class="row-start-1 sm:col-span-full">
-                            <x-input label="Title" id="title" name="title" required/>
+                        <div class="row-start-1 col-span-full">
+                            <x-input-label for="title">Title</x-input-label>
+                            <x-text-input id="title" name="title" required/>
                         </div>
 
                         <div class="row-start-2 col-span-full">
-                            <x-input label="Original title" id="original-title" required/>
+                            <x-input-label for="original-title">Original title</x-input-label>
+                            <x-text-input id="original-title" name="original-title" required/>
                         </div>
 
-                        <div class="row-start-3 col-span-3">
-                            <x-input label="Release date" id="release-date" type="date" required/>
+                        <div class="row-start-3 col-span-1">
+                            <x-input-label for="release-date">Release date</x-input-label>
+                            <x-text-input id="release-date" name="release-date" type="date" required/>
                         </div>
 
-                        <div class="row-start-3 col-span-3">
+                        <div class="row-start-3 col-span-1">
+                            <x-input-label for="original-language">Original language</x-input-label>
                             <x-country-select label="Original language" name="original-language"
                                               id="original-language" required/>
                         </div>
 
                         <div class="row-start-4 col-span-full">
-                            <x-input label="Poster path" id="poster-path"/>
+                            <x-input-label for="poster-path">Poster path</x-input-label>
+                            <x-text-input id="poster-path" name="poster-path" required/>
                         </div>
 
                         <div class="row-start-5 col-span-full">
-                            <x-input label="Backdrop path" id="backdrop-path"/>
+                            <x-input-label for="backdrop-path">Backdrop path</x-input-label>
+                            <x-text-input id="backdrop-path" name="backdrop-path" required/>
                         </div>
 
                         <div class="row-start-6 col-span-full">
-                            <label for="overview" class="{{ $labelStyling }}">
-                                Overview
-                            </label>
-                            <div class="mt-2">
-                                <textarea name="overview" id="overview"
-                                          class="{{ $textareaStyling }}" required></textarea>
-                            </div>
+                            <x-input-label for="overview">Overview</x-input-label>
+                            <x-textarea-input rows="5" id="overview" name="overview" required/>
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 flex items-center justify-end gap-x-6">
-                    <button type="submit"
-                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                        Save
-                    </button>
-                </div>
+                <x-primary-button class="box-content w-full py-2">Save</x-primary-button>
             </form>
         </div>
     </div>

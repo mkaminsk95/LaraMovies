@@ -124,14 +124,6 @@ class MovieController extends Controller
 
     public function update(StoreMovieRequest $request, int $id)
     {
-        $request->validate([
-            'title' => 'required',
-            'original-title' => 'required',
-            'overview' => 'required',
-            'release-date' => ['required', 'date'],
-            'original-language' => ['required', Rule::in(array_values(config('movie_languages')))],
-        ]);
-
         $movie = Movie::findOrFail($id);
         $movie->update([
             'title' => request('title'),
