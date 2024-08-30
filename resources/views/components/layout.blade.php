@@ -7,10 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>About page</title>
+    <script>
+        let theme = localStorage.getItem('theme');
+        if (theme  === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else if (theme  === 'light') {
+            document.documentElement.classList.add('light');
+        }
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('logos/favicon.png') }}" type="image/png">
 </head>
-<body style="display: none"
+<body
       class="bg-light-background dark:bg-dark-background text-light-text-primary dark:text-dark-text-primary">
 <header
     class="bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-gray-300 dark:border-gray-700">
