@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="bg-light-background dark:bg-dark-background text-light-text-primary dark:text-dark-text-primary">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,15 +10,16 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('logos/favicon.png') }}" type="image/png">
 </head>
-<body>
-<header class="bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-gray-300 dark:border-gray-700">
+<body style="display: none"
+      class="bg-light-background dark:bg-dark-background text-light-text-primary dark:text-dark-text-primary">
+<header
+    class="bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-gray-300 dark:border-gray-700">
     <div x-data="{ opened: false }">
         <x-desktop-nav/>
         <x-mobile-nav/>
     </div>
 </header>
 
-    {{ $slot }}
-
+{{ $slot }}
 </body>
 </html>

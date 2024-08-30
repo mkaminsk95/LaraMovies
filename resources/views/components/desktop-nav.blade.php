@@ -1,4 +1,4 @@
-<nav class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
+<nav class="mx-auto flex max-w-[900px] xl:max-w-[1100px] 2xl:max-w-[1250px] items-center justify-between p-6" aria-label="Global">
     <div class="flex lg:flex-1">
         <x-application-logo class="h-12 w-auto"/>
     </div>
@@ -32,5 +32,8 @@
                 <x-nav-link class="mr-4 text-sm" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-nav-link>
                 <x-nav-link class="text-sm" active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-nav-link>
         @endguest
+    </div>
+    <div class="absolute right-5 max-lg:hidden">
+        @include('components.theme-switcher')
     </div>
 </nav>

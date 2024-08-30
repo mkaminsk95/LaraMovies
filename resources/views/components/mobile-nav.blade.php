@@ -37,5 +37,8 @@
                 </div>
             </div>
         </div>
+        <div class="absolute top-7 left-7 lg:hidden">
+            @include('components.theme-switcher')
+        </div>
     </div>
 </div>
