@@ -14,13 +14,13 @@
         </button>
     </div>
     <div class="hidden lg:flex lg:gap-x-12">
-        <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-nav-link>
-        <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-nav-link>
-        <x-nav-link class="pt-1 text-sm" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">Contact</x-nav-link>
+        <x-layout.nav-link class="pt-1 text-sm" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-layout.nav-link>
+        <x-layout.nav-link class="pt-1 text-sm" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-layout.nav-link>
+        <x-layout.nav-link class="pt-1 text-sm" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">Contact</x-layout.nav-link>
     </div>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
         @auth
-            <x-nav-link class="mr-10 text-sm" active="{{ request()->routeIs('profile.show.me') ? true : '' }}" href="{{ route('profile.show.me') }}">Profile</x-nav-link>
+            <x-layout.nav-link class="mr-10 text-sm" active="{{ request()->routeIs('profile.show.me') ? true : '' }}" href="{{ route('profile.show.me') }}">Profile</x-layout.nav-link>
             <form class="flex items-center" method="POST" action="{{ route('logout') }}">
                 <a href="{{ route('logout') }}"
                    onclick="event.preventDefault(); this.closest('form').submit();"
@@ -29,11 +29,11 @@
             </form>
         @endauth
         @guest
-                <x-nav-link class="mr-4 text-sm" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-nav-link>
-                <x-nav-link class="text-sm" active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-nav-link>
+                <x-layout.nav-link class="mr-4 text-sm" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-layout.nav-link>
+                <x-layout.nav-link class="text-sm" active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-layout.nav-link>
         @endguest
     </div>
     <div class="absolute right-5 max-lg:hidden">
-        @include('components.theme-switcher')
+        <x-buttons.theme-switcher/>
     </div>
 </nav>

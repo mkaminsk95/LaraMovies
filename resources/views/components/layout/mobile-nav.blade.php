@@ -16,13 +16,13 @@
         <div class="mt-6">
             <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
-                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-nav-link>
-                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-nav-link>
-                    <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">Contact</x-nav-link>
+                    <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">Movies</x-layout.nav-link>
+                    <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">About</x-layout.nav-link>
+                    <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">Contact</x-layout.nav-link>
                 </div>
                 <div class="space-y-2 py-6">
                     @auth
-                        <x-nav-link class="block mr-4 py-2" active="{{ request()->routeIs('profile.show.me') ? true : '' }}" href="{{ route('profile.show.me') }}">Profile</x-nav-link>
+                        <x-layout.nav-link class="block mr-4 py-2" active="{{ request()->routeIs('profile.show.me') ? true : '' }}" href="{{ route('profile.show.me') }}">Profile</x-layout.nav-link>
                         <form class="block" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a href="{{ route('logout') }}"
@@ -31,14 +31,14 @@
                         </form>
                     @endauth
                     @guest
-                        <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-nav-link>
-                        <x-nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-nav-link>
+                        <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('login') ? true : '' }}" href="{{ route('login') }}">Log in</x-layout.nav-link>
+                        <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('register') ? true : '' }}" href="{{ route('register') }}">Register</x-layout.nav-link>
                     @endguest
                 </div>
             </div>
         </div>
         <div class="absolute top-7 left-7 lg:hidden">
-            @include('components.theme-switcher')
+            <x-buttons.theme-switcher/>
         </div>
     </div>
 </div>

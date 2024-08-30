@@ -23,8 +23,8 @@
 <header
     class="bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-gray-300 dark:border-gray-700">
     <div x-data="{ opened: false }">
-        <x-desktop-nav/>
-        <x-mobile-nav/>
+        <x-layout.desktop-nav/>
+        <x-layout.mobile-nav/>
     </div>
 </header>
 

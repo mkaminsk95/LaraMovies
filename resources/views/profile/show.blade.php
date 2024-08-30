@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout.base>
     <div class="bg-light-element dark:bg-dark-element shadow-lg flex flex-col mx-auto md:mb-20 pb-12 md:mt-12 lg:mt-10 w-full md:w-[725px] lg:w-[1000px] rounded">
         <x-action-status-message/>
 

@@ -17,8 +17,8 @@
             <span x-text="ratingText" class="text-base tracking-wider"></span>
         </div>
         <div class="flex flex-row items-center gap-1 mt-1 mr-[1px]">
-            <x-add-to-watchlist width="26px" height="26px" movieId="{{ $movieId }}" :added="$isWatchlistItem"/>
-            <x-add-to-favourites width="26px" height="26px" movieId="{{ $movieId }}" :added="$isFavourite"/>
+            <x-buttons.add-to-watchlist width="26px" height="26px" movieId="{{ $movieId }}" :added="$isWatchlistItem"/>
+            <x-buttons.add-to-favourites width="26px" height="26px" movieId="{{ $movieId }}" :added="$isFavourite"/>
         </div>
     </div>
     <div class="flex flex-row md:pt-3 pt-4" x-on:mouseleave="bringBackRating()">
@@ -33,19 +33,19 @@
     </div>
     <div x-data="{showReviewForm: false}">
         <div class="flex pt-5">
-            <x-secondary-button x-on:click="showReviewForm = !showReviewForm" x-show="!showReviewForm">{{ $review ? 'Edit review' : 'Review' }}</x-secondary-button>
+            <x-buttons.secondary x-on:click="showReviewForm = !showReviewForm" x-show="!showReviewForm">{{ $review ? 'Edit review' : 'Review' }}</x-buttons.secondary>
         </div>
         <form x-show="showReviewForm" action="{{ route('review.create', $movieId) }}" method="post">
             @csrf
             <div class="float-right pb-2 pr-1 cursor-pointer">
                 <svg @click="showReviewForm = false" height="24" width="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
             </div>
-            <x-text-input name="name" placeholder="Title" value="{{ $review?->name }}" required/>
-            <x-textarea-input name="description" class="resize-none mt-3" placeholder="Write a review..." rows="3" maxlength="200" required>
+            <x-inputs.text name="name" placeholder="Title" value="{{ $review?->name }}" required/>
+            <x-inputs.textarea name="description" class="resize-none mt-3" placeholder="Write a review..." rows="3" maxlength="200" required>
                 {{ $review?->description }}
-            </x-textarea-input>
+            </x-inputs.textarea>
             <div class="flex">
-                <x-primary-button class="mt-3">Submit</x-primary-button>
+                <x-buttons.primary class="mt-3">Submit</x-buttons.primary>
             </div>
         </form>
     </div>

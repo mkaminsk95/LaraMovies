@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout.base>
     <x-action-status-message/>
     <div x-data="initializePanel()"  class="flex flex-col mx-auto md:mt-16 md:mb-20 lg:mt-20 w-full max-lg:max-w-[800px] lg:w-[1000px] bg-white dark:bg-dark-element shadow-lg">
 

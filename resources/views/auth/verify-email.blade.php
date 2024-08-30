@@ -1,4 +1,4 @@
-<x-layout-guest>
+<x-layout.guest>
     <div class="mb-4 text-sm text-light-text-secondary dark:text-dark-text-secondary">
         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
     </div>
@@ -14,9 +14,9 @@
             @csrf
 
             <div>
-                <x-primary-button>
+                <x-buttons.primary>
                     {{ __('Resend Verification Email') }}
-                </x-primary-button>
+                </x-buttons.primary>
             </div>
         </form>
 

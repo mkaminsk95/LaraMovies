@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout.base>
     <div x-data="{opened: window.innerWidth > 768}" @resize.window="opened = window.innerWidth > 768;"
          class="flex flex-col md:flex-row mx-auto justify-center gap-x-4 lg:gap-x-8">
 

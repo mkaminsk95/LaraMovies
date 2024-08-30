@@ -18,13 +18,13 @@
             <x-message id="message" class="mt-5 hidden" type="error" messages="test"></x-message>
 
             <div class="mt-10 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-buttons.secondary x-on:click="$dispatch('close')">
                     Cancel
-                </x-secondary-button>
+                </x-buttons.secondary>
 
-                <x-primary-button x-on:click="$dispatch('changeAvatar', { id: chosenAvatarId })" class="ms-3">
+                <x-buttons.primary x-on:click="$dispatch('changeAvatar', { id: chosenAvatarId })" class="ms-3">
                     Change
-                </x-primary-button>
+                </x-buttons.primary>
             </div>
         </div>
     </x-modal>

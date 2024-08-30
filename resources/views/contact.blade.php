@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout.base>
     <div class="isolate px-6 py-24 sm:py-32 lg:px-8">
         <div class="mx-auto max-w-2xl text-center">
             <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Contact us</h2>
@@ -9,29 +9,29 @@
             @csrf
             <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
                 <div>
-                    <x-input-label for="first-name">First name</x-input-label>
-                    <x-text-input id="first-name" name="first-name" autocomplete="given-name" required/>
+                    <x-inputs.label for="first-name">First name</x-inputs.label>
+                    <x-inputs.text id="first-name" name="first-name" autocomplete="given-name" required/>
                 </div>
                 <div>
-                    <x-input-label for="first-name">Last name</x-input-label>
-                    <x-text-input id="last-name" name="last-name" autocomplete="family-name" required/>
+                    <x-inputs.label for="first-name">Last name</x-inputs.label>
+                    <x-inputs.text id="last-name" name="last-name" autocomplete="family-name" required/>
                 </div>
                 <div class="sm:col-span-2">
-                    <x-input-label for="company">Company</x-input-label>
-                    <x-text-input name="company" id="company" autocomplete="organization"/>
+                    <x-inputs.label for="company">Company</x-inputs.label>
+                    <x-inputs.text name="company" id="company" autocomplete="organization"/>
                 </div>
                 <div class="sm:col-span-2">
-                    <x-input-label for="user-email">Email</x-input-label>
-                    <x-text-input name="user-email" id="user-email" autocomplete="email" type="email" required/>
+                    <x-inputs.label for="user-email">Email</x-inputs.label>
+                    <x-inputs.text name="user-email" id="user-email" autocomplete="email" type="email" required/>
                 </div>
                 <div class="sm:col-span-2">
-                    <x-input-label for="message">Message</x-input-label>
-                    <x-textarea-input rows="4" name="message" id="message" required/>
+                    <x-inputs.label for="message">Message</x-inputs.label>
+                    <x-inputs.textarea rows="4" name="message" id="message" required/>
                 </div>
 
             </div>
             <div class="mt-10">
-                <x-primary-button class="box-content w-full mt-6 py-2">Let's talk</x-primary-button>
+                <x-buttons.primary class="box-content w-full mt-6 py-2">Let's talk</x-buttons.primary>
             </div>
         </form>
     </div>
