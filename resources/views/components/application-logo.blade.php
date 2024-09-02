@@ -1,4 +1,4 @@
 <a href="/">
     <span class="sr-only">LaraMovies</span>
-    <img {{$attributes}} src="{{ asset('logos/logo_transparent.png') }}" alt="Logo">
+    <img {{$attributes}} src="{{ asset('logos/logo_transparent.png') }}" alt="{{ __('logo') }}">
 </a>

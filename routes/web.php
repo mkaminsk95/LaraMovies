@@ -26,6 +26,13 @@ Route::get('/contact', [ContactController::class, 'edit'])->name('contact.edit')
 
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
+Route::get('language/{locale}', function ($locale) {
+    app()->setLocale($locale);
+    session()->put('locale', $locale);
+
+    return redirect()->back();
+})->name('language');
+
 require __DIR__.'/movies.php';
 
 require __DIR__.'/profile.php';

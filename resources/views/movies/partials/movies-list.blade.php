@@ -2,9 +2,9 @@
     @if($paginatedMovies->isEmpty())
         <li class="flex relative mt-1 pl-7 p-4 gap-x-6 bg-light-element dark:bg-dark-element border border-1 border-gray-300 dark:border-gray-700 rounded">
             <div class="flex flex-col justify-between min-w-0">
-                <div >
+                <div>
                     <p class="text-sm font-semibold leading-6">
-                        No movies found
+                        {{ __('No movies found') }}
                     </p>
                 </div>
             </div>
@@ -16,10 +16,10 @@
                 @if($movie['poster_path'] !== null)
                     <img class="h-30 w-20 flex-none rounded bg-gray-50"
                          src="https://image.tmdb.org/t/p/w185{{ $movie['poster_path'] }}"
-                         alt="">
+                         alt="{{ __('poster') }}">
                 @else
                     <img class="h-30 w-20 flex-none rounded bg-gray-50"
-                         src="https://dummyimage.com/185x278/d2d5db/fff&text=+" alt="poster">
+                         src="https://dummyimage.com/185x278/d2d5db/fff&text=+" alt="{{ __('poster') }}">
                 @endif
             </div>
             <div class="flex flex-row flex-1 justify-between shrink-0 my-3 rounded">
@@ -34,7 +34,7 @@
                     </div>
                     <div>
                         @foreach($movie->genres as $genre)
-                            <x-genre-block class="text-xs p-1 mr-1">{{ $genre['name'] }}</x-genre-block>
+                            <x-genre-block class="text-xs p-1 mr-1">{{ __($genre['name']) }}</x-genre-block>
                         @endforeach
                     </div>
                 </div>

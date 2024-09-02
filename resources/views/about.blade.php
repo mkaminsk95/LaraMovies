@@ -7,7 +7,7 @@
         </div>
         <div class="sm:w-1/2 p-5">
             <div class="text">
-                <h2 class="my-4 font-bold text-3xl sm:text-4xl">About <span class="text-accent-primary">Our Company</span>
+                <h2 class="my-4 font-bold text-3xl sm:text-4xl">{{ __('About') }} <span class="text-accent-primary">{{ __('Our Company') }}</span>
                 </h2>
                 <p class="dark:text-dark-text-secondary">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, commodi
@@ -17,4 +17,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+</x-layout.base>

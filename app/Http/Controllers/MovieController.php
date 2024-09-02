@@ -135,14 +135,14 @@ class MovieController extends Controller
             'original_language' => request('original-language'),
         ]);
 
-        return redirect()->route('movies.edit', ['id' => $movie->id])->with('success', 'Movie successfully updated!');
+        return redirect()->route('movies.edit', ['id' => $movie->id])->with('success', __('Movie successfully updated!'));
     }
 
     public function destroy(int $id)
     {
         Movie::findOrFail($id)->delete();
 
-        return redirect()->route('movies.index')->with('success', 'Movie successfully deleted!');
+        return redirect()->route('movies.index')->with('success', __('Movie successfully deleted!'));
     }
 
     public function rate(int $movieId): JsonResponse

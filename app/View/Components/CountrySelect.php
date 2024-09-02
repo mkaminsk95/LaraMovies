@@ -9,8 +9,8 @@ use Illuminate\View\Component;
 
 class CountrySelect extends Component
 {
-    public $label;
-    public $selected;
+    public string $label;
+    public string $selected;
 
     public function __construct($label, $selected = null)
     {
@@ -20,7 +20,7 @@ class CountrySelect extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.country-select');
+        return view('components.inputs.country-select');
     }
 
     public function getMovieLanguages(): array

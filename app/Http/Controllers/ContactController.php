@@ -32,6 +32,6 @@ class ContactController extends Controller
             'message' => $details['message'],
         ]));
 
-        return redirect()->route('contact.edit')->with('success', 'Your message has been sent successfully. We will contact you soon.');
+        return redirect()->route('contact.edit')->with('success', __('Your message has been sent successfully. We will contact you soon.'));
     }
 }

@@ -20,7 +20,7 @@
                     <a href="{{ route('movies.show', $movie->id) }}">
                         <img class="carousel-image shadow-lg rounded-lg"
                              src="https://image.tmdb.org/t/p/w154{{ $movie->poster_path }}"
-                             alt="poster">
+                             alt="{{ __('poster') }}">
                         <p class="pt-5 text-center text-sm lg:text-sm hover:text-dark-text-hover">{{ $movie->title }}</p>
                     </a>
                 </li>

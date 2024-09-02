@@ -2,7 +2,7 @@
     <x-modal maxWidth="xl" name="test" focusable>
 
         <div class="p-10 bg-light-element-secondary dark:bg-dark-element-secondary">
-            <span class="pt-5 pl-5 text-lg uppercase">Choose picture</span>
+            <span class="pt-5 pl-5 text-lg uppercase">{{ __('Choose picture') }}</span>
             <div class="pt-8 grid grid-cols-3 sm:grid-cols-6 gap-2">
                 @foreach($avatars as $avatar)
                     <div>
@@ -19,11 +19,11 @@
 
             <div class="mt-10 flex justify-end">
                 <x-buttons.secondary x-on:click="$dispatch('close')">
-                    Cancel
+                    {{ __('Cancel') }}
                 </x-buttons.secondary>
 
                 <x-buttons.primary x-on:click="$dispatch('changeAvatar', { id: chosenAvatarId })" class="ms-3">
-                    Change
+                    {{ __('Change') }}
                 </x-buttons.primary>
             </div>
         </div>
@@ -120,7 +120,7 @@
                 window.messagePanel.error(data.message);
             }
         }).catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
+            console.error({{ __('There has been a problem with your fetch operation:') }}, error);
         });
     });
 </script>

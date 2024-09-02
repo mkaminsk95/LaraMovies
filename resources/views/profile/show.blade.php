@@ -10,4 +10,4 @@
             @include('profile.partials.profile-movies')
         </div>
     </div>
-</x-layout>
+</x-layout.base>

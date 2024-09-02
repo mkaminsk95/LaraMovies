@@ -6,7 +6,7 @@
 @endphp
 
 <div x-on:mouseleave="clearRating()" @resize.window="starSize = getStarSize()"
-    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-additional-element rounded dark:text-black shadow-lg']) }}>
+        {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-additional-element rounded dark:text-black shadow-lg']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating"
@@ -33,19 +33,25 @@
     </div>
     <div x-data="{showReviewForm: false}">
         <div class="flex pt-5">
-            <x-buttons.secondary x-on:click="showReviewForm = !showReviewForm" x-show="!showReviewForm">{{ $review ? 'Edit review' : 'Review' }}</x-buttons.secondary>
+            <x-buttons.secondary x-on:click="showReviewForm = !showReviewForm"
+                                 x-show="!showReviewForm">{{ $review ? __('Edit review') : __('Review') }}</x-buttons.secondary>
         </div>
         <form x-show="showReviewForm" action="{{ route('review.create', $movieId) }}" method="post">
             @csrf
             <div class="float-right pb-2 pr-1 cursor-pointer">
-                <svg @click="showReviewForm = false" height="24" width="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                <svg @click="showReviewForm = false" height="24" width="24" viewBox="0 0 48 48"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                </svg>
             </div>
-            <x-inputs.text name="name" placeholder="Title" value="{{ $review?->name }}" required/>
-            <x-inputs.textarea name="description" class="resize-none mt-3" placeholder="Write a review..." rows="3" maxlength="200" required>
+            <x-inputs.text name="name" placeholder="{{ __('Title') }}" value="{{ $review?->name }}" required/>
+            <x-inputs.textarea name="description" class="resize-none mt-3" placeholder="{{ __('Write a review...') }}" rows="3"
+                               maxlength="200" required>
                 {{ $review?->description }}
             </x-inputs.textarea>
             <div class="flex">
-                <x-buttons.primary class="mt-3">Submit</x-buttons.primary>
+                <x-buttons.primary class="mt-3">{{ __('Submit') }}</x-buttons.primary>
             </div>
         </form>
     </div>
@@ -63,26 +69,26 @@
                 widthWithPaddings -
                 parseFloat(elementComputedStyle.paddingLeft) -
                 parseFloat(elementComputedStyle.paddingRight)
-            )/10;
+            ) / 10;
         }
 
         const ratingNames = [
-            'Abysmal',
-            'Terrible',
-            'Awful',
-            'Poor',
-            'Mediocre',
-            'Fair',
-            'Good',
-            'Very Good!',
-            'Excellent!',
-            'Perfect!'
+            '{{ __('Abysmal') }}',
+            '{{ __('Terrible') }}',
+            '{{ __('Awful') }}',
+            '{{ __('Poor') }}',
+            '{{ __('Mediocre') }}',
+            '{{ __('Fair') }}',
+            '{{ __('Good') }}',
+            '{{ __('Very Good!') }}',
+            '{{ __('Excellent!') }}',
+            '{{ __('Perfect!') }}'
         ];
 
         const rated = {{ $rated ? 'true' : 'false' }};
         const rating = '{{ $rated ?  $userRating : '' }}';
         const ratingNum = rating;
-        const ratingText = ratingNames[rating - 1] ?? 'Your rating:';
+        const ratingText = ratingNames[rating - 1] ?? '{{ __('Your rating:') }}';
 
         const starSize = getStarSize();
 
@@ -138,7 +144,7 @@
                         }
                     })
                     .catch(() => {
-                        this.message = 'Something went wrong!'
+                        this.message = '{{ __('Something went wrong!') }}'
                     })
             },
 
@@ -157,7 +163,7 @@
                         this.showSpinner = false;
                         this.rating = '';
                         this.ratingNum = '';
-                        this.ratingText = 'Your rating:';
+                        this.ratingText = '{{ __('Your rating:') }}';
 
                         const ratingElement = document.getElementById('rating');
                         if (ratingElement.classList.contains) {
@@ -166,7 +172,7 @@
                         }
                     })
                     .catch(() => {
-                        this.message = 'Something went wrong!'
+                        this.message = '{{ __('Something went wrong!') }}'
                     })
             },
 
@@ -174,7 +180,7 @@
                 if (!this.rated) {
                     this.rating = '';
                     this.ratingNum = '';
-                    this.ratingText = 'Your rating:';
+                    this.ratingText = '{{ __('Your rating:') }}';
                 }
             },
             displayRatingProposition() {

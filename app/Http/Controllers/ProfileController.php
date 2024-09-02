@@ -82,7 +82,7 @@ class ProfileController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Failed to update avatar. Please try again.'
+                'message' => __('Failed to update avatar. Please try again.')
             ]);
         }
     }

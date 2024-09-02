@@ -3,9 +3,9 @@
         @if($movie['poster_path'] !== null)
             <img class="flex-none bg-gray-50"
                  src="https://image.tmdb.org/t/p/w780{{ $movie['poster_path'] }}"
-                 alt="">
+                 alt="{{ __('poster') }}">
         @else
-            <img src="https://dummyimage.com/780x1170/d2d5db/fff&text=+" alt="poster">
+            <img src="https://dummyimage.com/780x1170/d2d5db/fff&text=+" alt="{{ __('poster') }}">
         @endif
     </div>
     <div class="basis-auto sm:basis-3/4 lg:basis-3/4 ml-7 sm:ml-9 md:ml-10 lg:ml-20">
