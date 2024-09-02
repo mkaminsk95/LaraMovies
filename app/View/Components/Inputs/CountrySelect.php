@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\View\Components;
+namespace App\View\Components\Inputs;
 
 use Closure;
 use Illuminate\Contracts\View\View;
