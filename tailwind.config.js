@@ -49,6 +49,9 @@ export default {
             lineHeight: {
                 '0': '0',
             },
+            fontSize: {
+                'nav-link': ['15px', '20px'],
+            }
         },
     },
 
