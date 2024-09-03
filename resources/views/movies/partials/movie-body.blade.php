@@ -1,3 +1,6 @@
+@php
+    $locale = app()->getLocale();
+@endphp
 <div class="flex flex-row">
     <div class="sm:basis-1/4 lg:basis-1/4 min-w-[80px] max-w-[120px] sm:max-w-[200px] md:max-w-full">
         @if($movie['poster_path'] !== null)
@@ -9,7 +12,15 @@
         @endif
     </div>
     <div class="basis-auto sm:basis-3/4 lg:basis-3/4 ml-7 sm:ml-9 md:ml-10 lg:ml-20">
-        <p class="text-xs sm:text-sm lg:text-base">{{ $movie['overview'] }}</p>
+        <p class="pb-2 text-xs lg:text-sm text-light-text-secondary dark:text-dark-text-secondary italic">{{ $movie['tagline_'.$locale] ?? $movie['tagline'] }}</p>
+        @if(!empty($movie['overview_'.$locale]))
+            <p class="text-xs sm:text-sm lg:text-base">{{ $movie['overview_'.$locale] }}</p>
+        @else
+            @if($locale !== 'en')
+                <p class="text-xs text-light-text-secondary dark:text-dark-text-secondary">{{ '('.__('There is no overview available for this language').')' }}</p>
+            @endif
+            <p class="text-xs sm:text-sm lg:text-base">{{ $movie['overview'] }}</p>
+        @endif
     </div>
 </div>
 

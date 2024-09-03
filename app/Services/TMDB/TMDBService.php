@@ -12,6 +12,7 @@ class TMDBService
     private const API_CREDITS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s/credits';
     private const API_PEOPLE_URL_TEMPLATE = 'https://api.themoviedb.org/3/person/%s';
     const API_GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+    const API_TRANSLATIONS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s/translations';
     private string $apiKey;
 
     public function __construct()
@@ -56,11 +57,24 @@ class TMDBService
         return $response->json()['genres'] ?? [];
     }
 
+    public function fetchTranslations(int $movieId): array
+    {
+        $response = Http::get($this->getTranslationsUrlWithId($movieId), [
+            'api_key' => $this->apiKey
+        ]);
+
+        return $response->json()['translations'] ?? [];
+    }
+
     public function getCreditsUrlWithId(int $movieId): string {
         return sprintf(self::API_CREDITS_URL_TEMPLATE, $movieId);
     }
 
     public function getPeopleUrlWithId(int $personId): string {
         return sprintf(self::API_PEOPLE_URL_TEMPLATE, $personId);
+    }
+
+    public function getTranslationsUrlWithId(int $movieId): string {
+        return sprintf(self::API_TRANSLATIONS_URL_TEMPLATE, $movieId);
     }
 }

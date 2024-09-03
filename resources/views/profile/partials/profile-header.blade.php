@@ -1,6 +1,5 @@
 <div x-data="{ chosenAvatarId: '', avatarHovered: false }">
     <x-modal maxWidth="xl" name="test" focusable>
-
         <div class="p-10 bg-light-element-secondary dark:bg-dark-element-secondary">
             <span class="pt-5 pl-5 text-lg uppercase">{{ __('Choose picture') }}</span>
             <div class="pt-8 grid grid-cols-3 sm:grid-cols-6 gap-2">
@@ -31,10 +30,10 @@
 
     <div class="relative">
         @if(!is_null($topRated) && !is_null($topRated['backdrop_path']))
-            <img class="object-cover w-full h-[300px] rounded"
+            <img class="object-cover w-full h-[300px] lg:h-[400px] rounded"
                  src="https://image.tmdb.org/t/p/w1280/{{ $topRated['backdrop_path'] }}" alt="poster">
         @else
-            <img class="object-cover w-full h-[300px] rounded"
+            <img class="object-cover w-full h-[300px] lg:h-[400px] rounded"
                  src="https://dummyimage.com/1280x720/d2d5db/fff&text=+" alt="poster">
         @endif
         <div
@@ -86,7 +85,7 @@
 
         @if($isMe)
             <a href="{{ route('profile.edit', $user->id) }}">
-                <svg class="absolute top-[20px] right-[40px] w-10 h-10" viewBox="0 0 48 48"
+                <svg class="absolute top-[30px] right-[50px] w-10 h-10" viewBox="0 0 48 48"
                      xmlns="http://www.w3.org/2000/svg" x-data="{ placeholder: 'rgba(255, 255, 255, 0.7)' }"
                      x-on:mouseenter="placeholder= 'rgba(255, 255, 255, 1)'"
                      x-on:mouseleave="placeholder= 'rgba(255, 255, 255, 0.7)'">
