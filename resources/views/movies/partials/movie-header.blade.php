@@ -11,7 +11,7 @@
             <x-star class="inline mr-1 align-top leading-none text-star-gold" width="30px" height="30px" :filled="true"/>
             <span class="inline-block align-top leading-7 text-lg lg:text-2xl">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
         </div>
-        <span class="text-2xl md:text-3xl lg:text-4xl">{{ $movie['title'] }}</span>
+        <span class="text-2xl md:text-3xl lg:text-4xl">{{ $movie['title_'.app()->getLocale()] ?? $movie['title'] }}</span>
         <span class="text-lg lg:text-2xl">({{ (new DateTime($movie['release_date']))->format('Y') }})</span>
         <div class="mt-3">
             @foreach($movie['genres'] as $genre)

@@ -1,3 +1,6 @@
+@php
+    $locale = app()->getLocale();
+@endphp
 <ul role="list" class="rounded">
     @if($paginatedMovies->isEmpty())
         <li class="flex relative mt-1 pl-7 p-4 gap-x-6 bg-light-element dark:bg-dark-element border border-1 border-gray-300 dark:border-gray-700 rounded">
@@ -27,7 +30,7 @@
                     <div>
                         <p class="text-xs sm:text-sm font-semibold leading-6 hover:text-light-text-hover dark:hover:text-dark-text-hover">
                             <a href="{{ route('movies.show', $movie['id']) }}">
-                                {{ $movie['title'] }}
+                                {{ $movie['title_'.$locale] ?? $movie['title'] }}
                             </a>
                         </p>
                         <p class="truncate text-xs leading-5 text-light-text-secondary dark:text-dark-text-secondary">{{ (new DateTime($movie['release_date']))->format('Y') }}</p>

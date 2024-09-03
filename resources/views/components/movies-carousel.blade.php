@@ -6,6 +6,7 @@
                 return $model->movie;
             });
     };
+    $locale = app()->getLocale();
 @endphp
 
 <section {{ $attributes }}>
@@ -21,7 +22,7 @@
                         <img class="carousel-image shadow-lg rounded-lg"
                              src="https://image.tmdb.org/t/p/w154{{ $movie->poster_path }}"
                              alt="{{ __('poster') }}">
-                        <p class="pt-5 text-center text-sm lg:text-sm hover:text-dark-text-hover">{{ $movie->title }}</p>
+                        <p class="pt-5 text-center text-sm lg:text-sm hover:text-dark-text-hover">{{ $movie['title_'.$locale] ?? $movie['title'] }}</p>
                     </a>
                 </li>
             @endforeach
