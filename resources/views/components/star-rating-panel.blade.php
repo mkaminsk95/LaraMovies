@@ -6,7 +6,7 @@
 @endphp
 
 <div x-on:mouseleave="clearRating()" @resize.window="starSize = getStarSize()"
-        {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-additional-element rounded dark:text-black shadow-lg']) }}>
+    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-additional-element rounded dark:text-black shadow-lg']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating"
@@ -32,21 +32,30 @@
         @endfor
     </div>
     <div x-data="{showReviewForm: false}">
-        <div class="flex pt-5">
-            <x-buttons.secondary x-on:click="showReviewForm = !showReviewForm"
-                                 x-show="!showReviewForm">{{ $review ? __('Edit review') : __('Review') }}</x-buttons.secondary>
+        <div class="pt-5">
+            @auth
+                <div class="flex">
+                    <x-buttons.secondary x-on:click="showReviewForm = !showReviewForm"
+                                         x-show="!showReviewForm">{{ $review ? __('Edit review') : __('Review') }}</x-buttons.secondary>
+                </div>
+            @endauth
+            @guest
+                    <p class="pr-3 text-right text-xs text-light-text-secondary hover:text-light-text-hover italic"><a href="{{ route('login') }}"><strong>{{ __('Login') }}</strong> {{ __('to leave a review') }}</a></p>
+            @endguest
         </div>
         <form x-show="showReviewForm" action="{{ route('review.create', $movieId) }}" method="post">
             @csrf
             <div class="float-right pb-2 pr-1 cursor-pointer">
                 <svg @click="showReviewForm = false" height="24" width="24" viewBox="0 0 48 48"
                      xmlns="http://www.w3.org/2000/svg">
-                    <path d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
+                    <path
+                        d="M38 12.83l-2.83-2.83-11.17 11.17-11.17-11.17-2.83 2.83 11.17 11.17-11.17 11.17 2.83 2.83 11.17-11.17 11.17 11.17 2.83-2.83-11.17-11.17z"/>
                     <path d="M0 0h48v48h-48z" fill="none"/>
                 </svg>
             </div>
             <x-inputs.text name="name" placeholder="{{ __('Title') }}" value="{{ $review?->name }}" required/>
-            <x-inputs.textarea name="description" class="resize-none mt-3" placeholder="{{ __('Write a review...') }}" rows="3"
+            <x-inputs.textarea name="description" class="resize-none mt-3" placeholder="{{ __('Write a review...') }}"
+                               rows="3"
                                maxlength="200" required>
                 {{ $review?->description }}
             </x-inputs.textarea>
