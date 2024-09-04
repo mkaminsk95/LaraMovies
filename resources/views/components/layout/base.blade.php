@@ -28,7 +28,11 @@
         <x-layout.mobile-nav/>
     </div>
 </header>
-
-{{ $slot }}
+<div class="relative h-fit">
+{{--    <div class="absolute h-full bg-gray-400/50 inset-0 z-50">--}}
+{{--        x--}}
+{{--    </div>--}}
+    {{ $slot }}
+</div>
 </body>
 </html>

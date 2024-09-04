@@ -1,4 +1,4 @@
-@props(['perViewExtraSmall' => 4, 'perViewSmall' => 4.7, 'perViewMedium' => 5.6, 'perViewLarge' => 6.4, 'arrowsPosition' => 'top-1/4'])
+@props(['perViewExtraSmall' => 3, 'perViewSmall' => 4.7, 'perViewMedium' => 5.6, 'perViewLarge' => 6.4, 'arrowsPosition' => 'top-1/4'])
 @vite('resources/js/carousel.js')
 <div {{ $attributes }}>
     <div class="glide" data-carousel-settings='{"perViewExtraSmall": {{ $perViewExtraSmall }}, "perViewSmall": {{ $perViewSmall }}, "perViewMedium": {{ $perViewMedium }}, "perViewLarge": {{ $perViewLarge }}}'>

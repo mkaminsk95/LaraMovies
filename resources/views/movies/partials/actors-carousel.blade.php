@@ -1,6 +1,6 @@
 @if($movie->credits->count())
-    <h2 class="max-md:text-center pt-12 sm:pt-12 md:pt-20 text-2xl font-medium tracking-wider uppercase">{{ __('Cast') }}</h2>
-    <x-carousel class="w-full mx-auto pt-8">
+    <h2 class="max-md:text-center pt-12 sm:pt-12 md:pt-20 text-xl sm:text-2xl font-medium tracking-wider uppercase">{{ __('Cast') }}</h2>
+    <x-carousel class="w-full mx-auto pt-4 sm:pt-8">
         @foreach($movie->credits as $credit)
             @if($credit->person['profile_path'] !== null)
                 <li class="glide__slide">

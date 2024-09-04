@@ -6,22 +6,22 @@
     @endif
     <div class="h-full w-full absolute -translate-y-full bg-gradient-to-t from-light-background dark:from-dark-background to-transparent ">
     </div>
-    <div class="absolute bottom-10 left-8 max-w-[400px] lg:max-w-[600px]">
-        <div class="mt-2 mb-2">
-            <x-star class="inline mr-1 align-top leading-none text-star-gold" width="30px" height="30px" :filled="true"/>
-            <span class="inline-block align-top leading-7 text-lg lg:text-2xl">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
+    <div class="absolute bottom-4 sm:bottom-10 left-6 sm:left-8 max-w-[400px] lg:max-w-[600px]">
+        <div class="mt-2 sm:mb-2">
+            <x-star class="inline mr-1 align-top leading-none text-star-gold" width="26px" height="26px" :filled="true"/>
+            <span class="inline-block align-top leading-7 text-md sm:text-lg lg:text-2xl">{{ number_format($movie->vote_average, 2, ',', '') }}</span>
         </div>
-        <span class="text-2xl md:text-3xl lg:text-4xl">{{ $movie['title_'.app()->getLocale()] ?? $movie['title'] }}</span>
+        <span class="text-lg md:text-2xl lg:text-3xl">{{ $movie['title_'.app()->getLocale()] ?? $movie['title'] }}</span>
         <span class="text-lg lg:text-2xl">({{ (new DateTime($movie['release_date']))->format('Y') }})</span>
-        <div class="mt-3">
+        <div class="mt-1 sm:mt-3">
             @foreach($movie['genres'] as $genre)
-                <x-genre-block class='text-sm lg:text-md p-1 mr-3'>{{ __($genre['name']) }}</x-genre-block>
+                <x-genre-block class='text-xs sm:text-sm lg:text-md p-1 mr-3'>{{ __($genre['name']) }}</x-genre-block>
             @endforeach
         </div>
 
     </div>
     <x-star-rating-panel
-        class="hidden md:block absolute top-[302px] lg:top-[412px] right-9 md:w-[300px] lg:w-[330px] pt-4 px-4 rounded"
+        class="hidden md:block bg-additional-element absolute top-[302px] lg:top-[412px] right-9 md:w-[300px] lg:w-[330px] pt-4 px-4 rounded shadow-lg dark:text-black"
         movieId="{{ $movie->id }}"
         userRating="{{ $rating }}"
         :isFavourite="$isFavourite"

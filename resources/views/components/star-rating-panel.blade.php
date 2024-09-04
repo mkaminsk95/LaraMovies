@@ -6,7 +6,7 @@
 @endphp
 
 <div x-on:mouseleave="clearRating()" @resize.window="starSize = getStarSize()"
-    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 bg-additional-element rounded dark:text-black shadow-lg']) }}>
+    {{ $attributes->merge(['class' => 'rating-panel py-5 px-4 rounded']) }}>
     <div class="flex flex-row justify-between items-center">
         <div class="flex flex-row items-center gap-3">
             <span id="rating"
