@@ -40,7 +40,9 @@
                 </div>
             @endauth
             @guest
-                    <p class="pr-3 text-right text-xs text-light-text-secondary hover:text-light-text-hover italic"><a href="{{ route('login') }}"><strong>{{ __('Login') }}</strong> {{ __('to leave a review') }}</a></p>
+                <p class="pr-3 text-right text-xs text-light-text-secondary hover:text-light-text-hover italic"><a
+                        href="{{ route('login') }}"><strong>{{ __('Login') }}</strong> {{ __('to leave a review') }}</a>
+                </p>
             @endguest
         </div>
         <form x-show="showReviewForm" action="{{ route('review.create', $movieId) }}" method="post">
@@ -56,9 +58,8 @@
             <x-inputs.text name="name" placeholder="{{ __('Title') }}" value="{{ $review?->name }}" required/>
             <x-inputs.textarea name="description" class="resize-none mt-3" placeholder="{{ __('Write a review...') }}"
                                rows="3"
-                               maxlength="200" required>
-                {{ $review?->description }}
-            </x-inputs.textarea>
+                               maxlength="200" required
+                               value="{{ $review?->description }}"/>
             <div class="flex">
                 <x-buttons.primary class="mt-3">{{ __('Submit') }}</x-buttons.primary>
             </div>
