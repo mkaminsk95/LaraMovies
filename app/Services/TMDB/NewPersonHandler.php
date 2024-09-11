@@ -56,6 +56,10 @@ class NewPersonHandler
 
     private function addNewCredit(Movie $movie, Person $person, array $credit): void
     {
+        if ($this->ifCreditExists($movie->id, $person->id)) {
+            return;
+        }
+
         Credit::create(
             [
                 'movie_id' => $movie->id,
@@ -65,5 +69,10 @@ class NewPersonHandler
             ]
         );
         echo "Added new credit for department: " . ($credit['job'] ?? $credit['known_for_department']) . "\n";
+    }
+
+    private function ifCreditExists(int $movieId, int $personId): bool
+    {
+        return Credit::where('movie_id', $movieId)->where('person_id', $personId)->exists();
     }
 }
