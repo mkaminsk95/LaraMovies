@@ -1,4 +1,4 @@
-@if($movie->reviews())
+@if($movie->reviews()->count() > 0)
     @php
         if ($userReview = $movie->reviews->where('user_id', auth()->id())->first()) {
             $movie->reviews = $movie->reviews->filter(function ($value, $key) use ($userReview) {
@@ -7,7 +7,7 @@
             $movie->reviews->prepend($userReview);
         }
     @endphp
-    <h2 class="max-md:text-center sm:pt-12 md:pt-12 text-xl sm:text-2xl font-medium tracking-wider uppercase">
+    <h2 class="max-md:text-center pt-8 sm:pt-12 text-xl sm:text-2xl font-medium tracking-wider uppercase">
         {{ __('Reviews') }}
     </h2>
     <x-carousel class="w-full mx-auto pt-4 sm:pt-8 pb-8" perViewExtraSmall='1' perViewSmall='1.6' perViewMedium='2'
