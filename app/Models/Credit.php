@@ -11,8 +11,8 @@ class Credit extends Model
     const DEPARTMENT_DIRECTING = 'Directing';
     const DEPARTMENT_WRITING = 'Writing';
     const DEPARTMENT_PRODUCTION = 'Production';
-    const DEPARTMENT_SOUND = 'Sound';
-    const DEPARTMENT_CAMERA = 'Camera';
+    const JOB_DIRECTOR = 'Director';
+    const JOB_SCREENPLAY = 'Screenplay';
 
     public $timestamps = false;
 
@@ -28,5 +28,10 @@ class Credit extends Model
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
+    }
+
+    public function scopeWithDepartment($query, $department): void
+    {
+        $query->where('department', $department);
     }
 }
