@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Http;
 
 class TMDBService
 {
-    const API_TOP_RATED_MOVIES_URL = 'https://api.themoviedb.org/3/movie/top_rated';
-    private const API_CREDITS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s/credits';
-    private const API_PEOPLE_URL_TEMPLATE = 'https://api.themoviedb.org/3/person/%s';
-    const API_GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
-    const API_TRANSLATIONS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s/translations';
+    private const string API_TOP_RATED_MOVIES_URL = 'https://api.themoviedb.org/3/movie/top_rated';
+    private const string API_MOVIE_DETAILS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s';
+    private const string API_CREDITS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s/credits';
+    private const string API_PEOPLE_URL_TEMPLATE = 'https://api.themoviedb.org/3/person/%s';
+    private const string API_GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list';
+    private const string API_TRANSLATIONS_URL_TEMPLATE = 'https://api.themoviedb.org/3/movie/%s/translations';
     private string $apiKey;
 
     public function __construct()
@@ -30,13 +31,32 @@ class TMDBService
         return $response->json()['results'] ?? [];
     }
 
-    public function fetchCastings(int $movieId): array
+    public function fetchMovieDetails(int $movieId): array
+    {
+        $response = Http::get($this->getMovieDetailsWithId($movieId), [
+            'api_key' => $this->apiKey
+        ]);
+
+        return $response->json() ?? [];
+    }
+
+    public function fetchCredits(int $movieId): array
     {
         $response = Http::get($this->getCreditsUrlWithId($movieId), [
             'api_key' => $this->apiKey
         ]);
 
-        return $response->json()['cast'] ?? [];
+        return $response->json() ?? [];
+    }
+
+    public function fetchCastings(int $movieId): array
+    {
+        return $this->fetchCredits($movieId)['cast'] ?? [];
+    }
+
+    public function fetchCrew(int $movieId): array
+    {
+        return $this->fetchCredits($movieId)['crew'] ?? [];
     }
 
     public function fetchPerson(int $personId): array
@@ -64,6 +84,10 @@ class TMDBService
         ]);
 
         return $response->json()['translations'] ?? [];
+    }
+
+    public function getMovieDetailsWithId(int $movieId): string {
+        return sprintf(self::API_MOVIE_DETAILS_URL_TEMPLATE, $movieId);
     }
 
     public function getCreditsUrlWithId(int $movieId): string {
