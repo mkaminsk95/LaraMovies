@@ -8,6 +8,7 @@ use App\Services\TMDB\MovieTranslationsPopulatorInterface;
 use App\Services\TMDB\TMDBActorsPopulator;
 use App\Services\TMDB\TMDBMoviesPopulator;
 use App\Services\TMDB\TMDBMovieTranslationsPopulator;
+use App\Services\TMDB\TMDBMoviesWithDetaEilsPopulator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(MovieTranslationsPopulatorInterface::class, TMDBMovieTranslationsPopulator::class);
-        $this->app->bind(MoviesPopulatorInterface::class, TMDBMoviesPopulator::class);
+        $this->app->bind(MoviesPopulatorInterface::class, TMDBMoviesWithDetailsPopulator::class);
         $this->app->bind(ActorsPopulatorInterface::class, TMDBActorsPopulator::class);
     }
 
