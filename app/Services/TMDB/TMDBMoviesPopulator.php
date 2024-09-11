@@ -13,7 +13,7 @@ use App\Models\Movie;
 class TMDBMoviesPopulator implements MoviesPopulatorInterface
 {
     public function __construct(
-        private readonly TMDBService $tmdbService
+        protected readonly TMDBService $tmdbService
     ) {}
 
     public function populateMovies(int $number = 10): void
@@ -53,7 +53,7 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
         DB::commit();
     }
 
-    private function provideMovies(int $number = 10): array
+    protected function provideMovies(int $number = 10): array
     {
         $page = 1;
         $movies = [];
