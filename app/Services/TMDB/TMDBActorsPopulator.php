@@ -7,14 +7,14 @@ use Illuminate\Support\Facades\DB;
 use App\Services\ActorsPopulatorInterface;
 use App\Models\Credit;
 use App\Models\Movie;
-use App\Models\Person;
 
 class TMDBActorsPopulator implements ActorsPopulatorInterface
 {
-    const ACTORS_FOR_MOVIE = 10;
+    const int ACTORS_FOR_MOVIE = 10;
 
     public function __construct(
-        private readonly TMDBService $tmdbService
+        private readonly TMDBService $tmdbService,
+        private readonly NewPersonHandler $newPersonHandler
     ) {}
 
     public function populateActors(): void
@@ -48,63 +48,21 @@ class TMDBActorsPopulator implements ActorsPopulatorInterface
         $castings = $this->tmdbService->fetchCastings($movie['tmdb_id']);
 
         foreach ($castings as $casting) {
-            if ($casting['known_for_department'] !== Credit::DEPARTMENT_ACTING) {
+            if (!$this->ifPersonIsActor($casting['known_for_department'])) {
                 continue;
             }
             if ($actorsLeft === 0) {
                 break;
             }
 
-            $personData = $this->tmdbService->fetchPerson($casting['id']);
+            $this->newPersonHandler->handle($movie, $casting);
 
-            if ($this->ifActorAlreadyExists($personData['id'])) {
-                $person = $this->returnExistingActor($personData['id']);
-            } else {
-                $person = $this->addNewActor($personData);
-            }
-
-            $this->addNewCredit($movie, $person, $casting);
             $actorsLeft--;
         }
     }
 
-    private function returnExistingActor(int $personId): Person
+    private function ifPersonIsActor(string $department): bool
     {
-        return Person::where('tmdb_id', $personId)->first();
-    }
-
-    private function ifActorAlreadyExists(int $personId): bool
-    {
-        return Person::where('tmdb_id', $personId)->exists();
-    }
-
-    private function addNewActor(array $personData): Person
-    {
-        $person = Person::create(
-            [
-                'tmdb_id' => $personData['id'],
-                'name' => $personData['name'],
-                'biography' => $personData['biography'],
-                'birthday' => $personData['birthday'],
-                'deathday' => $personData['deathday'],
-                'popularity' => $personData['popularity'],
-                'profile_path' => $personData['profile_path']
-            ]
-        );
-
-        echo "Added new actor: " . $personData['name'] . "\n";
-        return $person;
-    }
-
-    private function addNewCredit(Movie $movie, Person $person, array $credit): void
-    {
-        $credit = Credit::create(
-            [
-                'movie_id' => $movie->id,
-                'person_id' => $person->id,
-                'character' => $credit['character'],
-                'department' => $credit['known_for_department']
-            ]
-        );
+        return $department === Credit::DEPARTMENT_ACTING;
     }
 }
