@@ -9,7 +9,7 @@ use App\Services\TMDB\MovieTranslationsPopulatorInterface;
 use App\Services\TMDB\TMDBActorsPopulator;
 use App\Services\TMDB\TMDBCrewPopulator;
 use App\Services\TMDB\TMDBMovieTranslationsPopulator;
-use App\Services\TMDB\TMDBMoviesWithDetaEilsPopulator;
+use App\Services\TMDB\TMDBMoviesWithDetailsPopulator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
