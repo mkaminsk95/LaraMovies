@@ -4,7 +4,7 @@
 
         @include('movies.partials.movie-header')
 
-        <div class="bg-light-element dark:bg-dark-element py-4 sm:py-14 md:py-16 lg:py-20 px-6 sm:px-12 md:px-16 lg:px-20">
+        <div class="bg-light-element dark:bg-dark-element py-4 min-[500px]:py-6 sm:py-14 md:py-16 lg:py-20 px-6 min-[500px]:px-7 sm:px-12 md:px-16 lg:px-20">
             @include('movies.partials.movie-body')
         </div>
 

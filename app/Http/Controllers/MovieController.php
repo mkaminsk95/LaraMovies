@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
+use App\Models\Credit;
 use App\Models\Favourite;
 use App\Models\Genre;
 use App\Models\Movie;
@@ -94,7 +95,6 @@ class MovieController extends Controller
     public function show(int $id)
     {
         $movie = Movie::findOrFail($id);
-
         if (Auth::check()) {
             $user = auth()->user();
             $isFavourite = $user->favourites()->where('movie_id', $movie->id)->exists();
@@ -103,6 +103,24 @@ class MovieController extends Controller
             $review = $movie->reviews()->where('user_id', $user->id)->first();
         }
 
+        $movieBudget = $movie['budget'] ? number_format($movie['budget'], thousands_separator: '.') . ' $' : '-';
+        $movieRevenue = $movie['revenue'] ? number_format($movie['revenue'], thousands_separator: '.') . ' $' : '-';
+
+        $runtimeFormatted = $movie['runtime'] ?
+            floor($movie['runtime'] / 60) . 'h ' . ($movie['runtime'] % 60) . 'm' : '-';
+
+        $directors = $movie->credits()->withDepartment('Director')->get();
+        $directors = $directors->map(function ($director) {
+            return $director->person->name;
+        })->implode(', ');
+
+        $screenwriters = $movie->credits()->withDepartment('Screenplay')->get();
+        $screenwriters = $screenwriters->map(function ($screenwriter) {
+            return $screenwriter->person->name;
+        })->implode(', ');
+
+        $cast = $movie->credits()->withDepartment('Acting')->get();
+
         return view(
             'movies.show',
             [
@@ -110,7 +128,13 @@ class MovieController extends Controller
                 'rating' => $rating ?? null,
                 'review' => $review ?? null,
                 'isFavourite' => $isFavourite ?? false,
-                'isWatchlistItem' => $isWatchlistItem ?? false
+                'isWatchlistItem' => $isWatchlistItem ?? false,
+                'runtimeFormatted' => $runtimeFormatted,
+                'directors' => $directors,
+                'screenwriters' => $screenwriters,
+                'movieBudget' => $movieBudget,
+                'movieRevenue' => $movieRevenue,
+                'cast' => $cast,
             ]
         );
     }

@@ -149,5 +149,10 @@
     "Submit": "Wyślij",
     "There is no overview available for this language": "Brak dostępnego opisu w tym języku",
     "Login": "Zaloguj",
-    "to leave a review": "aby zostawić recenzję"
+    "to leave a review": "aby zostawić recenzję",
+    "Runtime": "Czas trwania",
+    "Budget": "Budżet",
+    "Revenue": "Dochód",
+    "Director": "Reżyseria",
+    "Screenplay": "Scenariusz"
 }
