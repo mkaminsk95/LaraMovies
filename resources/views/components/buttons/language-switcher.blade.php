@@ -10,13 +10,13 @@
         $selectedFlag = $flagsSvgs['en'];
     }
 @endphp
-<div x-data="{switcher:translationSwitcher()}" {{ $attributes }}>
-    <div class="">
+<div x-data="{menuToggle: false}" {{ $attributes }}>
+    <div>
         <div class="w-full flex justify-end">
-            <div class="relative" @click.away="switcher.menuToggle=false">
+            <div class="relative" @click.away="menuToggle=false">
                 <button
                     class="{{ $btnClass }} flex flex-row items-center rounded bg-light-element dark:bg-dark-element py-1 px-1 gap-2 focus:outline-none"
-                    @click.prevent="switcher.menuToggle=!switcher.menuToggle">
+                    @click.prevent="menuToggle=!menuToggle">
                     <span>{!! $selectedFlag !!}</span>
                     <svg fill="currentColor" height="12px" width="12px" viewBox="0 0 512 512" xml:space="preserve"
                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><polygon
@@ -24,7 +24,7 @@
                 </button>
                 <div
                     class="bg-white text-gray-700 shadow-md rounded text-sm absolute mt-12 top-0 right-0 min-w-full w-32 z-30"
-                    x-show="switcher.menuToggle" x-transition:enter="transition ease duration-300 transform"
+                    x-show="menuToggle" x-transition:enter="transition ease duration-300 transform"
                     x-transition:enter-start="opacity-0 translate-y-2"
                     x-transition:enter-end="opacity-100 translate-y-0"
                     x-transition:leave="transition ease duration-300 transform"
@@ -36,31 +36,21 @@
                             <li>
                                 <a href="{{ url('language') }}/en"
                                    class="px-4 py-2 flex flex-row items-center no-underline hover:no-underline transition-colors duration-100"
-                                   @click="switcher.menuToggle=false;switcher.selected=index;">
+                                   @click="menuToggle=false">
                                     <span>
                                         {!! $flagsSvgs['en'] !!}
                                     </span>
                                     <span class="inline-block pl-2">{{ __('English') }}</span>
-                                    <template x-if="index==switcher.selected">
-                                        <span class="ml-auto">
-                                            <i class="mdi mdi-check"></i>
-                                        </span>
-                                    </template>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ url('language') }}/pl"
                                    class="px-4 py-2 flex flex-row items-center no-underline hover:no-underline transition-colors duration-100"
-                                   @click="switcher.menuToggle=false;switcher.selected=index;">
+                                   @click="menuToggle=false">
                                     <span>
                                         {!! $flagsSvgs['pl'] !!}
                                     </span>
                                     <span class="inline-block pl-2">{{ __('Polish') }}</span>
-                                    <template x-if="index==switcher.selected">
-                                        <span class="ml-auto">
-                                            <i class="mdi mdi-check"></i>
-                                        </span>
-                                    </template>
                                 </a>
                             </li>
                         </ul>
@@ -70,37 +60,3 @@
         </div>
     </div>
 </div>
-<script>
-    let translationSwitcher = function () {
-        const locale = '{{ request()->session()->get('locale') }}';
-        const countries = [
-            {
-                label: '{{ __('English') }}',
-                lang: 'en',
-                flag: 'gb',
-                flagSvg: '',
-            },
-            {
-                label: '{{ __('Polish') }}',
-                lang: 'pl',
-                flag: 'pl',
-                flagSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="{{$flagSize}}" height="{{$flagSize}}" viewBox="0 0 32 32"><path d="M1,24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V15H1v9Z" fill="#cb2e40"></path><path d="M27,4H5c-2.209,0-4,1.791-4,4v8H31V8c0-2.209-1.791-4-4-4Z" fill="#fff"></path><path d="M5,28H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4ZM2,8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8Z" opacity=".15"></path><path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"></path></svg>',
-            },
-        ];
-
-        let selected = 0;
-        if (locale) {
-            countries.forEach((country, index) => {
-                if (country.lang === locale) {
-                    selected = index;
-                }
-            });
-        }
-
-        return {
-            selected: selected,
-            countries: countries,
-            menuToggle: false,
-        }
-    }
-</script>
