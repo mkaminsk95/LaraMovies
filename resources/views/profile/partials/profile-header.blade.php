@@ -1,13 +1,13 @@
 <div x-data="{ chosenAvatarId: '', avatarHovered: false }">
     <x-modal maxWidth="xl" name="test" focusable>
-        <div class="p-10 bg-light-element-secondary dark:bg-dark-element-secondary">
-            <span class="pt-5 pl-5 text-lg uppercase">{{ __('Choose picture') }}</span>
+        <div class="p-10 bg-light-element-secondary dark:bg-gray-800 shadow-lg">
+            <p class="text-center text-xl">{{ __('Choose a picture') }}</p>
             <div class="pt-8 grid grid-cols-3 sm:grid-cols-6 gap-2">
                 @foreach($avatars as $avatar)
-                    <div>
+                    <div class="rounded-full">
                         <img x-avatar-id="{{ $avatar->id }}" @click="chosenAvatarId = $el.getAttribute('x-avatar-id')"
                              :class="chosenAvatarId == $el.getAttribute('x-avatar-id') ? 'outline outline-4 outline-accent-primary/50' : ''"
-                             class="h-[80px] w-[80px]"
+                             class="h-[80px] w-[80px] rounded-full"
                              src="{{ Vite::asset('resources/assets/avatars/'.$avatar->path) }}"
                              alt="Avatar">
                     </div>
@@ -119,7 +119,7 @@
                 window.messagePanel.error(data.message);
             }
         }).catch(error => {
-            console.error({{ __('There has been a problem with your fetch operation:') }}, error);
+            console.error('{{ __('There has been a problem with your fetch operation:') }}', error);
         });
     });
 </script>
