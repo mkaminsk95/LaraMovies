@@ -1,5 +1,5 @@
 <x-layout.base>
-    <div class="sm:flex sm:flex-row justify-center mt-10 items-center mx-auto max-w-screen-xl">
+    <div class="sm:flex sm:flex-row justify-center pt-10 items-center mx-auto max-w-screen-xl">
         <div class="sm:w-fit p-10">
             <div class="image object-center text-center">
                 <img src="{{ Vite::asset('resources/assets/images/about_image.png') }}" alt="Illustration">

@@ -1,9 +1,9 @@
 <!-- Mobile menu, show/hide based on menu open state. -->
 <div class="lg:hidden" role="dialog" aria-modal="true" x-show="opened">
     <!-- Background backdrop, show/hide based on slide-over state. -->
-    <div class="fixed inset-0 z-10"></div>
+    <div class="fixed inset-0 z-50"></div>
     <div
-        class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-dark-element px-6 py-6 sm:max-w-sm border border-gray-300 dark:border-gray-700">
+        class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-dark-element px-6 py-6 sm:max-w-sm border border-gray-300 dark:border-gray-700">
         <div class="text-right">
             <button @click="opened = false" type="button" class="-m-2.5 rounded-md p-2.5">
                 <span class="sr-only">{{ __('Close menu') }}</span>
