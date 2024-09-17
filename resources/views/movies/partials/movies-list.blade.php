@@ -14,18 +14,18 @@
         </li>
     @endif
     @foreach($paginatedMovies as $movie)
-        <li class="flex lg:w-[500px] relative mt-1.5 gap-x-6 bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 ">
+        <li class="flex lg:w-[500px] relative mt-2.5 gap-x-6 bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-1 border-gray-300 dark:border-gray-700 ">
             <div class="flex min-w-0 gap-x-4">
                 @if($movie['poster_path'] !== null)
-                    <img class="h-30 w-20 flex-none rounded bg-gray-50"
+                    <img class="h-30 w-20 flex-none bg-gray-50"
                          src="https://image.tmdb.org/t/p/w185{{ $movie['poster_path'] }}"
                          alt="{{ __('poster') }}">
                 @else
-                    <img class="h-30 w-20 flex-none rounded bg-gray-50"
+                    <img class="h-30 w-20 flex-none bg-gray-50"
                          src="https://dummyimage.com/185x278/d2d5db/fff&text=+" alt="{{ __('poster') }}">
                 @endif
             </div>
-            <div class="flex flex-row flex-1 justify-between shrink-0 my-3 rounded">
+            <div class="flex flex-row flex-1 justify-between shrink-0 my-3">
                 <div class="flex flex-col justify-between min-w-0">
                     <div>
                         <p class="text-xs sm:text-sm font-semibold leading-6 hover:text-light-text-hover dark:hover:text-dark-text-hover">
@@ -82,6 +82,9 @@
         </form>
     @endforeach
 </ul>
-<div class="mt-4 mb-20 flex justify-center">
+<div class="max-lg:hidden mt-4 mb-20 flex justify-center">
     {{ $paginatedMovies->onEachSide(1)->links() }}
+</div>
+<div class="lg:hidden mt-4 mb-20 flex justify-center">
+    {{ $paginatedMovies->onEachSide(0)->links() }}
 </div>

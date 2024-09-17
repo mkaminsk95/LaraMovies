@@ -1,7 +1,7 @@
 <x-layout.base-with-loader>
     <x-action-status-message/>
     <div class="md:pt-16 lg:pt-20">
-        <div x-data="initializePanel()"  class="flex flex-col mx-auto md:mb-20w-full max-lg:max-w-[800px] lg:w-[1000px] bg-white dark:bg-dark-element shadow-lg">
+        <div x-data="initializePanel()"  class="flex flex-col mx-auto md:mb-20 w-full max-lg:max-w-[800px] lg:w-[1000px] bg-white dark:bg-dark-element shadow-lg">
 
             @include('movies.partials.movie-header')
 
