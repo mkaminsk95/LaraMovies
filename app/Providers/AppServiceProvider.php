@@ -11,6 +11,8 @@ use App\Services\TMDB\TMDBCrewPopulator;
 use App\Services\TMDB\TMDBMovieTranslationsPopulator;
 use App\Services\TMDB\TMDBMoviesWithDetailsPopulator;
 use Illuminate\Support\ServiceProvider;
+use App\Services\Ai\AiMovieRecommendationsInterface;
+use App\Services\Ai\Gemini\GeminiRecommendations;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(MoviesPopulatorInterface::class, TMDBMoviesWithDetailsPopulator::class);
         $this->app->bind(ActorsPopulatorInterface::class, TMDBActorsPopulator::class);
         $this->app->bind(CrewPopulatorInterface::class, TMDBCrewPopulator::class);
+        $this->app->bind(AiMovieRecommendationsInterface::class, GeminiRecommendations::class);
     }
 
     /**

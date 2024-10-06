@@ -17,6 +17,7 @@
         "vite-plugin-mkcert": "^1.17.5"
     },
     "dependencies": {
-        "@glidejs/glide": "^3.6.2"
+        "@glidejs/glide": "^3.6.2",
+        "@tailwindcss/line-clamp": "^0.4.4"
     }
 }

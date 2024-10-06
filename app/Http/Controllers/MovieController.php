@@ -119,7 +119,7 @@ class MovieController extends Controller
             return $screenwriter->person->name;
         })->implode(', ');
 
-        $cast = $movie->credits()->withDepartment('Acting')->get();
+        $cast = $movie->credits()->withDepartment('Acting')->with('person');
 
         return view(
             'movies.show',

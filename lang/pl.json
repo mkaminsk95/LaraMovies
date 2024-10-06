@@ -154,5 +154,21 @@
     "Budget": "Budżet",
     "Revenue": "Dochód",
     "Director": "Reżyseria",
-    "Screenplay": "Scenariusz"
+    "Screenplay": "Scenariusz",
+    "Here you can receive personalized movie recommendations based on your input.": "Tutaj możesz otrzymać spersonalizowane rekomendacje na podstawie podanych przez Ciebie informacji.",
+    "Here you can receive personalized movie recommendations based on your input and titles you rated.": "Tutaj możesz otrzymać spersonalizowane rekomendacje na podstawie podanych przez Ciebie informacji oraz tytułów które polubiłeś.",
+    "It's a quick and easy way to discover new movies!": "To szybki i łatwy sposób na odkrywanie nowych filmów!",
+    "Get recommendations": "Zaakceptuj",
+    "Based on your movie preferences and the input you provided, we recommend these movies for you. We hope you like it!": "Na podstawie twoich preferencji i podanych informacji chcielibyśmy polecić Ci te oto filmy. Mamy nadzieję, że przypadną Ci do gustu!",
+    "Directed by": "Reżyseria",
+    "Written by": "Scenariusz",
+    "Starring": "W rolach głównych",
+    "Show more": "Pokaż więcej",
+    "Show less": "Pokaż mniej",
+    "AI Recommendations": "Rekomendacje AI",
+    "Try again": "Spróbuj ponownie",
+    "No movies was rated higher than 5": "Żaden film nie został oceniony wyżej niż 5",
+    "Note": "Notka",
+    "This note will work as additional input for AI prompt." : "Ta notka będzie działać jako dodatkowa informacja dla AI.",
+    "to get more personalized results using your movie ratings.": "aby uzyskać bardziej spersonalizowane wyniki, korzystając z twoich ocen."
 }

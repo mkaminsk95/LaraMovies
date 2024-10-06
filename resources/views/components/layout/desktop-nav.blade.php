@@ -15,6 +15,7 @@
     </div>
     <div class="hidden lg:flex lg:gap-x-12 text-nav-link">
         <x-layout.nav-link class="pt-1" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">{{ __('Movies') }}</x-layout.nav-link>
+        <x-layout.nav-link class="pt-1" active="{{ request()->routeIs('recommendations') ? true : '' }}" href="{{ route('recommendations') }}">{{ __('AI Recommendations') }}</x-layout.nav-link>
         <x-layout.nav-link class="pt-1" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">{{ __('About us') }}</x-layout.nav-link>
         <x-layout.nav-link class="pt-1" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">{{ __('Contact') }}</x-layout.nav-link>
     </div>

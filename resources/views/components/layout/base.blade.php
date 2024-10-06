@@ -18,6 +18,7 @@
         window.addEventListener('load', () => {
             document.getElementById('loader').classList.add('hidden');
         });
+        window.locale = '{{ app()->getLocale() }}';
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="icon" href="{{ asset('logos/favicon.png') }}" type="image/png">

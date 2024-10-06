@@ -1,5 +1,6 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from "@tailwindcss/forms";
+import lineClamp from '@tailwindcss/line-clamp';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -37,6 +38,8 @@ export default {
                 'dark-text-hover': '#ffffff',
                 'dark-text-secondary': '#8e8e8e',
 
+                'black-text-hovered': '#6c6c6c',
+
                 'input-placeholder': '#8e8e8e',
 
                 'accent-primary':'rgb(79 70 229)',
@@ -62,6 +65,6 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms, lineClamp],
     darkMode: 'class'
 };

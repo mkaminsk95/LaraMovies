@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Models\Movie;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,8 +35,10 @@ Route::get('language/{locale}', function ($locale) {
     return redirect()->back();
 })->name('language');
 
-require __DIR__.'/movies.php';
+require __DIR__ . '/recommendations.php';
 
-require __DIR__.'/profile.php';
+require __DIR__ . '/movies.php';
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/profile.php';
+
+require __DIR__ . '/auth.php';

@@ -17,6 +17,7 @@
             <div class="-my-6 divide-y divide-gray-500/10">
                 <div class="space-y-2 py-6">
                     <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('movies.index') ? true : '' }}" href="{{ route('movies.index') }}">{{ __('Movies') }}</x-layout.nav-link>
+                    <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('recommendations') ? true : '' }}" href="{{ route('recommendations') }}">{{ __('AI Recommendations') }}</x-layout.nav-link>
                     <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('about') ? true : '' }}" href="{{ route('about') }}">{{ __('About us') }}</x-layout.nav-link>
                     <x-layout.nav-link class="block py-2 text-base leading-7" active="{{ request()->routeIs('contact.edit') ? true : '' }}" href="{{ route('contact.edit') }}">{{ __('Contact') }}</x-layout.nav-link>
                 </div>
