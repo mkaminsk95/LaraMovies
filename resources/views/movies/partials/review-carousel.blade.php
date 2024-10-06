@@ -14,7 +14,7 @@
                 perViewLarge='2.5' arrowsPosition="top-[40%]">
         @foreach($movie->reviews as $review)
             <li class="glide__slide">
-                <div class="ml-2 mb-10 p-4 overflow-y-scroll h-[250px] relative bg-additional-element dark:text-black rounded shadow-lg shadow">
+                <div class="ml-2 mb-10 p-4 overflow-y-auto h-[250px] relative bg-additional-element dark:text-black rounded shadow-lg shadow">
                     <div class="flex flex-row pt-2 items-center">
                         @if ($review->user['avatar_id'])
                             <img
