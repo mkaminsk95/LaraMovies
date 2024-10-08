@@ -33,7 +33,7 @@
                         </a>
                     </div>
 
-                    <p class="pt-3 text-sm sm:text-sm lg:text-md" lg:font-semibold >{{ $review['name'] }}</p>
+                    <p class="pt-3 text-sm sm:text-sm lg:text-md font-semibold" >{{ $review['name'] }}</p>
                     <p id="review-{{$index}}"
                        class="pt-1 text-xs lg:text-sm line-clamp-10 break-words">{{ $review['description'] }}</p>
                     <button id="showmore-button-{{$index}}"
