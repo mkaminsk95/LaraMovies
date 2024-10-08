@@ -14,8 +14,8 @@ class ReviewFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->sentence,
-            'description' => $this->faker->sentences(random_int(3, 7), true),
+            'name' => $this->faker->text(30),
+            'description' => $this->faker->text(200),
             'user_id' => function () {
                 throw new \Exception('A User instance must be provided when creating a Review.');
             },
