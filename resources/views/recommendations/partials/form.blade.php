@@ -1,4 +1,4 @@
-<form id="recommendationsForm" class="w-2/3 md:w-2/5 mx-auto pt-12 pb-4">
+<form id="recommendationsForm" class="w-11/12 sm:w-2/3 md:w-2/5 mx-auto pt-12 pb-4">
     @csrf
     <div>
         <x-inputs.label for="genre">{{ __('Genre') }}</x-inputs.label>

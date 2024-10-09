@@ -26,7 +26,7 @@
 <body
       class="bg-light-background dark:bg-dark-background text-light-text-primary dark:text-dark-text-primary">
 <header
-    class="bg-light-element dark:bg-dark-element shadow-md dark:shadow-shadow-color border border-gray-300 dark:border-gray-700">
+    class="bg-light-element dark:bg-dark-element border-b-[1px] dark:border-gray-700/50 shadow-sm">
     <div x-data="{ opened: false }">
         <x-layout.desktop-nav/>
         <x-layout.mobile-nav/>

@@ -1,6 +1,6 @@
 <p id="result-message"
-   class="hidden w-2/3 md:w-1/2 mx-auto mt-6 text-center text-lg leading-8 text-light-text-secondary dark:text-dark-text-secondary">{{ __('Based on your movie preferences and the input you provided, we recommend these movies for you. We hope you like it!') }}</p>
-<div id="recommendations-grid" class="grid grid-cols-1 md:grid-cols-2 mt-6 gap-7 text-black hidden">
+   class="hidden w-11/12 sm:w-2/3 md:w-1/2 mx-auto mt-6 text-center text-lg leading-8 text-light-text-secondary dark:text-dark-text-secondary">{{ __('Based on your movie preferences and the input you provided, we recommend these movies for you. We hope you like it!') }}</p>
+<div id="recommendations-grid" class="w-11/12 md:w-full mx-auto grid grid-cols-1 md:grid-cols-2 mt-6 gap-7 text-black hidden">
     @for($i = 0; $i < 4; $i++)
         <div id="card-template-{{$i}}" class="flex flex-col gap-2 p-6 bg-additional-element shadow-lg rounded">
             <div class="flex flex-row gap-6">

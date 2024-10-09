@@ -1,7 +1,7 @@
 <x-layout.base-with-loader>
-    <div class="md:pt-16 lg:pt-20">
+    <div class="lg:pt-20">
         <div
-            class="flex flex-col mx-auto md:mb-20 p-8 w-full max-lg:max-w-[800px] lg:w-[1000px] bg-white dark:bg-dark-element shadow-lg">
+            class="flex flex-col mx-auto md:mb-20 p-4 md:p-8 w-full lg:w-[1000px] bg-white dark:bg-dark-element shadow-lg">
             <x-message id="message" class="mt-5 hidden" type="error" messages="test"></x-message>
 
             <div class="mx-auto pt-6 max-w-2xl text-center">
