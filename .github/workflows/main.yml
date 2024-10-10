@@ -3,21 +3,89 @@ on:
     branches:
       - main
   workflow_dispatch:
-  
+
 jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          # The MySQL docker container requires these environment variables to be set
+          # so we can create and migrate the test database
+          # See: https://hub.docker.com/_/mysql
+          MYSQL_DATABASE: ${{ secrets.TEST_DB_DATABASE }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+        ports:
+          # Opens port 3306 on service container and host
+          # https://docs.github.com/en/actions/using-containerized-services/about-service-containers
+          - 3306:3306
+          # Before continuing, verify the mysql container is reachable from the ubuntu host
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    steps:
+      - name: Checkout codebase
+        uses: actions/checkout@v3
+
+      - name: Make .env file
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_APP_KEY: ${{ secrets.ENV_APP_KEY }}
+          envkey_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
+          envkey_DB_DATABASE: ${{ secrets.TEST_DB_DATABASE }}
+          envkey_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+
+      - name: Set up PHP 8.3
+        run: |
+          sudo add-apt-repository ppa:ondrej/php -y
+          sudo apt update
+          sudo apt install -y php8.3 php8.3-cli php8.3-fpm php8.3-mysql php8.3-xml php8.3-mbstring php8.3-curl php8.3-zip php8.3-gd php8.3-intl
+          sudo update-alternatives --set php /usr/bin/php8.3
+          php -v
+
+      - name: Install Composer dependencies
+        uses: php-actions/composer@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Ensure the correct Node.js version
+
+      - name: Install npm dependencies
+        run: npm install
+
+      - name: Build assets using Vite
+        run: npm run build
+
+      - name: Run tests
+        run: php artisan test
+
+
+
+
   run_pull:
     name: run pull
     runs-on: ubuntu-latest
-    
+    needs: run_tests
     steps:
-    - name: install ssh keys
-      # check this thread to understand why its needed:
-      # https://stackoverflow.com/a/70447517
-      run: |
-        install -m 600 -D /dev/null ~/.ssh/id_rsa
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-    - name: connect and pull
-      run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && git checkout ${{ secrets.MAIN_BRANCH }} && git pull && exit"
-    - name: cleanup
-      run: rm -rf ~/.ssh
+      - name: install ssh keys
+        # check this thread to understand why its needed:
+        # https://stackoverflow.com/a/70447517
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+      - name: connect and pull
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
+          cd ${{ secrets.WORK_DIR }} &&
+          git checkout ${{ secrets.MAIN_BRANCH }} &&
+          git pull &&
+          nvm use &&
+          npm run build &&
+          php artisan migrate --force &&
+          php artisan config:cache &&
+          php artisan route:cache &&
+          php artisan view:cache &&
+          exit"
+      - name: cleanup
+        run: rm -rf ~/.ssh
