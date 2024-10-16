@@ -12,11 +12,17 @@ class WatchlistItem extends Model
         'movie_id'
     ];
 
+    /**
+     * @return BelongsTo<User, WatchlistItem>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo<Movie, WatchlistItem>
+     */
     public function movie(): BelongsTo
     {
         return $this->belongsTo(Movie::class);

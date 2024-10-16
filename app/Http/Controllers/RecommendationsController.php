@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MovieRecommendationResource;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Services\Ai\AiMovieRecommendationsInterface;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\View\View;
 
 class RecommendationsController extends Controller
@@ -31,68 +33,18 @@ class RecommendationsController extends Controller
         ]);
     }
 
-    public function getRecommendations(): string
+    public function getRecommendations(): AnonymousResourceCollection|string
     {
         $data = request()->all();
 
         try {
             $movies = $this->aiMovieRecommendations->getRecommendations($data);
         } catch (\Exception $e) {
-            return json_encode(['error' => $e->getMessage()]);
+            return json_encode(['error' => $e->getMessage()]) ?: '';
         }
 
-        foreach ($movies as $movie) {
-            $this->includeCredits($movie);
-        }
-
-        return $movies->toJson();
+        return MovieRecommendationResource::collection($movies);
     }
 
-    private function includeCredits(Movie $movie): void
-    {
-        $this->includeDirectors($movie);
-        $this->includeScreenwriters($movie);
-        $this->includeCasting($movie);
-    }
 
-    private function includeDirectors(Movie $movie): void
-    {
-        $directors = $movie->credits()
-            ->withDepartment('Director')
-            ->get();
-        $directors = $directors->map(function ($director) {
-                return $director->person->name;
-            })->implode(', ');
-
-        $movie->directors = $directors;
-    }
-
-    private function includeScreenwriters(Movie $movie): void
-    {
-        $screenwriters = $movie->credits()
-            ->withDepartment('Screenplay')
-            ->get();
-        $screenwriters = $screenwriters
-            ->map(function ($screenwriter) {
-                return $screenwriter->person->name;
-            })->implode(', ');
-
-        $movie->screenwriters = $screenwriters;
-    }
-
-    private function includeCasting(Movie $movie): void
-    {
-        $casting = $movie->credits()
-            ->withDepartment('Acting')
-            ->with('Person')
-            ->get()
-            ->sortByDesc(function ($credit) {
-                return $credit->person->popularity;
-            })->take(4)
-            ->map(function ($credit) {
-                return $credit->person->name;
-            })->implode(', ');
-
-        $movie->casting = $casting;
-    }
 }

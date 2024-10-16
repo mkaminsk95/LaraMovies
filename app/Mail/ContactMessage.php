@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -13,8 +14,14 @@ class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /**
+     * @var array<mixed>
+     */
     public array $details;
 
+    /**
+     * @param array<mixed> $details
+     */
     public function __construct(array $details)
     {
         $this->details = $details;
@@ -41,6 +48,9 @@ class ContactMessage extends Mailable
         );
     }
 
+    /**
+     * @return array<int, Attachment>
+     */
     public function attachments(): array
     {
         return [];

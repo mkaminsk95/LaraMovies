@@ -53,6 +53,10 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
         DB::commit();
     }
 
+    /**
+     * @param int $number
+     * @return array<mixed>
+     */
     protected function provideMovies(int $number = 10): array
     {
         $page = 1;
@@ -90,11 +94,20 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
         }
     }
 
+    /**
+     * @return array<mixed>
+     */
     private function provideGenres(): array
     {
         return $this->tmdbService->fetchGenres();
     }
 
+    /**
+     * @param array<mixed> $movies
+     * @param array<mixed> $result
+     * @param int $n
+     * @return array<mixed>
+     */
     private function mergeMovies(array $movies, array $result, int &$n): array
     {
         $count = count($result);

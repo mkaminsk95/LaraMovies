@@ -12,7 +12,7 @@ class CountrySelect extends Component
     public string $label;
     public string $selected;
 
-    public function __construct($label, $selected = null)
+    public function __construct(string $label, string $selected = null)
     {
         $this->label = $label;
         $this->selected = $selected;
@@ -23,6 +23,9 @@ class CountrySelect extends Component
         return view('components.inputs.country-select');
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getMovieLanguages(): array
     {
         return config('movie_languages');

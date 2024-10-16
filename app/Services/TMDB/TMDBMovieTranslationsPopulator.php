@@ -7,8 +7,11 @@ use App\Models\Movie;
 
 class TMDBMovieTranslationsPopulator implements MovieTranslationsPopulatorInterface
 {
-    const LANGUAGE_CODE_STANDARD = 'iso_639_1';
+    const string LANGUAGE_CODE_STANDARD = 'iso_639_1';
 
+    /**
+     * @var array<string>
+     */
     private array $languages;
     private int $languagesCount;
 
@@ -47,11 +50,21 @@ class TMDBMovieTranslationsPopulator implements MovieTranslationsPopulatorInterf
         $movie->save();
     }
 
+    /**
+     * @param int $movieId
+     * @return array<mixed>
+     */
     private function provideTranslations(int $movieId): array
     {
         return $this->tmdbService->fetchTranslations($movieId);
     }
 
+    /**
+     * @param Movie $movie
+     * @param array<mixed> $translation
+     * @param string $language
+     * @return void
+     */
     private function updateMovie(Movie $movie, array $translation, string $language): void
     {
         if ($language === 'en') {

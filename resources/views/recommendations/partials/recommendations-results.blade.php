@@ -81,6 +81,7 @@
         })
             .then(response => response.json())
             .then(data => {
+                data = data.data;
                 if (data.error) {
                     window.messagePanel.error(data.error);
                     document.getElementById('recommendations-grid').classList.add('hidden');

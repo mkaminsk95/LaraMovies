@@ -56,10 +56,11 @@ jobs:
       - name: Build assets using Vite
         run: npm run build
 
+      - name: Run PhpStan
+        run: composer phpstan
+
       - name: Run tests
         run: php artisan test
-
-
 
 
   run_pull:

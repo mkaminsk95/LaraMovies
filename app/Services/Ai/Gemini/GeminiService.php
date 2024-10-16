@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Services\Ai\Gemini;
 
+use App\Models\Rating;
 use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
@@ -54,6 +55,13 @@ class GeminiService
         return $this->fetchRecommendations($prompt);
     }
 
+    /**
+     * @param Collection<int, Rating> $topRatings
+     * @param string $genre
+     * @param string $note
+     * @return string
+     * @throws Exception
+     */
     public function fetchRecommendationsForLogged(Collection $topRatings, string $genre, string $note = ''): string
     {
         $favouriteMoviesList = '';
