@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Credit extends Model
@@ -20,17 +21,27 @@ class Credit extends Model
         'movie_id', 'person_id', 'character', 'order', 'department'
     ];
 
+    /**
+     * @return BelongsTo<Movie, Credit>
+     */
     public function movie(): BelongsTo
     {
         return $this->belongsTo(Movie::class);
     }
 
+    /**
+     * @return BelongsTo<Person, Credit>
+     */
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class);
     }
 
-    public function scopeWithDepartment($query, $department): void
+    /**
+     * @param Builder<Credit> $query
+     * @param string $department
+     */
+    public function scopeWithDepartment(Builder $query, string $department): void
     {
         $query->where('department', $department);
     }

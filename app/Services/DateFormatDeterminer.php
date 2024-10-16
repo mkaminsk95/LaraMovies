@@ -8,7 +8,7 @@ use Carbon\Exceptions\InvalidFormatException;
 
 class DateFormatDeterminer
 {
-    public static function determine($dateString): bool|string
+    public static function determine(string $dateString): false|string
     {
         $formats = [
             'Y-m-d',

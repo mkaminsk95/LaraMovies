@@ -3,24 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMovieRequest;
-use App\Models\Credit;
 use App\Models\Favourite;
 use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\Rating;
 use App\Models\WatchlistItem;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class MovieController extends Controller
 {
     public function index(): View
     {
-        $query = request()->query();
+        $query = (array) (request()->query() ?? []);
         $moviesQuery = Movie::query();
         $moviesQuery = $this->applyFilters($moviesQuery, $query);
         $moviesQuery = $this->applySorting($moviesQuery, $query['sorting'] ?? 'vote_average.desc');
@@ -35,7 +34,12 @@ class MovieController extends Controller
         ]);
     }
 
-    private function applyFilters($query, $filters)
+    /**
+     * @param Builder<Movie> $query
+     * @param array<mixed> $filters
+     * @return Builder<Movie>
+     */
+    private function applyFilters(Builder $query, array $filters): Builder
     {
         foreach ($filters as $key => $value) {
             if (!is_null($value) && method_exists($this, $method = 'filter' . ucfirst(Str::camel($key)))) {
@@ -45,39 +49,64 @@ class MovieController extends Controller
         return $query;
     }
 
-    private function applySorting($query, $sorting)
+    /**
+     * @param Builder<Movie> $query
+     * @param string $sorting
+     * @return Builder<Movie>
+     */
+    private function applySorting(Builder $query, string $sorting): Builder
     {
         list($attribute, $order) = explode('.', $sorting);
         $query->orderBy($attribute, $order);
         return $query;
     }
 
-    private function filterGenre($query, $genres)
+    /**
+     * @param Builder<Movie> $query
+     * @param array<string> $genres
+     * @return Builder<Movie>
+     */
+    private function filterGenre(Builder $query, array $genres): Builder
     {
         return $query->withGenre($genres);
     }
 
-    private function filterTitle($query, $title)
+    /**
+     * @param Builder<Movie> $query
+     * @param string $title
+     * @return Builder<Movie>
+     */
+    private function filterTitle(Builder $query, string $title): Builder
     {
         return $query->withTitle($title);
     }
 
-    private function filterYear($query, $year)
+    /**
+     * @param Builder<Movie> $query
+     * @param string $year
+     * @return Builder<Movie>
+     */
+    private function filterYear(Builder $query, string $year): Builder
     {
         return $query->withYear($year);
     }
 
-    private function filterVoteAverage($query, $voteAverage)
+    /**
+     * @param Builder<Movie> $query
+     * @param float $voteAverage
+     * @return Builder<Movie>
+     */
+    private function filterVoteAverage(Builder $query, float $voteAverage): Builder
     {
         return $query->withVoteAverage($voteAverage);
     }
 
-    public function create()
+    public function create(): View
     {
         return view('movies.create');
     }
 
-    public function store(StoreMovieRequest $request)
+    public function store(StoreMovieRequest $request): RedirectResponse
     {
         $movie = Movie::create([
             'title' => request('title'),
@@ -92,7 +121,7 @@ class MovieController extends Controller
         return redirect()->route('movies.show', ['id' => $movie->id]);
     }
 
-    public function show(int $id)
+    public function show(int $id): View
     {
         $movie = Movie::findOrFail($id);
         if (Auth::check()) {
@@ -139,14 +168,14 @@ class MovieController extends Controller
         );
     }
 
-    public function edit(int $id)
+    public function edit(int $id): View
     {
         $movie = Movie::find($id);
 
         return view('movies.edit', ['movie' => $movie]);
     }
 
-    public function update(StoreMovieRequest $request, int $id)
+    public function update(StoreMovieRequest $request, int $id): RedirectResponse
     {
         $movie = Movie::findOrFail($id);
         $movie->update([
@@ -162,7 +191,7 @@ class MovieController extends Controller
         return redirect()->route('movies.edit', ['id' => $movie->id])->with('success', __('Movie successfully updated!'));
     }
 
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         Movie::findOrFail($id)->delete();
 

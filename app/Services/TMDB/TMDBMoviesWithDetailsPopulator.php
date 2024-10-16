@@ -46,12 +46,18 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
         DB::commit();
     }
 
-    private function ifMovieExists($tmdbId): bool
+    private function ifMovieExists(int $tmdbId): bool
     {
         return Movie::where('tmdb_id', $tmdbId)->exists();
     }
 
-    private function updateMovie(array $movie, array $additionalDetails, string $format)
+    /**
+     * @param array<mixed> $movie
+     * @param array<mixed> $additionalDetails
+     * @param string $format
+     * @return void
+     */
+    private function updateMovie(array $movie, array $additionalDetails, string $format): void
     {
         Movie::where('tmdb_id', $movie['id'])->update([
             'budget' => $additionalDetails['budget'] ?? null,
@@ -63,6 +69,12 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
         ]);
     }
 
+    /**
+     * @param array<mixed> $movie
+     * @param array<mixed> $additionalDetails
+     * @param string $format
+     * @return void
+     */
     private function createMovie(array $movie, array $additionalDetails, string $format): void
     {
         Movie::create([
@@ -87,6 +99,10 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
             ->attach($movie['genre_ids']);
     }
 
+    /**
+     * @param int $tmdbId
+     * @return array<mixed>
+     */
     private function provideAdditionalDetails(int $tmdbId): array
     {
         return $this->tmdbService->fetchMovieDetails($tmdbId);

@@ -21,6 +21,9 @@ class TMDBService
         $this->apiKey = (string)Config::get('services.themoviedb.api_key');
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchTopRatedMovies(int $page): array
     {
         $response = Http::get(self::API_TOP_RATED_MOVIES_URL, [
@@ -31,6 +34,9 @@ class TMDBService
         return $response->json()['results'] ?? [];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchMovieDetails(int $movieId): array
     {
         $response = Http::get($this->getMovieDetailsWithId($movieId), [
@@ -40,6 +46,9 @@ class TMDBService
         return $response->json() ?? [];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchCredits(int $movieId): array
     {
         $response = Http::get($this->getCreditsUrlWithId($movieId), [
@@ -49,16 +58,25 @@ class TMDBService
         return $response->json() ?? [];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchCastings(int $movieId): array
     {
         return $this->fetchCredits($movieId)['cast'] ?? [];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchCrew(int $movieId): array
     {
         return $this->fetchCredits($movieId)['crew'] ?? [];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchPerson(int $personId): array
     {
         $response = Http::get($this->getPeopleUrlWithId($personId), [
@@ -68,6 +86,9 @@ class TMDBService
         return $response->json() ?? [];
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function fetchGenres(): array
     {
         $response = Http::get(self::API_GENRES_URL, [
@@ -77,6 +98,10 @@ class TMDBService
         return $response->json()['genres'] ?? [];
     }
 
+    /**
+     * @param int $movieId
+     * @return array<mixed>
+     */
     public function fetchTranslations(int $movieId): array
     {
         $response = Http::get($this->getTranslationsUrlWithId($movieId), [
