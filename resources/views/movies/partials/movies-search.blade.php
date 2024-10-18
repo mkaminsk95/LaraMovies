@@ -25,10 +25,10 @@
         <x-inputs.text class="shadow-none" id="title" name="title" :value="$query['title'] ?? ''"/>
 
         <x-inputs.label class="mt-2" for="title">{{ __('Year') }}</x-inputs.label>
-        <x-inputs.select class="shadow-none" id="year" name="year" :options="range(date('Y'), 1900)" :value="$query['year'] ?? ''"/>
+        <x-inputs.select class="shadow-none" id="year" name="year" :options="array_combine($years = range(date('Y'), 1900), $years)" :value="$query['year'] ?? ''"/>
 
         <x-inputs.label class="mt-2" for="vote_average">{{ __('Vote average') }}</x-inputs.label>
-        <x-inputs.select class="shadow-none" id="vote_average" name="vote_average" :options="range(1, 10)"
+        <x-inputs.select class="shadow-none" id="vote_average" name="vote_average" :options="array_combine(range(0, 10), range(0, 10))"
                         :value="$query['vote_average'] ?? ''"/>
 
         <x-inputs.label class="mt-4 mb-2">{{ __('Genre') }}</x-inputs.label>
