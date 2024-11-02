@@ -1,11 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
 use App\Http\Resources\MovieRecommendationResource;
 use App\Models\Genre;
-use App\Models\Movie;
 use App\Services\Ai\AiMovieRecommendationsInterface;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\View\View;
@@ -14,7 +14,8 @@ class RecommendationsController extends Controller
 {
     public function __construct(
         private readonly AiMovieRecommendationsInterface $aiMovieRecommendations
-    ) {}
+    ) {
+    }
 
     public function index(): View
     {
@@ -45,6 +46,4 @@ class RecommendationsController extends Controller
 
         return MovieRecommendationResource::collection($movies);
     }
-
-
 }

@@ -1,20 +1,21 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Models\Movie;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Models\Movie;
 
 class RecalculateRatings extends Command
 {
     protected $signature = 'app:recalculate-ratings';
+
     protected $description = 'Command for recalculating rating with new entries.';
 
     public function __construct(
-    )
-    {
+    ) {
         parent::__construct();
     }
 
@@ -30,7 +31,7 @@ class RecalculateRatings extends Command
             /** @var Movie $movie */
             $movie = Movie::find($rating->movie_id);
             $newRating = ($movie->vote_average * $movie->vote_count + $rating->rating) / ($movie->vote_count + 1);
-            $movie->vote_average = (float)number_format($newRating, 6, '.', '');
+            $movie->vote_average = (float) number_format($newRating, 6, '.', '');
             $movie->vote_count += 1;
             $movie->save();
 

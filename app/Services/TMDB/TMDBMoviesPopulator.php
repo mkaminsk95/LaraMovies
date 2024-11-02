@@ -1,20 +1,22 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\TMDB;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
-use App\Services\MoviesPopulatorInterface;
-use App\Services\DateFormatDeterminer;
 use App\Models\Genre;
 use App\Models\Movie;
+use App\Services\DateFormatDeterminer;
+use App\Services\MoviesPopulatorInterface;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class TMDBMoviesPopulator implements MoviesPopulatorInterface
 {
     public function __construct(
         protected readonly TMDBService $tmdbService
-    ) {}
+    ) {
+    }
 
     public function populateMovies(int $number = 10): void
     {
@@ -31,7 +33,7 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
 
         foreach ($movies as $movie) {
             try {
-                echo $movie['title'] . PHP_EOL;
+                echo $movie['title'].PHP_EOL;
                 Movie::create([
                     'tmdb_id' => $movie['id'],
                     'title' => $movie['title'],
@@ -54,7 +56,6 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
     }
 
     /**
-     * @param int $number
      * @return array<mixed>
      */
     protected function provideMovies(int $number = 10): array
@@ -103,9 +104,8 @@ class TMDBMoviesPopulator implements MoviesPopulatorInterface
     }
 
     /**
-     * @param array<mixed> $movies
-     * @param array<mixed> $result
-     * @param int $n
+     * @param  array<mixed>  $movies
+     * @param  array<mixed>  $result
      * @return array<mixed>
      */
     private function mergeMovies(array $movies, array $result, int &$n): array

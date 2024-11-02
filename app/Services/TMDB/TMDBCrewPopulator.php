@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\TMDB;
 
-use App\Services\CrewPopulatorInterface;
-use Illuminate\Support\Facades\DB;
 use App\Models\Credit;
 use App\Models\Movie;
+use App\Services\CrewPopulatorInterface;
+use Illuminate\Support\Facades\DB;
 
 class TMDBCrewPopulator implements CrewPopulatorInterface
 {
@@ -15,7 +16,8 @@ class TMDBCrewPopulator implements CrewPopulatorInterface
     public function __construct(
         private readonly TMDBService $tmdbService,
         private readonly NewPersonHandler $newPersonHandler
-    ) {}
+    ) {
+    }
 
     public function populateCrew(): void
     {
@@ -27,7 +29,7 @@ class TMDBCrewPopulator implements CrewPopulatorInterface
         try {
             foreach ($movies as $movie) {
 
-                echo "Movies left: " . $moviesLeft . "\n";
+                echo 'Movies left: '.$moviesLeft."\n";
                 if (is_null($movie['tmdb_id'])) {
                     continue;
                 }
@@ -49,7 +51,7 @@ class TMDBCrewPopulator implements CrewPopulatorInterface
         $crew = $this->tmdbService->fetchCrew($movie['tmdb_id']);
 
         foreach ($crew as $person) {
-            if (!isset($person['job']) || !$this->ifPersonWorksInProduction($person['job'])) {
+            if (! isset($person['job']) || ! $this->ifPersonWorksInProduction($person['job'])) {
                 continue;
             }
 

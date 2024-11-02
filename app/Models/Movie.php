@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
@@ -20,7 +21,7 @@ class Movie extends Model
         'vote_average',
         'vote_count',
         'overview',
-        'original_language'
+        'original_language',
     ];
 
     /**
@@ -56,8 +57,8 @@ class Movie extends Model
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param array<string> $genres
+     * @param  Builder<Movie>  $query
+     * @param  array<string>  $genres
      * @return Builder<Movie>
      */
     public function scopeWithGenre(Builder $query, array $genres): Builder
@@ -67,12 +68,12 @@ class Movie extends Model
                 $q->where('name', $genre);
             });
         }
+
         return $query;
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param string $title
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     public function scopeWithTitle(Builder $query, string $title): Builder
@@ -81,8 +82,7 @@ class Movie extends Model
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param string $year
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     public function scopeWithYear(Builder $query, string $year): Builder
@@ -91,8 +91,7 @@ class Movie extends Model
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param float $voteAverage
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     public function scopeWithVoteAverage(Builder $query, float $voteAverage): Builder

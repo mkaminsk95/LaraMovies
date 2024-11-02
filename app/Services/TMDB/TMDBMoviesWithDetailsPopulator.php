@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\TMDB;
 
 use App\Models\Movie;
+use App\Services\DateFormatDeterminer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use App\Services\DateFormatDeterminer;
 
 class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
 {
@@ -33,7 +34,7 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
             $additionalDetails = $this->provideAdditionalDetails($movie['id']);
 
             try {
-                echo $movie['title'] . PHP_EOL;
+                echo $movie['title'].PHP_EOL;
                 if ($this->ifMovieExists($movie['id'])) {
                     $this->updateMovie($movie, $additionalDetails, $format);
                 } else {
@@ -52,10 +53,8 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
     }
 
     /**
-     * @param array<mixed> $movie
-     * @param array<mixed> $additionalDetails
-     * @param string $format
-     * @return void
+     * @param  array<mixed>  $movie
+     * @param  array<mixed>  $additionalDetails
      */
     private function updateMovie(array $movie, array $additionalDetails, string $format): void
     {
@@ -70,10 +69,8 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
     }
 
     /**
-     * @param array<mixed> $movie
-     * @param array<mixed> $additionalDetails
-     * @param string $format
-     * @return void
+     * @param  array<mixed>  $movie
+     * @param  array<mixed>  $additionalDetails
      */
     private function createMovie(array $movie, array $additionalDetails, string $format): void
     {
@@ -100,7 +97,6 @@ class TMDBMoviesWithDetailsPopulator extends TMDBMoviesPopulator
     }
 
     /**
-     * @param int $tmdbId
      * @return array<mixed>
      */
     private function provideAdditionalDetails(int $tmdbId): array

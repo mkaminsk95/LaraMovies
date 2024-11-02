@@ -35,35 +35,36 @@ class MovieController extends Controller
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param array<mixed> $filters
+     * @param  Builder<Movie>  $query
+     * @param  array<mixed>  $filters
      * @return Builder<Movie>
      */
     private function applyFilters(Builder $query, array $filters): Builder
     {
         foreach ($filters as $key => $value) {
-            if (!is_null($value) && method_exists($this, $method = 'filter' . ucfirst(Str::camel($key)))) {
+            if (! is_null($value) && method_exists($this, $method = 'filter'.ucfirst(Str::camel($key)))) {
                 $this->$method($query, $value);
             }
         }
+
         return $query;
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param string $sorting
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     private function applySorting(Builder $query, string $sorting): Builder
     {
-        list($attribute, $order) = explode('.', $sorting);
+        [$attribute, $order] = explode('.', $sorting);
         $query->orderBy($attribute, $order);
+
         return $query;
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param array<string> $genres
+     * @param  Builder<Movie>  $query
+     * @param  array<string>  $genres
      * @return Builder<Movie>
      */
     private function filterGenre(Builder $query, array $genres): Builder
@@ -72,8 +73,7 @@ class MovieController extends Controller
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param string $title
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     private function filterTitle(Builder $query, string $title): Builder
@@ -82,8 +82,7 @@ class MovieController extends Controller
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param string $year
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     private function filterYear(Builder $query, string $year): Builder
@@ -92,8 +91,7 @@ class MovieController extends Controller
     }
 
     /**
-     * @param Builder<Movie> $query
-     * @param float $voteAverage
+     * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
     private function filterVoteAverage(Builder $query, float $voteAverage): Builder
@@ -132,11 +130,11 @@ class MovieController extends Controller
             $review = $movie->reviews()->where('user_id', $user->id)->first();
         }
 
-        $movieBudget = $movie['budget'] ? number_format($movie['budget'], thousands_separator: '.') . ' $' : '-';
-        $movieRevenue = $movie['revenue'] ? number_format($movie['revenue'], thousands_separator: '.') . ' $' : '-';
+        $movieBudget = $movie['budget'] ? number_format($movie['budget'], thousands_separator: '.').' $' : '-';
+        $movieRevenue = $movie['revenue'] ? number_format($movie['revenue'], thousands_separator: '.').' $' : '-';
 
         $runtimeFormatted = $movie['runtime'] ?
-            floor($movie['runtime'] / 60) . 'h ' . ($movie['runtime'] % 60) . 'm' : '-';
+            floor($movie['runtime'] / 60).'h '.($movie['runtime'] % 60).'m' : '-';
 
         $directors = $movie->credits()->withDepartment('Director')->get();
         $directors = $directors->map(function ($director) {
@@ -214,7 +212,7 @@ class MovieController extends Controller
 
         Rating::where([
             ['user_id', $user->id],
-            ['movie_id', $movieId]
+            ['movie_id', $movieId],
         ])->firstOrFail()->delete();
 
         return response()->json(['success' => true]);

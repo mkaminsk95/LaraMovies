@@ -30,7 +30,7 @@ class DummyMovieUserInteractionsSeeder extends Seeder
     private function seedDummyInteractions(Collection $users): void
     {
         Movie::all()->each(function ($movie) use ($users) {
-            echo "Movie Id: " . $movie->id . PHP_EOL;
+            echo 'Movie Id: '.$movie->id.PHP_EOL;
             for ($i = 0; $i < rand(1, 10); $i++) {
                 $user = $users->random();
 

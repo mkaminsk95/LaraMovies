@@ -38,8 +38,7 @@ class Review extends Model
     }
 
     /**
-     * @param Builder<Review> $query
-     * @param int $movieId
+     * @param  Builder<Review>  $query
      * @return Builder<Review>
      */
     public function scopeByMovie(Builder $query, int $movieId): Builder
@@ -48,8 +47,7 @@ class Review extends Model
     }
 
     /**
-     * @param Builder<Review> $query
-     * @param int $userId
+     * @param  Builder<Review>  $query
      * @return Builder<Review>
      */
     public function scopeByUser(Builder $query, int $userId): Builder

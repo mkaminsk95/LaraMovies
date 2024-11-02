@@ -9,7 +9,7 @@ class Favourite extends Model
 {
     protected $fillable = [
         'user_id',
-        'movie_id'
+        'movie_id',
     ];
 
     /**

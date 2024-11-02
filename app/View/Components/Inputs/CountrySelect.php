@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\View\Components\Inputs;
@@ -10,9 +11,10 @@ use Illuminate\View\Component;
 class CountrySelect extends Component
 {
     public string $label;
+
     public string $selected;
 
-    public function __construct(string $label, string $selected = null)
+    public function __construct(string $label, ?string $selected = null)
     {
         $this->label = $label;
         $this->selected = $selected;

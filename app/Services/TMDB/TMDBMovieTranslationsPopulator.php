@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\TMDB;
@@ -13,12 +14,12 @@ class TMDBMovieTranslationsPopulator implements MovieTranslationsPopulatorInterf
      * @var array<string>
      */
     private array $languages;
+
     private int $languagesCount;
 
     public function __construct(
         private readonly TMDBService $tmdbService,
-    )
-    {
+    ) {
         $this->languages = config()->get('app.available_locales');
         $this->languagesCount = count($this->languages);
     }
@@ -26,7 +27,7 @@ class TMDBMovieTranslationsPopulator implements MovieTranslationsPopulatorInterf
     public function populate(): void
     {
         foreach (Movie::all() as $movie) {
-            echo $movie->title . PHP_EOL;
+            echo $movie->title.PHP_EOL;
             $this->seedTranslations($movie);
         }
     }
@@ -51,7 +52,6 @@ class TMDBMovieTranslationsPopulator implements MovieTranslationsPopulatorInterf
     }
 
     /**
-     * @param int $movieId
      * @return array<mixed>
      */
     private function provideTranslations(int $movieId): array
@@ -60,19 +60,16 @@ class TMDBMovieTranslationsPopulator implements MovieTranslationsPopulatorInterf
     }
 
     /**
-     * @param Movie $movie
-     * @param array<mixed> $translation
-     * @param string $language
-     * @return void
+     * @param  array<mixed>  $translation
      */
     private function updateMovie(Movie $movie, array $translation, string $language): void
     {
         if ($language === 'en') {
             $movie['tagline'] = $translation['data']['tagline'];
         } else {
-            $movie['title_' . $language] = $translation['data']['title'] ?: $movie['title'];
-            $movie['tagline_' . $language] = $translation['data']['tagline'];
-            $movie['overview_' . $language] = $translation['data']['overview'] ?: $movie['overview'];
+            $movie['title_'.$language] = $translation['data']['title'] ?: $movie['title'];
+            $movie['tagline_'.$language] = $translation['data']['tagline'];
+            $movie['overview_'.$language] = $translation['data']['overview'] ?: $movie['overview'];
         }
     }
 }

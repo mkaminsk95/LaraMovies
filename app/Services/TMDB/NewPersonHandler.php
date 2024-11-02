@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\TMDB;
@@ -11,12 +12,11 @@ class NewPersonHandler
 {
     public function __construct(
         private readonly TMDBService $tmdbService
-    ) {}
+    ) {
+    }
 
     /**
-     * @param Movie $movie
-     * @param array<mixed> $casting
-     * @return void
+     * @param  array<mixed>  $casting
      */
     public function handle(Movie $movie, array $casting): void
     {
@@ -42,8 +42,7 @@ class NewPersonHandler
     }
 
     /**
-     * @param array<mixed> $personData
-     * @return Person
+     * @param  array<mixed>  $personData
      */
     private function addNewPerson(array $personData): Person
     {
@@ -55,19 +54,17 @@ class NewPersonHandler
                 'birthday' => $personData['birthday'],
                 'deathday' => $personData['deathday'],
                 'popularity' => $personData['popularity'],
-                'profile_path' => $personData['profile_path']
+                'profile_path' => $personData['profile_path'],
             ]
         );
 
-        echo "Added new person: " . $personData['name'] . "\n";
+        echo 'Added new person: '.$personData['name']."\n";
+
         return $person;
     }
 
     /**
-     * @param Movie $movie
-     * @param Person $person
-     * @param array<mixed> $credit
-     * @return void
+     * @param  array<mixed>  $credit
      */
     private function addNewCredit(Movie $movie, Person $person, array $credit): void
     {
@@ -83,7 +80,7 @@ class NewPersonHandler
                 'department' => $credit['job'] ?? $credit['known_for_department'],
             ]
         );
-        echo "Added new credit for department: " . ($credit['job'] ?? $credit['known_for_department']) . "\n";
+        echo 'Added new credit for department: '.($credit['job'] ?? $credit['known_for_department'])."\n";
     }
 
     private function ifCreditExists(int $movieId, int $personId): bool

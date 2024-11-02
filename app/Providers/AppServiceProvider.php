@@ -3,16 +3,16 @@
 namespace App\Providers;
 
 use App\Services\ActorsPopulatorInterface;
+use App\Services\Ai\AiMovieRecommendationsInterface;
+use App\Services\Ai\Gemini\GeminiRecommendations;
 use App\Services\CrewPopulatorInterface;
 use App\Services\MoviesPopulatorInterface;
 use App\Services\TMDB\MovieTranslationsPopulatorInterface;
 use App\Services\TMDB\TMDBActorsPopulator;
 use App\Services\TMDB\TMDBCrewPopulator;
-use App\Services\TMDB\TMDBMovieTranslationsPopulator;
 use App\Services\TMDB\TMDBMoviesWithDetailsPopulator;
+use App\Services\TMDB\TMDBMovieTranslationsPopulator;
 use Illuminate\Support\ServiceProvider;
-use App\Services\Ai\AiMovieRecommendationsInterface;
-use App\Services\Ai\Gemini\GeminiRecommendations;
 
 class AppServiceProvider extends ServiceProvider
 {
