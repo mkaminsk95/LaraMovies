@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 interface AiMovieRecommendationsInterface
 {
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return Collection<int, Movie>
      */
     public function getRecommendations(array $data): Collection;

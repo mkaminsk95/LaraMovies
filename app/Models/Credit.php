@@ -2,23 +2,28 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Credit extends Model
 {
     const DEPARTMENT_ACTING = 'Acting';
+
     const DEPARTMENT_DIRECTING = 'Directing';
+
     const DEPARTMENT_WRITING = 'Writing';
+
     const DEPARTMENT_PRODUCTION = 'Production';
+
     const JOB_DIRECTOR = 'Director';
+
     const JOB_SCREENPLAY = 'Screenplay';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'movie_id', 'person_id', 'character', 'order', 'department'
+        'movie_id', 'person_id', 'character', 'order', 'department',
     ];
 
     /**
@@ -38,8 +43,7 @@ class Credit extends Model
     }
 
     /**
-     * @param Builder<Credit> $query
-     * @param string $department
+     * @param  Builder<Credit>  $query
      */
     public function scopeWithDepartment(Builder $query, string $department): void
     {

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class CreateAdminUser extends Command
 {
     protected $signature = 'app:admin:create-user';
+
     protected $description = 'Command for creating an admin user.';
 
     public function __construct()
@@ -26,9 +28,10 @@ class CreateAdminUser extends Command
         $password = $this->secret('What is the password?');
         $passwordConfirmed = $this->secret('Repeat the password?');
 
-        if (!$this->isInputValid($email, $name, $password, $passwordConfirmed) ||
+        if (! $this->isInputValid($email, $name, $password, $passwordConfirmed) ||
             $this->checkIfAlreadyExists($email, $name)) {
             echo 'test2';
+
             return;
         }
 
@@ -44,17 +47,18 @@ class CreateAdminUser extends Command
             'email' => $email,
             'name' => $name,
             'password' => $password,
-            'password_confirmation' => $passwordConfirmed
+            'password_confirmation' => $passwordConfirmed,
         ], [
             'email' => 'required|email',
             'name' => 'required',
-            'password' => 'required|min:8|max:255|confirmed'
+            'password' => 'required|min:8|max:255|confirmed',
         ]);
 
         if ($validator->fails()) {
             foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
+
             return false;
         }
 
@@ -65,10 +69,12 @@ class CreateAdminUser extends Command
     {
         if (User::where('email', $email)->exists()) {
             $this->error('User with the given email already exists.');
+
             return true;
         }
         if (User::where('name', $name)->exists()) {
             $this->error('User with the given name already exists.');
+
             return true;
         }
 
@@ -81,7 +87,7 @@ class CreateAdminUser extends Command
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
-            'is_admin' => true
+            'is_admin' => true,
         ]);
     }
 }

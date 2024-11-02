@@ -14,7 +14,7 @@ class AvatarSeeder extends Seeder
         foreach ($avatars as $avatar) {
             try {
                 Avatar::create([
-                    'path' => basename($avatar)
+                    'path' => basename($avatar),
                 ]);
             } catch (\Exception $e) {
                 continue;

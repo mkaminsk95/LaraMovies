@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands;
@@ -9,12 +10,12 @@ use Illuminate\Console\Command;
 class PopulateDbWithActors extends Command
 {
     protected $signature = 'app:populate-db-with-actors';
+
     protected $description = 'Command for populating the database with actors for existing movies.';
 
     public function __construct(
         private readonly ActorsPopulatorInterface $actorsPopulator
-    )
-    {
+    ) {
         parent::__construct();
     }
 

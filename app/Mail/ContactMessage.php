@@ -20,7 +20,7 @@ class ContactMessage extends Mailable
     public array $details;
 
     /**
-     * @param array<mixed> $details
+     * @param  array<mixed>  $details
      */
     public function __construct(array $details)
     {
@@ -32,7 +32,7 @@ class ContactMessage extends Mailable
         return new Envelope(
             from: new Address(config('mail.from_contact_address.address'), config('mail.from_contact_address.name')),
             to: [
-                new Address(config('mail.from_support_address.address'))
+                new Address(config('mail.from_support_address.address')),
             ],
             replyTo: [
                 new Address($this->details['userEmail']),

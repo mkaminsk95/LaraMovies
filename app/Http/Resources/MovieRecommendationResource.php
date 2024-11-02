@@ -9,7 +9,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class MovieRecommendationResource extends JsonResource
 {
     /**
-     * @param Request $request
      * @return array<Movie>
      */
     public function toArray(Request $request): array
@@ -23,7 +22,7 @@ class MovieRecommendationResource extends JsonResource
     }
 
     /**
-     * @param array<Movie> $movieArray
+     * @param  array<Movie>  $movieArray
      */
     private function includeCredits(array &$movieArray): void
     {
@@ -33,7 +32,7 @@ class MovieRecommendationResource extends JsonResource
     }
 
     /**
-     * @param array<Movie> $movieArray
+     * @param  array<Movie>  $movieArray
      */
     private function includeDirectors(array &$movieArray): void
     {
@@ -48,7 +47,7 @@ class MovieRecommendationResource extends JsonResource
     }
 
     /**
-     * @param array<Movie> $movieArray
+     * @param  array<Movie>  $movieArray
      */
     private function includeScreenwriters(array &$movieArray): void
     {
@@ -64,7 +63,7 @@ class MovieRecommendationResource extends JsonResource
     }
 
     /**
-     * @param array<Movie> $movieArray
+     * @param  array<Movie>  $movieArray
      */
     private function includeCasting(array &$movieArray): void
     {

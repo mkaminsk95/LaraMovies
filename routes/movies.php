@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/movies', [MovieController::class, 'store'])->name('movies.store');
 
-//    Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
+    //    Route::get('/movies/create', [MovieController::class, 'create'])->name('movies.create');
 
     Route::get('/movies/{id}/edit', [MovieController::class, 'edit'])->name('movies.edit');
 

@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\TMDB;
 
-use Illuminate\Support\Facades\DB;
-use App\Services\ActorsPopulatorInterface;
 use App\Models\Credit;
 use App\Models\Movie;
+use App\Services\ActorsPopulatorInterface;
+use Illuminate\Support\Facades\DB;
 
 class TMDBActorsPopulator implements ActorsPopulatorInterface
 {
@@ -15,7 +16,8 @@ class TMDBActorsPopulator implements ActorsPopulatorInterface
     public function __construct(
         private readonly TMDBService $tmdbService,
         private readonly NewPersonHandler $newPersonHandler
-    ) {}
+    ) {
+    }
 
     public function populateActors(): void
     {
@@ -27,7 +29,7 @@ class TMDBActorsPopulator implements ActorsPopulatorInterface
         try {
             foreach ($movies as $movie) {
 
-                echo "Movies left: " . $moviesLeft . "\n";
+                echo 'Movies left: '.$moviesLeft."\n";
                 if (is_null($movie['tmdb_id'])) {
                     continue;
                 }
@@ -48,7 +50,7 @@ class TMDBActorsPopulator implements ActorsPopulatorInterface
         $castings = $this->tmdbService->fetchCastings($movie['tmdb_id']);
 
         foreach ($castings as $casting) {
-            if (!$this->ifPersonIsActor($casting['known_for_department'])) {
+            if (! $this->ifPersonIsActor($casting['known_for_department'])) {
                 continue;
             }
             if ($actorsLeft === 0) {

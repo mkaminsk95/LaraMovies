@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Ai\Gemini;
@@ -16,11 +17,13 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
 
     public function __construct(
         private readonly GeminiService $geminiService
-    ) {}
+    ) {
+    }
 
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return Collection<int, Movie>
+     *
      * @throws Throwable
      */
     public function getRecommendations(array $data): Collection
@@ -39,6 +42,7 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
         $response = $this->formatResponse($response);
         $movies = $this->correlateMovies($response);
         $this->getRidOfDuplications($movies);
+
         return $this->limitNumberOfMovies($movies);
     }
 
@@ -55,7 +59,6 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
     }
 
     /**
-     * @param string $response
      * @return array<mixed>
      */
     private function formatResponse(string $response): array
@@ -66,7 +69,7 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
     }
 
     /**
-     * @param array<mixed> $response
+     * @param  array<mixed>  $response
      * @return Collection<int, Movie>
      */
     private function correlateMovies(array $response): Collection
@@ -75,7 +78,7 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
     }
 
     /**
-     * @param Collection<int, Movie> $movies
+     * @param  Collection<int, Movie>  $movies
      */
     private function getRidOfDuplications(Collection $movies): void
     {
@@ -86,7 +89,7 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
     }
 
     /**
-     * @param Collection<int, Movie> $movies
+     * @param  Collection<int, Movie>  $movies
      * @return Collection<int, Movie>
      */
     private function limitNumberOfMovies(Collection $movies): Collection

@@ -14,7 +14,6 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-
     public function showMe(Request $request): View
     {
         $favourites = $request->user()->favourites()->get();
@@ -77,12 +76,12 @@ class ProfileController extends Controller
             $request->user()->save();
 
             return response()->json([
-                'status' => 'success'
+                'status' => 'success',
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('Failed to update avatar. Please try again.')
+                'message' => __('Failed to update avatar. Please try again.'),
             ]);
         }
     }

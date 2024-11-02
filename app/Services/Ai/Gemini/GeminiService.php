@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Services\Ai\Gemini;
@@ -17,7 +18,7 @@ class GeminiService
 
     private const string GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent';
 
-    private const string RECOMMENDATIONS_PROMPT_FOR_GUEST = <<<END
+    private const string RECOMMENDATIONS_PROMPT_FOR_GUEST = <<<'END'
         I want you to recommend 10 different movies
 
         Genre of the movies you are looking for is: {genre}
@@ -29,7 +30,7 @@ class GeminiService
         Write those movie recommendations by title separated by comma. Nothing else.
         END;
 
-    private const string RECOMMENDATIONS_PROMPT_FOR_LOGGED = <<<END
+    private const string RECOMMENDATIONS_PROMPT_FOR_LOGGED = <<<'END'
         I want you to recommend 10 different movies based on the user's opinions from listed below on the scale from 1 to 10:
         {favouriteMoviesList}
 
@@ -44,7 +45,7 @@ class GeminiService
 
     public function __construct()
     {
-        $this->apiKey = (string)Config::get('services.gemini.api_key');
+        $this->apiKey = (string) Config::get('services.gemini.api_key');
     }
 
     public function fetchRecommendationsForGuest(string $genre, string $note = ''): string
@@ -56,17 +57,15 @@ class GeminiService
     }
 
     /**
-     * @param Collection<int, Rating> $topRatings
-     * @param string $genre
-     * @param string $note
-     * @return string
+     * @param  Collection<int, Rating>  $topRatings
+     *
      * @throws Exception
      */
     public function fetchRecommendationsForLogged(Collection $topRatings, string $genre, string $note = ''): string
     {
         $favouriteMoviesList = '';
         foreach ($topRatings as $rating) {
-            $favouriteMoviesList .= $rating->movie->title . ' - ' . $rating->rating . '/10' . PHP_EOL;
+            $favouriteMoviesList .= $rating->movie->title.' - '.$rating->rating.'/10'.PHP_EOL;
         }
         $prompt = str_replace('{favouriteMoviesList}', $favouriteMoviesList, self::RECOMMENDATIONS_PROMPT_FOR_LOGGED);
         $prompt = str_replace('{genre}', $genre, $prompt);
@@ -78,7 +77,7 @@ class GeminiService
     private function fetchRecommendations(string $prompt): string
     {
         try {
-            $response = Http::post(self::GEMINI_API_URL . '?key=' . $this->apiKey, [
+            $response = Http::post(self::GEMINI_API_URL.'?key='.$this->apiKey, [
                 'contents' => [
                     'parts' => [
                         'text' => $prompt,

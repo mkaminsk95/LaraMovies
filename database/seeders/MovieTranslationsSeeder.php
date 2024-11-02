@@ -9,7 +9,8 @@ class MovieTranslationsSeeder extends Seeder
 {
     public function __construct(
         private readonly MovieTranslationsPopulatorInterface $populator
-    ) {}
+    ) {
+    }
 
     public function run(): void
     {
