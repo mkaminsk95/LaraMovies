@@ -27,9 +27,10 @@ class RecalculateRatings extends Command
 
         // Loop through all ratings and update the rating for the movie
         foreach ($ratings as $rating) {
+            /** @var Movie $movie */
             $movie = Movie::find($rating->movie_id);
             $newRating = ($movie->vote_average * $movie->vote_count + $rating->rating) / ($movie->vote_count + 1);
-            $movie->vote_average = number_format($newRating, 6, '.', '');
+            $movie->vote_average = (float)number_format($newRating, 6, '.', '');
             $movie->vote_count += 1;
             $movie->save();
 

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -22,27 +23,44 @@ class Movie extends Model
         'original_language'
     ];
 
+    /**
+     * @return BelongsToMany<Genre>
+     */
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class, 'movie_genre');
     }
 
+    /**
+     * @return HasMany<Rating>
+     */
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
     }
 
+    /**
+     * @return HasMany<Credit>
+     */
     public function credits(): HasMany
     {
         return $this->hasMany(Credit::class);
     }
 
+    /**
+     * @return HasMany<Review>
+     */
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
     }
 
-    public function scopeWithGenre($query, $genres)
+    /**
+     * @param Builder<Movie> $query
+     * @param array<string> $genres
+     * @return Builder<Movie>
+     */
+    public function scopeWithGenre(Builder $query, array $genres): Builder
     {
         foreach ($genres as $genre) {
             $query->whereHas('genres', function ($q) use ($genre) {
@@ -52,17 +70,32 @@ class Movie extends Model
         return $query;
     }
 
-    public function scopeWithTitle($query, $title)
+    /**
+     * @param Builder<Movie> $query
+     * @param string $title
+     * @return Builder<Movie>
+     */
+    public function scopeWithTitle(Builder $query, string $title): Builder
     {
         return $query->where('title', 'like', "%$title%");
     }
 
-    public function scopeWithYear($query, $year)
+    /**
+     * @param Builder<Movie> $query
+     * @param string $year
+     * @return Builder<Movie>
+     */
+    public function scopeWithYear(Builder $query, string $year): Builder
     {
         return $query->whereYear('release_date', $year);
     }
 
-    public function scopeWithVoteAverage($query, $voteAverage)
+    /**
+     * @param Builder<Movie> $query
+     * @param float $voteAverage
+     * @return Builder<Movie>
+     */
+    public function scopeWithVoteAverage(Builder $query, float $voteAverage): Builder
     {
         return $query->where('vote_average', '>=', $voteAverage);
     }

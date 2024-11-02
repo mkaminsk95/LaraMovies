@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Services\Ai\Gemini;
 
 use App\Models\Movie;
+use App\Models\Rating;
 use App\Services\Ai\AiMovieRecommendationsInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,8 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
     ) {}
 
     /**
+     * @param array<mixed> $data
+     * @return Collection<int, Movie>
      * @throws Throwable
      */
     public function getRecommendations(array $data): Collection
@@ -39,6 +42,9 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
         return $this->limitNumberOfMovies($movies);
     }
 
+    /**
+     * @return Collection<int, Rating>
+     */
     private function getUserTopRating(): Collection
     {
         return Auth::user()
@@ -48,6 +54,10 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
             })->take(10);
     }
 
+    /**
+     * @param string $response
+     * @return array<mixed>
+     */
     private function formatResponse(string $response): array
     {
         return array_map(function ($recommendation) {
@@ -55,11 +65,18 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
         }, explode(',', $response));
     }
 
+    /**
+     * @param array<mixed> $response
+     * @return Collection<int, Movie>
+     */
     private function correlateMovies(array $response): Collection
     {
         return Movie::whereIn('title', $response)->get();
     }
 
+    /**
+     * @param Collection<int, Movie> $movies
+     */
     private function getRidOfDuplications(Collection $movies): void
     {
         $movies->groupBy('title')
@@ -68,6 +85,10 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
             });
     }
 
+    /**
+     * @param Collection<int, Movie> $movies
+     * @return Collection<int, Movie>
+     */
     private function limitNumberOfMovies(Collection $movies): Collection
     {
         return $movies->take(self::NUMBER_OF_RECOMMENDATIONS);

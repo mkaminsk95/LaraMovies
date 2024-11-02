@@ -25,6 +25,9 @@ class Person extends Model
         'deathday' => 'date',
     ];
 
+    /**
+     * @return HasMany<Credit>
+     */
     public function credits(): HasMany
     {
         return $this->hasMany(Credit::class);

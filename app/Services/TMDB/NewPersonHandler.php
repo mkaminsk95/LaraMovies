@@ -13,6 +13,11 @@ class NewPersonHandler
         private readonly TMDBService $tmdbService
     ) {}
 
+    /**
+     * @param Movie $movie
+     * @param array<mixed> $casting
+     * @return void
+     */
     public function handle(Movie $movie, array $casting): void
     {
         $personData = $this->tmdbService->fetchPerson($casting['id']);
@@ -36,6 +41,10 @@ class NewPersonHandler
         return Person::where('tmdb_id', $personId)->exists();
     }
 
+    /**
+     * @param array<mixed> $personData
+     * @return Person
+     */
     private function addNewPerson(array $personData): Person
     {
         $person = Person::create(
@@ -54,6 +63,12 @@ class NewPersonHandler
         return $person;
     }
 
+    /**
+     * @param Movie $movie
+     * @param Person $person
+     * @param array<mixed> $credit
+     * @return void
+     */
     private function addNewCredit(Movie $movie, Person $person, array $credit): void
     {
         if ($this->ifCreditExists($movie->id, $person->id)) {
