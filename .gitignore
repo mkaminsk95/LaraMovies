@@ -23,5 +23,6 @@ yarn-error.log
 .env.local
 .env.development
 .env.testing
+.env.testing_outside_docker
 .env.*.backup
 .env.*.local
