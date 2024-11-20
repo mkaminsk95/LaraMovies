@@ -33,6 +33,7 @@ jobs:
           envkey_DB_USERNAME: ${{ secrets.TEST_DB_USERNAME }}
           envkey_DB_DATABASE: ${{ secrets.TEST_DB_DATABASE }}
           envkey_DB_PASSWORD: ${{ secrets.TEST_DB_PASSWORD }}
+          envkey_MAIL_MAILER: "array"
 
       - name: Set up PHP 8.3
         run: |
