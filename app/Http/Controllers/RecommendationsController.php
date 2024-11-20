@@ -7,8 +7,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\MovieRecommendationResource;
 use App\Models\Genre;
 use App\Services\Ai\AiMovieRecommendationsInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\Response;
 
 class RecommendationsController extends Controller
 {
@@ -34,16 +36,16 @@ class RecommendationsController extends Controller
         ]);
     }
 
-    public function getRecommendations(): AnonymousResourceCollection|string
+    public function getRecommendations(): JsonResponse
     {
         $data = request()->all();
 
         try {
             $movies = $this->aiMovieRecommendations->getRecommendations($data);
         } catch (\Exception $e) {
-            return json_encode(['error' => $e->getMessage()]) ?: '';
+            return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
 
-        return MovieRecommendationResource::collection($movies);
+        return response()->json(MovieRecommendationResource::collection($movies), Response::HTTP_OK);
     }
 }

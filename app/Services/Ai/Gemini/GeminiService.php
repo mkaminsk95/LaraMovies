@@ -86,7 +86,7 @@ class GeminiService
             ])->json()['candidates'][0]['content']['parts'][0]['text'];
         } catch (Throwable $e) {
             Log::error($e->getMessage());
-            throw new Exception('Something went wrong while fetching recommendations. Please try again later.');
+            throw new Exception(__('messages.gemini_error_message'));
         }
 
         return $response;

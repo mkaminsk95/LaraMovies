@@ -28,7 +28,7 @@ class GeminiRecommendations implements AiMovieRecommendationsInterface
      */
     public function getRecommendations(array $data): Collection
     {
-        $genre = $data['genre'];
+        $genre = $data['genre'] ?? 'Any';
         $note = $data['note'] ?? '';
 
         if (auth()->check()) {
