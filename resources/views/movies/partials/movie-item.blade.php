@@ -2,7 +2,7 @@
     <div class="flex min-w-0 gap-x-4">
         @if($movie['poster_path'] !== null)
             <img class="h-30 w-20 flex-none bg-gray-50"
-                 src="https://image.tmdb.org/t/p/w185{{ $movie['poster_path'] }}"
+                 src="https://image.tmdb.org/t/p/w92{{ $movie['poster_path'] }}"
                  alt="{{ __('poster') }}">
         @else
             <img class="h-30 w-20 flex-none bg-gray-50"
