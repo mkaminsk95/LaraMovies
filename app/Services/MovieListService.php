@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Models\Movie;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
@@ -16,6 +17,12 @@ class MovieListService
         private MovieQueryBuilder $movieQueryBuilder
     ) {}
 
+    /**
+     * @param array<string, mixed> $filters
+     * @param string $sorting
+     * @param int $perPage
+     * @return LengthAwarePaginator<Movie>
+     */
     public function getPaginatedList(array $filters = [], string $sorting = 'vote_average.desc', int $perPage = 15): LengthAwarePaginator
     {
         $this->movieQueryBuilder->applyFilters($filters);
@@ -34,6 +41,11 @@ class MovieListService
         return 'movies_page_' . $currentPage . '_' . $perPage;
     }
 
+    /**
+     * @param array<string, mixed> $filters
+     * @param string $sorting
+     * @return Collection<int, Movie>
+     */
     public function getList(array $filters = [], string $sorting = 'vote_average.desc'): Collection
     {
         $this->movieQueryBuilder->applyFilters($filters);
