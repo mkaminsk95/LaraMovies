@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Cache;
 
 class Genre extends Model
 {
@@ -24,6 +25,8 @@ class Genre extends Model
      */
     public static function getAllGenresArray(): array
     {
-        return self::all()->pluck('name')->toArray();
+        return Cache::remember('movie_genres', 60 * 60 * 24, function () {
+            return self::all()->pluck('name')->toArray();
+        });
     }
 }
