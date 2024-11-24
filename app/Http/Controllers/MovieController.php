@@ -8,23 +8,21 @@ use App\Models\Genre;
 use App\Models\Movie;
 use App\Models\Rating;
 use App\Models\WatchlistItem;
+use App\Services\MovieListService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class MovieController extends Controller
 {
-    public function index(): View
+    public function index(MovieListService $movieListService): View
     {
         $query = (array) (request()->query() ?? []);
-        $moviesQuery = Movie::query();
-        $moviesQuery = $this->applyFilters($moviesQuery, $query);
-        $moviesQuery = $this->applySorting($moviesQuery, $query['sorting'] ?? 'vote_average.desc');
+        $sorting = $query['sorting'] ?? 'vote_average.desc';
 
-        $movies = $moviesQuery->paginate(20);
+        $movies = $movieListService->getPaginatedList($query, $sorting, 20);
+
         $genresList = Genre::getAllGenresArray();
 
         return view('movies.index', [
@@ -32,71 +30,6 @@ class MovieController extends Controller
             'genres' => $genresList,
             'query' => $query,
         ]);
-    }
-
-    /**
-     * @param  Builder<Movie>  $query
-     * @param  array<mixed>  $filters
-     * @return Builder<Movie>
-     */
-    private function applyFilters(Builder $query, array $filters): Builder
-    {
-        foreach ($filters as $key => $value) {
-            if (! is_null($value) && method_exists($this, $method = 'filter'.ucfirst(Str::camel($key)))) {
-                $this->$method($query, $value);
-            }
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param  Builder<Movie>  $query
-     * @return Builder<Movie>
-     */
-    private function applySorting(Builder $query, string $sorting): Builder
-    {
-        [$attribute, $order] = explode('.', $sorting);
-        $query->orderBy($attribute, $order);
-
-        return $query;
-    }
-
-    /**
-     * @param  Builder<Movie>  $query
-     * @param  array<string>  $genres
-     * @return Builder<Movie>
-     */
-    private function filterGenre(Builder $query, array $genres): Builder
-    {
-        return $query->withGenre($genres);
-    }
-
-    /**
-     * @param  Builder<Movie>  $query
-     * @return Builder<Movie>
-     */
-    private function filterTitle(Builder $query, string $title): Builder
-    {
-        return $query->withTitle($title);
-    }
-
-    /**
-     * @param  Builder<Movie>  $query
-     * @return Builder<Movie>
-     */
-    private function filterYear(Builder $query, string $year): Builder
-    {
-        return $query->withYear($year);
-    }
-
-    /**
-     * @param  Builder<Movie>  $query
-     * @return Builder<Movie>
-     */
-    private function filterVoteAverage(Builder $query, float $voteAverage): Builder
-    {
-        return $query->withVoteAverage($voteAverage);
     }
 
     public function create(): View

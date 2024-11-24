@@ -97,7 +97,7 @@ class Movie extends Model
      * @param  Builder<Movie>  $query
      * @return Builder<Movie>
      */
-    public function scopeWithVoteAverage(Builder $query, float $voteAverage): Builder
+    public function scopeWithVoteAverage(Builder $query, float|string $voteAverage): Builder
     {
         return $query->where('vote_average', '>=', $voteAverage);
     }
